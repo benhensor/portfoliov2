@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'Poppins';
+  src:  url('./Poppins/Poppins-Regular.ttf') format('truetype'),
+        url('./Poppins//Poppins-Bold.ttf') format('truetype'),
+        url('./Poppins/Poppins-Light.ttf') format('truetype'),
+        url('./Poppins/Poppins-ExtraLight.ttf') format('truetype'),
+        url('./Poppins/Poppins-Thin.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Centra';
+  src:  url('./Centra/CentraNo2-Book.ttf') format('truetype'),
+        url('./Centra/CentraNo2-Bold.ttf') format('truetype'),
+        url('./Centra/CentraNo2-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Blackout';
+  src:  url('./Blackout/Blackout-Midnight.ttf') format('truetype'),
+        url('./Blackout/Blackout-2am.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Monesque';
+  src:  url('./Monesque/Monesque.otf') format('opentype');
+}
