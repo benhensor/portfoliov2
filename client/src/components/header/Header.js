@@ -1,9 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useRef, useState, useEffect, useCallback } from 'react'
+import { useTransform, useScroll } from 'framer-motion'
 import NavLink from './NavLink'
 import { 
-    StyledHeader, 
+    StyledHeader,
+    HeaderContent,
+    Block,
+    Border,
     Navbar,
     LogoContainer, 
+    HeaderName, 
     HeaderMenu, 
     Contact, 
     StyledSend, 
@@ -13,13 +18,16 @@ import {
     MobileMenu, 
     Icons 
 } from '../../styles/HeaderStyles'
+import Hero from '../hero/Hero'
 import NavIcon1 from '../../assets/icons/nav-icon1.svg'
 import NavIcon2 from '../../assets/icons/nav-icon2.svg'
 import NavIcon3 from '../../assets/icons/nav-icon3.svg'
-
 import Logo from '../../assets/img/logo2023.png'
 
 export default function Header () {
+
+    const headerRef = useRef(null)
+    const { scrollYProgress } = useScroll({ domTarget: headerRef })
 
     const [activeLink, setActiveLink] = useState('home')
     const [isOpen, setIsOpen] = useState(false)
@@ -59,33 +67,37 @@ export default function Header () {
         onUpdateActiveLink('home')
     }, [onUpdateActiveLink])
 
+    const headerNameOpacity = useTransform(scrollYProgress, [0, 0.2], ['0.3', '1'])
+
 
     return (<>
-        <StyledHeader $scrolled={scrolled}>
-            <Navbar className="navbar">
-                
-                <LogoContainer className='header-logo'>
-                    <div></div>
-                    <a href='#home' onClick={scrollToTop}>
-                        <img src={Logo} alt='Ben Hensor Development' />
-                    </a>
-                    <h1>Ben Hensor Dev</h1>
-                </LogoContainer>
-                <HeaderMenu>
-                    <NavLink to='skills' name='Skills' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
-                    <NavLink to='about' name='About' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
-                    <NavLink to='projects' name='Projects' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
-                    <Contact><button type="button"><StyledSend/></button></Contact>              
-                </HeaderMenu>
-                <MenuControls className='burger' aria-label='Toggle navigation' aria-expanded={isOpen} onClick={() => toggleMenu(!isOpen)}>
-                    {isOpen ? <StyledFaTimes /> : <StyledFaBars />}
-                </MenuControls>
-            </Navbar>
+        <StyledHeader id='home' ref={headerRef} $scrolled={scrolled}>
+            <HeaderContent>
+                <Navbar>
+                    <LogoContainer>
+                        <Border></Border>
+                        <Block></Block>
+                        <a href='#home' onClick={scrollToTop}>
+                            <img src={Logo} alt='Ben Hensor Development' />
+                        </a>
+                        <HeaderName style={{ opacity: headerNameOpacity }}>Ben Hensor Dev</HeaderName>
+                    </LogoContainer>
+                    <HeaderMenu>
+                        <NavLink to='skills' name='Skills' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
+                        <NavLink to='projects' name='Projects' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
+                        <NavLink to='about' name='About' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
+                        <Contact><button type="button"><StyledSend/></button></Contact>              
+                    </HeaderMenu>
+                    <MenuControls aria-label='Toggle navigation' aria-expanded={isOpen} onClick={() => toggleMenu(!isOpen)}>
+                        {isOpen ? <StyledFaTimes /> : <StyledFaBars />}
+                    </MenuControls>
+                </Navbar>
+            </HeaderContent>
         </StyledHeader>
         <MobileMenu $isOpen={isOpen}>
             <NavLink to='skills' name='Skills' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
-            <NavLink to='about' name='About' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
             <NavLink to='projects' name='Projects' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
+            <NavLink to='about' name='About' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
             <NavLink to='connect' name={<StyledSend/>} activeLink={activeLink} onClick={() => toggleMenu()} />
             <Icons>
                 <a href='https://github.com/benhensor' rel='noreferrer' target='_blank'>
@@ -99,5 +111,6 @@ export default function Header () {
                 </a>
             </Icons>
         </MobileMenu>
+        <Hero />
     </>)
 }

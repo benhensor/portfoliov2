@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { ReactComponent as Send } from '../assets/icons/send.svg'
 
@@ -11,14 +12,19 @@ export const StyledHeader = styled.header`
     height: 100%;
 	height: 4em;
     background-color: var(--background-static);
-    border-bottom: 0.2em solid var(--border-color);
     user-select: none;
-    z-index: 10;
+    z-index: 100;
+`
+
+export const HeaderContent = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 0.2em solid var(--border-color);
 `
 
 export const Navbar = styled.nav`
     width: 100%;
-    height: 100%;
     max-width: 1000px;
     display: flex;
     justify-content: space-between;
@@ -31,43 +37,56 @@ export const Navbar = styled.nav`
     }
 `
 
+export const Block = styled.div`
+    position: absolute;
+    top: -1em;
+    left: -2em;
+    width: 7em;
+    height: 4em;
+    background-color: var(--background-static);
+`
+
+export const Border = styled.div`
+    position: absolute;
+    top: -1em;
+    left: -1em;
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    border: 0.2em solid var(--border-color);
+    background-color: var(--background-static);
+
+    
+`
+
 export const LogoContainer = styled.div`
     display: flex;
     align-items: center;
     position: relative;
     height: 100%;
-    div {
-        position: absolute;
-        left: -1em;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 5em;
-        height: 5em;
-        border-radius: 50%;
-        border: 0.2em solid var(--border-color);
-        background-color: var(--background-static);
-        padding: 1em;
-        z-index: -1;
-    }
+    z-index: 100;
     a { 
-        position: absolute;
-        left: -0.8em;
-        padding: 0.8em;
-        background-color: var(--background-static);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border-radius: 50%;
         img {
             width: 3em;
-            border-radius: 50%;
-            z-index: 99;
-            
+            height: 3em;
+            border-radius: 50%; 
+            background-color: var(--background-static);           
         }
     }
-    h1 {
-        margin-left: 2.3em;
-        z-index: 100;
-        @media screen and (max-width: 375px) {
-            color: transparent;
-        }
+`
+
+export const HeaderName = styled(motion.h1)`
+    font-weight: 100;
+    margin-left: 0.5em;
+    z-index: 100;
+    color: #FFFFFF;
+    @media screen and (max-width: 375px) {
+        color: transparent;
     }
 `
 
@@ -75,6 +94,7 @@ export const HeaderMenu = styled.ul`
     display: flex;
     align-items: center;
     gap: 2em;
+    z-index: 10;
     @media screen and (max-width: 768px) {
         display: none;
     }
@@ -104,6 +124,7 @@ export const MenuControls = styled.button`
     background-color: transparent;
     border: none;
     color: white;
+    z-index: 1000;
     &:hover {
         color: var(--button-hover);
     }

@@ -14,6 +14,8 @@ const ProjectImage = styled.img`
 
 // content
 const ProjectContent = styled.div`
+	height: 100%;
+	width: 100%;
     transition: flex-basis 500ms, flex-grow 500ms;
 
 	> p {
@@ -26,12 +28,13 @@ const ProjectContent = styled.div`
 // panel
 const ProjectContainer = styled.div`
 	position: relative;
+	height: 100%;
 	isolation: isolate;
 	flex-basis: ${(props) =>
 		props.isOpen
 			? "clamp(15rem, 40vh, 20rem)"
 			: "calc((0.25rem * 2) + 3rem)"};
-	max-width: ${(props) => (props.isOpen ? "none" : "50rem")};
+	max-width: ${(props) => (props.isOpen ? "none" : "100%")};
 	overflow: hidden;
 	padding: 0.75rem;
 	padding-right: calc(-0.75rem * 4);

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
+import { motion, useTransform, useScroll } from 'framer-motion'
 import CircleVec1 from '../../assets/img/circleVec1.svg'
 import CircleVec2 from '../../assets/img/circleVec2.svg'
 import CircleVec3 from '../../assets/img/circleVec3.svg'
@@ -7,61 +8,51 @@ import CircleVec4 from '../../assets/img/circleVec4.svg'
 import { HeroWave } from '../Waves'
 import 'animate.css'
 
-const HeroSection = styled.section`
-    width: 100%;
-    height: 30em;
-    max-width: 1000px;
-    margin: 0 auto;
-    z-index: 49;
-    background-color: linear-gradient(to bottom right, #2f3636, #171e1e);
+const HeroSection = styled(motion.section)`
+    width: 100vw;
+    margin: 4em auto 0 auto;
+    background-color: #000;
     transition: background-color 0.5s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
-    position: relative;
-    z-index: 1;
+    overflow-x: hidden;
+    position: fixed;
+    z-index: 10;
 `
 
-const Curve = styled.div`
-    position: absolute;
-    top: -4em;
-    left: 0.8em;
-    width: 5.4em;
-    height: 5.2em;
-    background-color: var(--background-static);
-    border-radius: 50%;
-    z-index: 10;
-    @media screen and (max-width: 768px) {
-        left: -0.2em;
-    }
+const HeroContent = styled.div`
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
 `
 
 const HeroAnimation = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(1.2);
-    width: 100vw;
-    height: calc(100% - 5.5em);
-    z-index: 0;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-y: hidden;
-    z-index: 0;
 `
 
-const Circle = styled.img`
+const Circle = styled(motion.img)`
     position: absolute;
     mix-blend-mode:screen;
     opacity: 0.5;
     ${({ $id }) => $id === 'one' && `
-        animation: rotateA 25s linear infinite;
+        animation: rotateA 20s linear infinite;
         scale: 200%;
         filter: var(--blurA);
         @keyframes rotateA {
-        0% {
+            0% {
             transform: rotate(0deg);
             }
             100% {
@@ -70,12 +61,12 @@ const Circle = styled.img`
         }
     `}
     ${({ $id }) => $id === 'two' && `
-        animation: rotateB 20s linear infinite;
+        animation: rotateB 24s linear infinite;
         scale: 300%;
         filter: var(--blurB);
         @keyframes rotateB {
-        0% {
-            transform: rotate(360deg);
+            0% {
+                transform: rotate(360deg);
             }
             100% {
                 transform: rotate(0deg);
@@ -83,12 +74,12 @@ const Circle = styled.img`
         }
     `}
     ${({ $id }) => $id === 'three' && `
-        animation: rotateC 25s linear infinite;
+        animation: rotateC 28s linear infinite;
         scale: 200%;
         filter: var(--blurC);
         @keyframes rotateC {
-        0% {
-            transform: rotate(0deg);
+            0% {
+                transform: rotate(0deg);
             }
             100% {
                 transform: rotate(360deg);
@@ -96,12 +87,12 @@ const Circle = styled.img`
         }
     `}
     ${({ $id }) => $id === 'four' && `
-        animation: rotateD 20s linear infinite;
+        animation: rotateD 32s linear infinite;
         scale: 300%;
         filter: var(--blurD);
         @keyframes rotateD {
-        0% {
-            transform: rotate(360deg);
+            0% {
+                transform: rotate(360deg);
             }
             100% {
                 transform: rotate(0deg);
@@ -111,7 +102,7 @@ const Circle = styled.img`
 `
 
 
-const HeroTitleContainer = styled.div`
+const HeroTitleContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -142,7 +133,6 @@ const HeroTitle = styled.h1`
     background-clip: text;
     color: #ffffff75;
     mix-blend-mode: overlay;
-    z-index: 2;
     animation: ${gradientAnimation} 20s ease infinite;
     @media screen and (max-width: 999px) {
         font-size: 6em;
@@ -158,7 +148,7 @@ const Phrases = styled.div`
     align-content: center;
 `
   
-const Phrase = styled.h2`
+const Phrase = styled(motion.h2)`
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -174,7 +164,19 @@ const Phrase = styled.h2`
 
 export default function Hero () {
 
-    const textRotate = ['Full Stack Developer', 'React Wizard', 'Cat Fanatic!']
+    const heroRef = useRef(null) 
+    const { scrollYProgress } = useScroll({ domTarget: heroRef })
+    const heroHeight = useTransform(scrollYProgress, [0, 0.2], ['100vh', '4.1vh'])
+    const heroBorder = useTransform(scrollYProgress, [0, 0.2], ['transparent', '0.2em solid var(--border-color'])
+    const circleOneBottom = useTransform(scrollYProgress, [0, 0.2], ['35em', '-42.5em'])
+    const circleTwoBottom = useTransform(scrollYProgress, [0, 0.2], ['35em', '-42.5em'])
+    const circleThreeBottom = useTransform(scrollYProgress, [0, 0.2], ['35em', '-42.5em'])
+    const circleFourBottom = useTransform(scrollYProgress, [0, 0.2], ['35em', '-42.5em'])
+    const textPaddingTop = useTransform(scrollYProgress, [0, 0.2], ['14em', '-4em'])
+    const textOpacity = useTransform(scrollYProgress, [0, 0.15], [0.75, 0])
+       
+
+    const textRotate = ['', 'Frontend Developer', 'JaVaScript Sage', 'React Wizard', 'csYess!', 'Cat Fanatic!']
     const [currentPhrase, setCurrentPhrase] = useState(0)
     
     useEffect(() => {
@@ -182,7 +184,7 @@ export default function Hero () {
         setCurrentPhrase(prevPhrase =>
             (prevPhrase + 1) % textRotate.length
         )
-        }, 5000) 
+        }, 3500) 
 
         return () => clearInterval(interval)
     }, [textRotate.length])
@@ -198,21 +200,22 @@ export default function Hero () {
     }
 
     return (
-        <HeroSection>
-            <Curve />
-            <HeroAnimation>
-                <Circle $id='one' src={CircleVec1} />
-                <Circle $id='two' src={CircleVec2} />
-                <Circle $id='three' src={CircleVec3} />
-                <Circle $id='four' src={CircleVec4} />
-                <HeroWave />
-            </HeroAnimation>
-            <HeroTitleContainer>
-                <HeroTitle>Ben Hensor</HeroTitle>
-                <Phrases>
-                    {renderPhrases()}
-                </Phrases>
-            </HeroTitleContainer>
+        <HeroSection ref={heroRef} style={{ height: heroHeight, borderBottom: heroBorder }}>
+            <HeroContent>
+                <HeroAnimation>
+                    <Circle $id='one' src={CircleVec1} style={{ bottom: circleOneBottom }}/>
+                    <Circle $id='two' src={CircleVec2} style={{ bottom: circleTwoBottom }}/>
+                    <Circle $id='three' src={CircleVec3} style={{ bottom: circleThreeBottom }}/>
+                    <Circle $id='four' src={CircleVec4} style={{ bottom: circleFourBottom }}/>
+                    <HeroWave />
+                </HeroAnimation>
+                <HeroTitleContainer style={{ paddingTop: textPaddingTop, opacity: textOpacity }}>
+                    <HeroTitle>Ben Hensor</HeroTitle>
+                    <Phrases>
+                        {renderPhrases()}
+                    </Phrases>
+                </HeroTitleContainer>
+            </HeroContent>
         </HeroSection>
     )
 }

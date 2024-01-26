@@ -75,6 +75,8 @@ const GlobalStyles = createGlobalStyle`
         @media screen and (max-width: 400px) {
             font-size: 13px;
         }
+        width: 100vw;
+        height: 100svh;
     }
 
     body {
@@ -84,12 +86,14 @@ const GlobalStyles = createGlobalStyle`
         color: #fff;
         justify-content: center;
         background-color: var(--background-static);
+        overflow-x: hidden;
     }
 
     main {
         padding-top: 4em;
         background: #111;
         margin: 0 auto;
+        position: relative;
     }
 
     p {
