@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import catFace from '../../assets/img/catFaceBanner.png'
 import leftEye from '../../assets/img/leftEye.png'
 import rightEye from '../../assets/img/rightEye.png'
+import Footer from '../footer/Footer'
 
 const CatSection = styled(motion.section)`
     position: fixed;
@@ -158,6 +159,7 @@ export default function Cat() {
                     </div>
                 </CatHead>
             </CatContent>
+            <Footer />
         </CatSection>
     )
 }

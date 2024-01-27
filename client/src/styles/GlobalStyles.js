@@ -4,6 +4,7 @@ import '../assets/fonts/fonts.css'
 const GlobalStyles = createGlobalStyle`
     :root {
         font-size: 62.5%;
+        ::-webkit-scrollbar {display:none;}
 
         /* Global Colours */
         --accent-color: #de9e36;
@@ -57,10 +58,10 @@ const GlobalStyles = createGlobalStyle`
 
         /* Animation Settings */
 
-        --blurA: blur(4px);
-        --blurB: blur(3px);
-        --blurC: blur(8px);
-        --blurD: blur(8px);
+        --blurA: blur(20px);
+        --blurB: blur(10px);
+        --blurC: blur(10px);
+        --blurD: blur(20px);
     }
 
     *, *::before, *::after {

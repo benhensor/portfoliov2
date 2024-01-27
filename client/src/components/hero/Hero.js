@@ -45,6 +45,8 @@ const HeroAnimation = styled.div`
 
 const Circle = styled(motion.img)`
     position: absolute;
+    width: 100em;
+    height: 100em;
     mix-blend-mode:screen;
     opacity: 0.5;
     ${({ $id }) => $id === 'one' && `
@@ -138,7 +140,10 @@ const HeroTitle = styled.h1`
         font-size: 6em;
     }
     @media screen and (max-width: 768px) {
-        font-size: 5em;
+        font-size: 4em;
+    }
+    @media screen and (max-width: 546px) {
+        font-size: 2.2em;
     }
 `
 
@@ -153,13 +158,22 @@ const Phrase = styled(motion.h2)`
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    font-size: var(--text-xxxxl);
+    font-size: 4em;
     text-align: center;
     letter-spacing: 1rem;
     line-height: 1;
     display: block;
     text-transform: uppercase;
     word-wrap: normal;
+    @media screen and (max-width: 999px) {
+        font-size: 2.7em;
+    }
+    @media screen and (max-width: 768px) {
+        font-size: 2em;
+    }
+    @media screen and (max-width: 546px) {
+        font-size: 0.7em;
+    }
 `
 
 export default function Hero () {
@@ -167,16 +181,16 @@ export default function Hero () {
     const heroRef = useRef(null) 
     const { scrollYProgress } = useScroll({ domTarget: heroRef })
     const heroHeight = useTransform(scrollYProgress, [0, 0.2], ['100vh', '4.1vh'])
-    const heroBorder = useTransform(scrollYProgress, [0, 0.2], ['transparent', '0.2em solid var(--border-color'])
-    const circleOneBottom = useTransform(scrollYProgress, [0, 0.2], ['35em', '-42.5em'])
-    const circleTwoBottom = useTransform(scrollYProgress, [0, 0.2], ['35em', '-42.5em'])
-    const circleThreeBottom = useTransform(scrollYProgress, [0, 0.2], ['35em', '-42.5em'])
-    const circleFourBottom = useTransform(scrollYProgress, [0, 0.2], ['35em', '-42.5em'])
+    const heroBorder = useTransform(scrollYProgress, [0, 0.2], ['0.2em solid, #00c5c500', '0.2em solid #00c5c5'])
+    const circleOneBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
+    const circleTwoBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
+    const circleThreeBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
+    const circleFourBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
     const textPaddingTop = useTransform(scrollYProgress, [0, 0.2], ['14em', '-4em'])
     const textOpacity = useTransform(scrollYProgress, [0, 0.15], [0.75, 0])
        
 
-    const textRotate = ['', 'Frontend Developer', 'JaVaScript Sage', 'React Wizard', 'csYess!', 'Cat Fanatic!']
+    const textRotate = ['Frontend Developer', 'JaVaScript', 'React Wizard', 'csYess!', 'Cat Fanatic!']
     const [currentPhrase, setCurrentPhrase] = useState(0)
     
     useEffect(() => {
