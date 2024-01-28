@@ -22,9 +22,9 @@ const GlobalStyles = createGlobalStyle`
         --button-active: #00c5c5;
 
         /* Text Colors */
-        --text-color-light: #eeeeee;
-        --text-color-medium: #cccccc;
-        --text-color-dark: #323232;
+        --text-color-lt: #eeeeee;
+        --text-color-md: #cccccc;
+        --text-color-dk: #323232;
         --text-color-soft: #8c8c8c;
         --copy-dkbg-color: #8d8d8d;
 
@@ -53,8 +53,8 @@ const GlobalStyles = createGlobalStyle`
 
         /* Global Margins */
 
-        --margin-body-desktop: 0 10%;
-        --margin-body-mobile: 2rem 10%;
+        --m-desktop: 0 2em;
+        --m-mobile: 0 1em;
 
         /* Animation Settings */
 

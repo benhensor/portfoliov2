@@ -31,9 +31,9 @@ export const Navbar = styled.nav`
     align-items: center;
     background: var(--background-static);
     color: white;
-    padding: 1em 2em 0 2em;
+    padding: var(--m-desktop);
     @media screen and (max-width: 768px) {
-        padding: 1em 1em 0 1em;
+        padding: var(--m-mobile);
     }
 `
 
@@ -86,7 +86,7 @@ export const HeaderName = styled(motion.h1)`
     z-index: 100;
     color: #FFFFFF;
     @media screen and (max-width: 375px) {
-        color: transparent;
+        display: none;
     }
 `
 

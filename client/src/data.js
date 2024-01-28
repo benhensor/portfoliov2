@@ -10,7 +10,7 @@ import javascript from './assets/icons/tech/js.svg';
 import mongodb from './assets/icons/tech/mongodb.svg';
 import node from './assets/icons/tech/nodejs.svg';
 import npm from './assets/icons/tech/npm.svg';
-import postfresql from './assets/icons/tech/postfresql.svg';
+import postfresql from './assets/icons/tech/postgresql.svg';
 import postman from './assets/icons/tech/postman.svg';
 import ps from './assets/icons/tech/ps.svg';
 import react from './assets/icons/tech/reactjs.svg';
@@ -34,6 +34,7 @@ import sneakersBackground from './assets/img/sneakersBackground.jpg';
 import countriesBackground from './assets/img/countriesBackground.png';
 import audiophileBackground from './assets/img/image-header.jpg';
 import designoBackground from './assets/img/designoBackground.jpg';
+import weatherAppBackground from './assets/img/weather-app.png';
 
 const tech = [
 {
@@ -140,34 +141,30 @@ const tech = [
 
 // Journey data
 
-const journey = [
+const aboutInfo = [
 {
     key: 1,
-    text: "Hi, I'm Ben, a Full Stack Developer based in Bristol, UK."
+    text: "I'm a Junior Frontend Developer based in Bristol, UK."
 },
 {
     key: 2,
-    text: "I started out creating music and sound effects for local theatre companies..."
+    text: "Following my time as an award-winning Sound Designer, I decided to switch things up and get into Software and Web Development."
 },
 {
     key: 3,
-    text: "Driven by my love for audio production, I trained at the prestigious National Film & Television School, honed my skills and became a professional Sound Designer, working in Film, Television, and Commercials."
+    text: "I joined the School of Code's excellent programming bootcamp for a crash-course in foundation coding."
 },
 {
     key: 4,
-    text: "However, following the pandemic, I realised the need to adapt and explore new avenues. It was during this time that I made a bold decision to pursue my other passion: Software Development!"
+    text: "Since graduating from the bootcamp I have adopted a rigourous strategy of building projects everyday, refining my knowledge and always learning as much as I can."
 },
 {
     key: 5,
-    text: "To kickstart this new chapter, I enrolled onto the School of Code. Through determination and a lot of hard work, I completed the immensely challenging coding bootcamp..."
+    text: "Throughout this journey, I have embraced the mindset of aquiring new knowledge and skills."
 },
 {
     key: 6,
-    text: "Throughout this journey, I have embraced the opportunity to acquire a wealth of new knowledge and skills. Building upon my successes in my first role as a Full Stack Developer, I am now looking forward to the next chapter in my career."
-},
-{
-    key: 7,
-    text: "Thank you for visiting my portfolio, please check out some of my projects below. I am actively seeking new opportunities, so please feel free to get in touch!"
+    text: "Thank you for visiting my portfolio, please check out some of my projects below. I am actively seeking new opportunities, so please get in touch!"
 }
 ]
 
@@ -235,9 +232,18 @@ const projects = [
         image: designoBackground,
         description: 'A Frontend Mentor multi-page site built with React and Styled Components.',
         live: 'https://bhfm-designo.netlify.app/',
-        code: 'https://github.com/benhensor'
+        code: 'https://github.com/benhensor/designo.git'
+    },
+    {
+        key: 8,
+        title: 'Weather App',
+        logo: null,
+        image: weatherAppBackground,
+        description: 'A simple React weather app.',
+        live: 'https://weather-a0yriosp6-ben-s-projects-3a069c6e.vercel.app/',
+        code: 'https://github.com/benhensor/weather-app.git'
     }
 ]
 
 
-export { tech, journey, projects }
+export { tech, aboutInfo, projects }

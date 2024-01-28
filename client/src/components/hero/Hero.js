@@ -158,13 +158,14 @@ const Phrase = styled(motion.h2)`
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    font-size: 4em;
+    font-size: 3.5em;
     text-align: center;
     letter-spacing: 1rem;
     line-height: 1;
     display: block;
     text-transform: uppercase;
     word-wrap: normal;
+    opacity: 0;
     @media screen and (max-width: 999px) {
         font-size: 2.7em;
     }
@@ -190,7 +191,7 @@ export default function Hero () {
     const textOpacity = useTransform(scrollYProgress, [0, 0.15], [0.75, 0])
        
 
-    const textRotate = ['Frontend Developer', 'JaVaScript', 'React Wizard', 'csYess!', 'Cat Fanatic!']
+    const textRotate = ['Frontend Developer', 'Sound Designer', 'Cat Fanatic!']
     const [currentPhrase, setCurrentPhrase] = useState(0)
     
     useEffect(() => {
