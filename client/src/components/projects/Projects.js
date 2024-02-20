@@ -6,7 +6,7 @@ import { projects } from '../../data'
 
 export default function Projects() {
 
-    const projectsRef = useRef()
+    const projectsRef = useRef(null)
     const { scrollYProgress } = useScroll({ domTarget: projectsRef })
     
     const [activeProject, setActiveProject] = useState(0)
@@ -16,9 +16,10 @@ export default function Projects() {
     }
 
     const projectsYPosition = useTransform(scrollYProgress, [0.1, 0.4, 0.45, 0.7], ['-100em', '8.1em', '8.1em', '-100em'])
+    const opacity = useTransform(scrollYProgress, [0.1, 0.4, 0.45, 0.7], ['0', '1', '1', '0'])
     
     return (
-        <ProjectsSection id='projects' ref={projectsRef} style={{ top: projectsYPosition }}>
+        <ProjectsSection id='projects' ref={projectsRef} style={{ top: projectsYPosition, opacity: opacity }}>
             <ProjectsContent>
                     <ProjectGallery>
                         {projects.map((project, index) => (
@@ -48,12 +49,15 @@ const ProjectsSection = styled(motion.section)`
     top: 8em;
     width: 100%;
     height: 50em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const ProjectsContent = styled.div`
     width: 100%;
     max-width: 1000px;
-    height: 100%;
+    height: 75%;
     margin: 0 auto;
     display: flex;
     justify-content: center;

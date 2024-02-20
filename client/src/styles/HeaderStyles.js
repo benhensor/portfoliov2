@@ -81,10 +81,14 @@ export const LogoContainer = styled.div`
 `
 
 export const HeaderName = styled(motion.h1)`
+    font-size: 1.5em;
     font-weight: 100;
     margin-left: 0.5em;
     z-index: 100;
     color: #FFFFFF;
+    @media screen and (max-width: 768px) {
+        font-size: 1.2em;
+    }
     @media screen and (max-width: 375px) {
         display: none;
     }

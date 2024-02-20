@@ -23,18 +23,18 @@ import elementUI from './assets/icons/tech/element-ui.svg';
 import netlify from './assets/icons/tech/netlify.svg';
 import prettier from './assets/icons/tech/prettier.svg';
 
-import paperbackLogo from './assets/img/paprback_logo_books.svg';
-import bookShelf from './assets/img/bookshelfHero.png';
-import bhSoundLogo from './assets/img/bhsoundLogo.svg';
-import mixingDesk from './assets/img/mixingDesk.jpeg';
-import seasonItLogo from './assets/img/seasonit-logo.svg';
-import seasonItBackground from './assets/img/seasons-banner3.jpeg';
-import sneakersLogo from './assets/img/sneakersLogo.svg';
-import sneakersBackground from './assets/img/sneakersBackground.jpg';
-import countriesBackground from './assets/img/countriesBackground.png';
-import audiophileBackground from './assets/img/image-header.jpg';
-import designoBackground from './assets/img/designoBackground.jpg';
-import weatherAppBackground from './assets/img/weather-app.png';
+import paperbackLogo from './assets/projects/paprback_logo_books.svg';
+import bookShelf from './assets/projects/bookshelfHero.png';
+import bhSoundLogo from './assets/projects/bhsoundLogo.svg';
+import mixingDesk from './assets/projects/mixingDesk.jpeg';
+import seasonItLogo from './assets/projects/seasonit-logo.svg';
+import seasonItBackground from './assets/projects/seasons-banner3.png';
+import sneakersLogo from './assets/projects/sneakersLogo.svg';
+import sneakersBackground from './assets/projects/sneakersBackground.jpg';
+import countriesBackground from './assets/projects/countriesBackground.png';
+import audiophileBackground from './assets/projects/image-header.jpg';
+import designoBackground from './assets/projects/designoBackground.jpg';
+import weatherAppBackground from './assets/projects/weather-app.png';
 
 const tech = [
 {
@@ -191,7 +191,7 @@ const projects = [
     },
     {
         key: 3,
-        title: 'Season It',
+        title: 'SeasonIt 2.0',
         logo: seasonItLogo,
         image: seasonItBackground,
         description: 'Discover seasonal produce throughout the year in the UK.',

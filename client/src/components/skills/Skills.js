@@ -5,7 +5,7 @@ import icons from '../../icons'
 
 export default function Skills() {
 
-    const skillsRef = useRef()
+    const skillsRef = useRef(null)
     const carouselRef = useRef()
     const { scrollYProgress } = useScroll({ domTarget: skillsRef })
 
@@ -16,9 +16,10 @@ export default function Skills() {
     }, [])
 
     const skillsXPosition = useTransform(scrollYProgress, [0, 0.2, 0.25, 0.4], ['-100%', '0%', '0%', '100%'])
+    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.25, 0.4], ['0', '1', '1', '0'])
 
     return (
-        <SkillsSection id='skills' ref={skillsRef} style={{ left: skillsXPosition }}>
+        <SkillsSection id='skills' ref={skillsRef} style={{ left: skillsXPosition, opacity: opacity }}>
             <SkillsContent>
                 <Carousel ref={carouselRef} className="carousel">
                     <InnerCarousel className="inner" drag="x" dragConstraints={{left: -width, right: 0}}>

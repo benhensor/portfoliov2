@@ -3,28 +3,26 @@ import styled from 'styled-components'
 
 const Li = styled.li`
     list-style: none;
-    &:hover {
-        a {
-            color: var(--button-hover);
-        }
-    }
+    
 `
 
+
 const A = styled.a`
-        color: #fff;
-        font-size: var(--text-l);
-        text-decoration: none;
-        transition: 0.1s ease-in-out;
-        ${({ $activeLink }) => $activeLink && `
-        `}
+    color: ${({ $activeLink }) => ($activeLink ? 'var(--button-hover)' : 'var(--text)')};
+    font-size: var(--text-l);
+    text-decoration: none;
+    transition: 0.1s ease-in-out;
 `
 
 const NavLink = ({ to, name, activeLink, onUpdateActiveLink }) => (
     <Li>
         <A
             href={`#${to}`}
-            $activeLink={activeLink}
-            onClick={() => onUpdateActiveLink(to)}
+            $activeLink={activeLink === to}
+            onClick={(e) => {
+                e.preventDefault()
+                onUpdateActiveLink(to)
+            }}
         >
             {name}
         </A>

@@ -22,8 +22,7 @@ export default function ProjectPanel({
 					aria-expanded={isOpen}
 					onClick={() => toggleProject(index)}
 				>
-					<ProjectTitle>{title}</ProjectTitle>
-					{/* icon here */}
+					<ProjectImage src={image} alt={title} />
 				</ProjectTrigger>
 			</ProjectTriggerContainer>
 			<ProjectContent
@@ -31,9 +30,11 @@ export default function ProjectPanel({
 				aria-labelledby="project-title"
 				aria-hidden={!isOpen}
 				role="region"
+				$isOpen={isOpen}
 			>
+				<ProjectTitle>{title}</ProjectTitle>
 				<p>{description}</p>
-				<ProjectImage src={image} alt={title} />
+				
 				<a href={live} target="_blank" rel="noreferrer">
 					Live
 				</a>
@@ -54,20 +55,19 @@ const ProjectImage = styled.img`
 	object-fit: cover;
 	z-index: -1;
 	transition: filter 500ms;
-`;
+`
 
 // content
 const ProjectContent = styled.div`
 	height: 100%;
 	width: 100%;
     transition: flex-basis 500ms, flex-grow 500ms;
-
 	> p {
 		transform: translateY(2rem);
 		opacity: 0;
 		margin-left: calc(3rem + 1rem);
 	}
-`;
+`
 
 // panel
 const ProjectContainer = styled.div`
@@ -82,7 +82,7 @@ const ProjectContainer = styled.div`
 	overflow: hidden;
 	padding: 0.75rem;
 	padding-right: calc(-0.75rem * 4);
-	border-radius: calc((0.25rem * 2) + (0.25rem * 2));
+	border-radius: calc((0.25rem) + (0.25rem));
 
 	@media (prefers-reduced-motion: no-preference) {
 		& {
@@ -107,7 +107,7 @@ const ProjectContainer = styled.div`
 		outline: 3px solid #ff0ff0;
 		outline-offset: 4px;
 	}
-`;
+`
 
 const ProjectTriggerContainer = styled.h2`
     position: absolute;
@@ -132,14 +132,14 @@ const ProjectTrigger = styled.button`
 	background: transparent;
 	border: 0;
 	padding: 0;
-`;
+`
 
 // title
 const ProjectTitle = styled.span`
+	color: var(--highlight-color);
 	font-size: 1.5rem;
 	font-weight: 700;
 	position: relative;
-	isolation: isolate;
 	display: grid;
 	align-items: center;
 
@@ -155,4 +155,4 @@ const ProjectTitle = styled.span`
 			border-radius: 100vw;
 		}
 	}
-`;
+`

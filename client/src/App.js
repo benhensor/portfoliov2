@@ -5,10 +5,8 @@ import Skills from './components/skills/Skills'
 import Projects from './components/projects/Projects'
 import About from './components/about/About'
 import Contact from './components/contact/Contact'
-import VertSpace from './components/VertSpace'
-import Cat from './components/cat/Cat'
 
-export default function App() {    
+export default function App() {
 
     return (
         <Container>
@@ -18,8 +16,6 @@ export default function App() {
                 <Projects />
                 <About />
                 <Contact />
-                <Cat />
-                <VertSpace />
             </Main>
         </Container>
     )

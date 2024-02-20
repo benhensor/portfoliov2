@@ -72,12 +72,9 @@ const GlobalStyles = createGlobalStyle`
     }
 
     html {
-        scroll-behavior: smooth;
         @media screen and (max-width: 400px) {
             font-size: 13px;
         }
-        width: 100vw;
-        height: 100svh;
     }
 
     body {
@@ -88,6 +85,8 @@ const GlobalStyles = createGlobalStyle`
         justify-content: center;
         background-color: var(--background-static);
         overflow-x: hidden;
+        width: 100vw;
+        min-height: 2400vh;
     }
 
     main {

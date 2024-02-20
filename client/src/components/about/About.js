@@ -4,6 +4,36 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import mugshot from '../../assets/img/profile.png'
 import { aboutInfo } from '../../data'
 
+export default function About() {
+
+    const aboutRef = useRef(null)
+    const { scrollYProgress } = useScroll({ domTarget: aboutRef })
+
+    const left = useTransform(scrollYProgress, [0.4, 0.6, 0.65, 0.8], ['-100%', '0%', '0%', '100%'])
+    const opacity = useTransform(scrollYProgress, [0.45, 0.6, 0.65, 0.75], ['0', '1', '1', '0'])
+
+    return (
+        <AboutSection id='about' ref={aboutRef} style={{ left: left, opacity: opacity }}>
+            <AboutContent>
+                    <TextContainer>
+                        <Heading>
+                            <h2>Hi, I'm Ben.</h2>
+                            <h3>Welcome to my portfolio!</h3>
+                        </Heading>
+                        <Paragraph>
+                            {aboutInfo.map((sentence) => (
+                                <Sentence key={sentence.key} >{sentence.text}</Sentence>
+                            ))}
+                        </Paragraph>
+                    </TextContainer>
+                    <ImageContainer>
+                        <Image src={mugshot} alt='' />
+                    </ImageContainer>
+            </AboutContent>
+        </AboutSection>
+    )
+}
+
 const AboutSection = styled(motion.section)`
     position: fixed;
     left: 0;
@@ -24,7 +54,7 @@ const AboutContent = styled.div`
     position: relative;
     padding-top: 8em;
     @media screen and (max-width: 768px) {
-
+        padding: 8em 2em;
     }
 `
 
@@ -121,33 +151,3 @@ const Image = styled.img`
         filter: grayscale(100%);
     }
 `
-
-export default function About() {
-
-    const aboutRef = useRef()
-    const { scrollYProgress } = useScroll({ domTarget: aboutRef })
-
-    const left = useTransform(scrollYProgress, [0.4, 0.6, 0.65, 0.8], ['-100%', '0%', '0%', '100%'])
-    const opacity = useTransform(scrollYProgress, [0.45, 0.6, 0.65, 0.75], ['0', '1', '1', '0'])
-
-    return (
-        <AboutSection id='about' ref={aboutRef} style={{ left: left, opacity: opacity }}>
-            <AboutContent>
-                    <TextContainer>
-                        <Heading>
-                            <h2>Hi, I'm Ben.</h2>
-                            <h3>Welcome to my portfolio!</h3>
-                        </Heading>
-                        <Paragraph>
-                            {aboutInfo.map((sentence) => (
-                                <Sentence key={sentence.key}>{sentence.text}</Sentence>
-                            ))}
-                        </Paragraph>
-                    </TextContainer>
-                    <ImageContainer>
-                        <Image src={mugshot} alt='' />
-                    </ImageContainer>
-            </AboutContent>
-        </AboutSection>
-    )
-}

@@ -4,13 +4,14 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 
 export default function Contact() {
 
-    const contactRef = useRef()
+    const contactRef = useRef(null)
     const { scrollYProgress } = useScroll({ domTarget: contactRef })
 
     const contactYPosition = useTransform(scrollYProgress, [0.6, 0.8, 0.85, 1], ['-100em', '8em', '8em', '-100em'])
+    const opacity = useTransform(scrollYProgress, [0.6, 0.8, 0.85, 1], ['0', '1', '1', '0'])
 
     return (
-        <ContactSection ref={contactRef} style={{ top: contactYPosition }}>
+        <ContactSection ref={contactRef} style={{ top: contactYPosition, opacity: opacity }}>
             <ContactContent>
                 <h1>Contact</h1>
             </ContactContent>
