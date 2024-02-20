@@ -8,6 +8,64 @@ import CircleVec4 from '../../assets/img/circleVec4.svg'
 import { HeroWave } from '../Waves'
 import 'animate.css'
 
+export default function Hero () {
+
+    const heroRef = useRef(null) 
+    const { scrollYProgress } = useScroll({ domTarget: heroRef })
+    const heroHeight = useTransform(scrollYProgress, [0, 0.2], ['100vh', '3.1vh'])
+    const heroBorder = useTransform(scrollYProgress, [0, 0.2], ['0.2em solid, #00c5c500', '0.2em solid #00c5c5'])
+    const circleOneBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
+    const circleTwoBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
+    const circleThreeBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
+    const circleFourBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
+    const textPaddingTop = useTransform(scrollYProgress, [0, 0.2], ['14em', '-4em'])
+    const textOpacity = useTransform(scrollYProgress, [0, 0.15], [0.75, 0])
+       
+
+    const textRotate = ['Frontend Developer', 'Sound Designer', 'Cat Fanatic!']
+    const [currentPhrase, setCurrentPhrase] = useState(0)
+    
+    useEffect(() => {
+        const interval = setInterval(() => {
+        setCurrentPhrase(prevPhrase =>
+            (prevPhrase + 1) % textRotate.length
+        )
+        }, 3500) 
+
+        return () => clearInterval(interval)
+    }, [textRotate.length])
+
+    const renderPhrases = () => {
+        return textRotate.map((phrase, index) => (
+        <Phrase key={index} 
+            className={`text-phrase ${index === currentPhrase ? 'animate__animated animate__fadeIn' : 'animate__animated animate__fadeOut'}`}
+        >
+            {phrase}
+        </Phrase>
+        ))
+    }
+
+    return (
+        <HeroSection ref={heroRef} style={{ height: heroHeight, borderBottom: heroBorder }}>
+            <HeroContent>
+                <HeroAnimation>
+                    <Circle $id='one' src={CircleVec1} style={{ bottom: circleOneBottom }}/>
+                    <Circle $id='two' src={CircleVec2} style={{ bottom: circleTwoBottom }}/>
+                    <Circle $id='three' src={CircleVec3} style={{ bottom: circleThreeBottom }}/>
+                    <Circle $id='four' src={CircleVec4} style={{ bottom: circleFourBottom }}/>
+                    <HeroWave />
+                </HeroAnimation>
+                <HeroTitleContainer style={{ paddingTop: textPaddingTop, opacity: textOpacity }}>
+                    <HeroTitle>Ben Hensor</HeroTitle>
+                    <Phrases>
+                        {renderPhrases()}
+                    </Phrases>
+                </HeroTitleContainer>
+            </HeroContent>
+        </HeroSection>
+    )
+}
+
 const HeroSection = styled(motion.section)`
     width: 100vw;
     margin: 4em auto 0 auto;
@@ -103,7 +161,6 @@ const Circle = styled(motion.img)`
     `}
 `
 
-
 const HeroTitleContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
@@ -158,7 +215,7 @@ const Phrase = styled(motion.h2)`
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    font-size: 3.5em;
+    font-size: 3em;
     text-align: center;
     letter-spacing: 1rem;
     line-height: 1;
@@ -167,70 +224,12 @@ const Phrase = styled(motion.h2)`
     word-wrap: normal;
     opacity: 0;
     @media screen and (max-width: 999px) {
-        font-size: 2.7em;
+        font-size: 2.5em;
     }
     @media screen and (max-width: 768px) {
-        font-size: 2em;
+        font-size: 1.5em;
     }
     @media screen and (max-width: 546px) {
         font-size: 0.7em;
     }
 `
-
-export default function Hero () {
-
-    const heroRef = useRef(null) 
-    const { scrollYProgress } = useScroll({ domTarget: heroRef })
-    const heroHeight = useTransform(scrollYProgress, [0, 0.2], ['100vh', '4.1vh'])
-    const heroBorder = useTransform(scrollYProgress, [0, 0.2], ['0.2em solid, #00c5c500', '0.2em solid #00c5c5'])
-    const circleOneBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
-    const circleTwoBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
-    const circleThreeBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
-    const circleFourBottom = useTransform(scrollYProgress, [0, 0.2], ['29em', '-48em'])
-    const textPaddingTop = useTransform(scrollYProgress, [0, 0.2], ['14em', '-4em'])
-    const textOpacity = useTransform(scrollYProgress, [0, 0.15], [0.75, 0])
-       
-
-    const textRotate = ['Frontend Developer', 'Sound Designer', 'Cat Fanatic!']
-    const [currentPhrase, setCurrentPhrase] = useState(0)
-    
-    useEffect(() => {
-        const interval = setInterval(() => {
-        setCurrentPhrase(prevPhrase =>
-            (prevPhrase + 1) % textRotate.length
-        )
-        }, 3500) 
-
-        return () => clearInterval(interval)
-    }, [textRotate.length])
-
-    const renderPhrases = () => {
-        return textRotate.map((phrase, index) => (
-        <Phrase key={index} 
-            className={`text-phrase ${index === currentPhrase ? 'animate__animated animate__fadeIn' : 'animate__animated animate__fadeOut'}`}
-        >
-            {phrase}
-        </Phrase>
-        ))
-    }
-
-    return (
-        <HeroSection ref={heroRef} style={{ height: heroHeight, borderBottom: heroBorder }}>
-            <HeroContent>
-                <HeroAnimation>
-                    <Circle $id='one' src={CircleVec1} style={{ bottom: circleOneBottom }}/>
-                    <Circle $id='two' src={CircleVec2} style={{ bottom: circleTwoBottom }}/>
-                    <Circle $id='three' src={CircleVec3} style={{ bottom: circleThreeBottom }}/>
-                    <Circle $id='four' src={CircleVec4} style={{ bottom: circleFourBottom }}/>
-                    <HeroWave />
-                </HeroAnimation>
-                <HeroTitleContainer style={{ paddingTop: textPaddingTop, opacity: textOpacity }}>
-                    <HeroTitle>Ben Hensor</HeroTitle>
-                    <Phrases>
-                        {renderPhrases()}
-                    </Phrases>
-                </HeroTitleContainer>
-            </HeroContent>
-        </HeroSection>
-    )
-}

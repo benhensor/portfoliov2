@@ -8,21 +8,7 @@ import Contact from './components/contact/Contact'
 import VertSpace from './components/VertSpace'
 import Cat from './components/cat/Cat'
 
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-`
-
-const Main = styled.main`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin: 60em auto;
-`
-
-function App() {    
+export default function App() {    
 
     return (
         <Container>
@@ -39,4 +25,16 @@ function App() {
     )
 }
 
-export default App;
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
+
+const Main = styled.main`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 60em auto;
+`

@@ -1,6 +1,50 @@
 import React from "react";
 import styled from "styled-components";
 
+export default function ProjectPanel({
+	activeProject,
+    index,
+    toggleProject,
+	title,
+	description,
+	image,
+	live,
+	code,
+}) {
+
+    const isOpen = activeProject === index;
+
+	return (
+		<ProjectContainer $isOpen={isOpen}>
+			<ProjectTriggerContainer>
+				<ProjectTrigger
+					aria-controls="project-content"
+					aria-expanded={isOpen}
+					onClick={() => toggleProject(index)}
+				>
+					<ProjectTitle>{title}</ProjectTitle>
+					{/* icon here */}
+				</ProjectTrigger>
+			</ProjectTriggerContainer>
+			<ProjectContent
+				id="project-content"
+				aria-labelledby="project-title"
+				aria-hidden={!isOpen}
+				role="region"
+			>
+				<p>{description}</p>
+				<ProjectImage src={image} alt={title} />
+				<a href={live} target="_blank" rel="noreferrer">
+					Live
+				</a>
+				<a href={code} target="_blank" rel="noreferrer">
+					Code
+				</a>
+			</ProjectContent>
+		</ProjectContainer>
+	);
+}
+
 // image
 const ProjectImage = styled.img`
 	position: absolute;
@@ -112,47 +156,3 @@ const ProjectTitle = styled.span`
 		}
 	}
 `;
-
-export default function ProjectPanel({
-	activeProject,
-    index,
-    toggleProject,
-	title,
-	description,
-	image,
-	live,
-	code,
-}) {
-
-    const isOpen = activeProject === index;
-
-	return (
-		<ProjectContainer $isOpen={isOpen}>
-			<ProjectTriggerContainer>
-				<ProjectTrigger
-					aria-controls="project-content"
-					aria-expanded={isOpen}
-					onClick={() => toggleProject(index)}
-				>
-					<ProjectTitle>{title}</ProjectTitle>
-					{/* icon here */}
-				</ProjectTrigger>
-			</ProjectTriggerContainer>
-			<ProjectContent
-				id="project-content"
-				aria-labelledby="project-title"
-				aria-hidden={!isOpen}
-				role="region"
-			>
-				<p>{description}</p>
-				<ProjectImage src={image} alt={title} />
-				<a href={live} target="_blank" rel="noreferrer">
-					Live
-				</a>
-				<a href={code} target="_blank" rel="noreferrer">
-					Code
-				</a>
-			</ProjectContent>
-		</ProjectContainer>
-	);
-}

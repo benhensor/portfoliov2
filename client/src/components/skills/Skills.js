@@ -3,12 +3,53 @@ import styled from 'styled-components'
 import { motion, useTransform, useScroll } from 'framer-motion'
 import icons from '../../icons'
 
+export default function Skills() {
+
+    const skillsRef = useRef()
+    const carouselRef = useRef()
+    const { scrollYProgress } = useScroll({ domTarget: skillsRef })
+
+    const [width, setWidth] = useState(0)
+
+    useEffect(() => {
+        setWidth(carouselRef.current.scrollWidth - carouselRef.current.offsetWidth)
+    }, [])
+
+    const skillsXPosition = useTransform(scrollYProgress, [0, 0.2, 0.25, 0.4], ['-100%', '0%', '0%', '100%'])
+
+    return (
+        <SkillsSection id='skills' ref={skillsRef} style={{ left: skillsXPosition }}>
+            <SkillsContent>
+                <Carousel ref={carouselRef} className="carousel">
+                    <InnerCarousel className="inner" drag="x" dragConstraints={{left: -width, right: 0}}>
+                        {icons.map((icon, index) => {
+                            return (
+                                <IconContainer key={index}>
+                                    <div>
+                                        <Icon src={icon} alt='' />
+                                    </div>
+                                </IconContainer>
+                            )
+                        })}
+                    </InnerCarousel>
+                </Carousel>
+            </SkillsContent>
+        </SkillsSection>
+    )
+}
+
 const SkillsSection = styled(motion.section)`
     position: fixed;
     left: 0;
     top: 8em;
     width: 100%;
     height: 50em;
+    @media screen and (max-width: 999px) {
+        padding: var(--m-desktop);
+    }
+    @media screen and (max-width: 768px) {
+        padding: var(--m-mobile);
+    }
 `
 
 const SkillsContent = styled.div`
@@ -53,40 +94,3 @@ const Icon = styled.img`
     border-radius: 2rem;
     pointer-events: none; 
 `
-
-
-
-export default function Skills() {
-
-    const skillsRef = useRef()
-    const carouselRef = useRef()
-    const { scrollYProgress } = useScroll({ domTarget: skillsRef })
-
-    const [width, setWidth] = useState(0)
-
-    useEffect(() => {
-        setWidth(carouselRef.current.scrollWidth - carouselRef.current.offsetWidth)
-    }, [])
-
-    const skillsXPosition = useTransform(scrollYProgress, [0, 0.2, 0.25, 0.4], ['-100%', '0%', '0%', '100%'])
-
-    return (
-        <SkillsSection id='skills' ref={skillsRef} style={{ left: skillsXPosition }}>
-            <SkillsContent>
-                <Carousel ref={carouselRef} className="carousel">
-                    <InnerCarousel className="inner" drag="x" dragConstraints={{left: -width, right: 0}}>
-                        {icons.map((icon, index) => {
-                            return (
-                                <IconContainer key={index}>
-                                    <div>
-                                        <Icon src={icon} alt='' />
-                                    </div>
-                                </IconContainer>
-                            )
-                        })}
-                    </InnerCarousel>
-                </Carousel>
-            </SkillsContent>
-        </SkillsSection>
-    )
-}
