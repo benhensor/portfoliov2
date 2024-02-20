@@ -7,7 +7,7 @@ export default function Contact() {
     const contactRef = useRef(null)
     const { scrollYProgress } = useScroll({ domTarget: contactRef })
 
-    const contactYPosition = useTransform(scrollYProgress, [0.6, 0.8, 0.85, 1], ['-100em', '8em', '8em', '-100em'])
+    const contactYPosition = useTransform(scrollYProgress, [0.6, 0.8, 0.85, 1], ['-100em', '4em', '4em', '-100em'])
     const opacity = useTransform(scrollYProgress, [0.6, 0.8, 0.85, 1], ['0', '1', '1', '0'])
 
     return (
@@ -22,7 +22,7 @@ export default function Contact() {
 const ContactSection = styled(motion.section)`
     position: fixed;
     left: 0;
-    top: 8em;
+    top: 4em;
     width: 100%;
     height: 50em;
 `

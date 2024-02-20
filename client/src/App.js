@@ -6,7 +6,7 @@ import Projects from './components/projects/Projects'
 import About from './components/about/About'
 import Contact from './components/contact/Contact'
 
-export default function App() {
+export default function App() {    
 
     return (
         <Container>

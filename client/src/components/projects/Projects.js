@@ -15,7 +15,7 @@ export default function Projects() {
         setActiveProject(activeProject === index ? null : index)
     }
 
-    const projectsYPosition = useTransform(scrollYProgress, [0.1, 0.4, 0.45, 0.7], ['-100em', '8.1em', '8.1em', '-100em'])
+    const projectsYPosition = useTransform(scrollYProgress, [0.1, 0.4, 0.45, 0.7], ['-100em', '4em', '4em', '-100em'])
     const opacity = useTransform(scrollYProgress, [0.1, 0.4, 0.45, 0.7], ['0', '1', '1', '0'])
     
     return (
@@ -46,7 +46,7 @@ export default function Projects() {
 const ProjectsSection = styled(motion.section)`
     position: fixed;
     left: 0;
-    top: 8em;
+    top: 4em;
     width: 100%;
     height: 50em;
     display: flex;

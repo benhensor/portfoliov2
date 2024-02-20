@@ -52,9 +52,9 @@ const AboutContent = styled.div`
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    padding-top: 8em;
+    padding-top: 4em;
     @media screen and (max-width: 768px) {
-        padding: 8em 2em;
+        padding: 4em 2em;
     }
 `
 
@@ -82,7 +82,7 @@ const Heading = styled.div`
     }
     @media screen and (max-width: 546px) {
         h3 {
-        margin-top: 4em;
+        margin-top: 2em;
         }
     }
 `
@@ -92,11 +92,11 @@ const Paragraph = styled.div`
     flex-direction: column;
     justify-content: center;
     text-align: justify;
-    gap: 1em;
+    gap: 0.5em;
 `
 
 const Sentence = styled.p`
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: var(--text-color-md);
 `
 
@@ -128,7 +128,7 @@ const ImageContainer = styled.div`
         border: 2px solid var(--text-color-dk);
     }
     @media screen and (max-width: 546px) {
-        top: 27%;
+        top: 20%;
         transform: translateY(-50%);
         right: -17%;
         width: 17em;

@@ -42,7 +42,7 @@ export default function Skills() {
 const SkillsSection = styled(motion.section)`
     position: fixed;
     left: 0;
-    top: 8em;
+    top: 4em;
     width: 100%;
     height: 50em;
     @media screen and (max-width: 999px) {
