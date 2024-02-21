@@ -5,7 +5,6 @@ import CircleVec1 from '../../assets/img/circleVec1.svg'
 import CircleVec2 from '../../assets/img/circleVec2.svg'
 import CircleVec3 from '../../assets/img/circleVec3.svg'
 import CircleVec4 from '../../assets/img/circleVec4.svg'
-import { HeroWave } from '../Waves'
 import 'animate.css'
 
 export default function Hero () {
@@ -53,7 +52,6 @@ export default function Hero () {
                     <Circle $id='two' src={CircleVec2} style={{ bottom: circleTwoBottom }}/>
                     <Circle $id='three' src={CircleVec3} style={{ bottom: circleThreeBottom }}/>
                     <Circle $id='four' src={CircleVec4} style={{ bottom: circleFourBottom }}/>
-                    <HeroWave />
                 </HeroAnimation>
                 <HeroTitleContainer style={{ paddingTop: textPaddingTop, opacity: textOpacity }}>
                     <HeroTitle>Ben Hensor</HeroTitle>

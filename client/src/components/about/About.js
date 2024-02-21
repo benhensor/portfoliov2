@@ -64,9 +64,11 @@ const TextContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-left: 2em;
     padding-right: 40%;
     z-index: 1;
+    @media screen and (max-width: 999px) {
+        padding-left: 2em;
+    }
     @media screen and (max-width: 768px) {
         padding-left: 1em;
         padding-right: 1em;
@@ -112,9 +114,6 @@ const Sentence = styled.p`
         font-size: 1.4rem;
         line-height: 1.5;
     }
-    @media screen and (max-width: 546px) {
-        font-size: 1.2rem;
-    }
 `
 
 const ImageContainer = styled.div`
@@ -153,12 +152,12 @@ const ImageContainer = styled.div`
 `
 
 const Image = styled.img`
-    width: 20em;
+    width: 18em;
     height: auto;
     object-position: center;
     position: relative;
-    top: -6em;
-    left: 1em;
+    top: -2.7em;
+    left: 2.5em;
     @media screen and (max-width: 768px) {
         width: 8em;
         top: -1em;

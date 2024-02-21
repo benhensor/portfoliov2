@@ -9,8 +9,7 @@ import {
     Navbar,
     LogoContainer, 
     HeaderName, 
-    HeaderMenu, 
-    Contact, 
+    HeaderMenu,
     StyledSend, 
     MenuControls, 
     StyledFaBars, 
@@ -64,7 +63,7 @@ export default function Header () {
                 case 'about':
                     scrollToValue = (siteHeight * 0.6) - headerOffset;
                     break;
-                case 'connect':
+                case 'contact':
                     scrollToValue = (siteHeight * 0.8) - headerOffset;
                     break;
                 default:
@@ -103,7 +102,7 @@ export default function Header () {
                         <NavLink to='skills' name='Skills' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
                         <NavLink to='projects' name='Projects' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
                         <NavLink to='about' name='About' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
-                        <NavLink to='connect' name={<StyledSend style={{ width: '1.4em', rotate: '-45deg' }}/>} activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink}  />             
+                        <NavLink to='contact' name={<StyledSend style={{ width: '1.4em', rotate: '-45deg' }}/>} activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink}  />             
                     </HeaderMenu>
                     <MenuControls aria-label='Toggle navigation' aria-expanded={isOpen} onClick={() => toggleMenu(!isOpen)}>
                         {isOpen ? <StyledFaTimes /> : <StyledFaBars />}
@@ -115,7 +114,7 @@ export default function Header () {
             <NavLink to='skills' name='Skills' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
             <NavLink to='projects' name='Projects' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
             <NavLink to='about' name='About' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
-            <NavLink to='connect' name={<StyledSend/>} activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink}  />
+            <NavLink to='contact' name={<StyledSend/>} activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink}  />
             <Icons>
                 <a href='https://github.com/benhensor' rel='noreferrer' target='_blank'>
                     <img src={NavIcon1} alt='Github' />
