@@ -31,7 +31,9 @@ export const Navbar = styled.nav`
     align-items: center;
     background: var(--background-static);
     color: white;
-    padding: var(--m-desktop);
+    @media screen and (max-width: 999px) {
+        padding: var(--m-desktop);
+    }
     @media screen and (max-width: 768px) {
         padding: var(--m-mobile);
     }
@@ -55,8 +57,6 @@ export const Border = styled.div`
     border-radius: 50%;
     border: 0.2em solid var(--border-color);
     background-color: var(--background-static);
-
-    
 `
 
 export const LogoContainer = styled.div`
@@ -147,7 +147,7 @@ export const MobileMenu = styled.ul`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9;
+    z-index: 11;
     margin-top: 4em;
     display: flex;
     flex-direction: column;

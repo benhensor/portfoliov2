@@ -1,28 +1,40 @@
-import babel from './assets/icons/tech/babel.svg';
-import bootstrap from './assets/icons/tech/bootstrap5.svg';
-import css from './assets/icons/tech/css.svg';
-import figma from './assets/icons/tech/figma.svg';
-import git from './assets/icons/tech/git.svg';
-import gitlab from './assets/icons/tech/gitlab.svg';
-import html from './assets/icons/tech/html5.svg';
-import jest from './assets/icons/tech/jest.svg';
-import javascript from './assets/icons/tech/js.svg';
-import mongodb from './assets/icons/tech/mongodb.svg';
-import node from './assets/icons/tech/nodejs.svg';
-import npm from './assets/icons/tech/npm.svg';
-import postfresql from './assets/icons/tech/postgresql.svg';
-import postman from './assets/icons/tech/postman.svg';
-import ps from './assets/icons/tech/ps.svg';
-import react from './assets/icons/tech/reactjs.svg';
-import sass from './assets/icons/tech/sass.svg';
-import semanticUi from './assets/icons/tech/semantic-ui.svg';
-import tailwind from './assets/icons/tech/tailwind.svg';
-import vs from './assets/icons/tech/vs.svg';
-import auth0 from './assets/icons/tech/auth0.svg';
-import elementUI from './assets/icons/tech/element-ui.svg';
-import netlify from './assets/icons/tech/netlify.svg';
-import prettier from './assets/icons/tech/prettier.svg';
+// Tech Icons
+import auth0 from './assets/icons/tech/tools/auth0.svg';
+import babel from './assets/icons/tech/tools/babel.svg';
+import bootstrap from './assets/icons/tech/frontend/bootstrap5.svg';
+import css from './assets/icons/tech/frontend/css3.svg';
+import cypress from './assets/icons/tech/testing/cypress.svg';
+import elementUI from './assets/icons/tech/frontend/elementui.svg';
+import figma from './assets/icons/tech/design/figma.svg';
+import firebase from './assets/icons/tech/backend/firebase.svg';
+import flask from './assets/icons/tech/backend/flask.svg';
+import git from './assets/icons/tech/devops/git.svg';
+import github from './assets/icons/tech/devops/github.svg';
+import heroku from './assets/icons/tech/devops/heroku.svg';
+import html from './assets/icons/tech/frontend/html5.svg';
+import jest from './assets/icons/tech/testing/jest.svg';
+import javascript from './assets/icons/tech/languages/js.svg';
+import mongodb from './assets/icons/tech/backend/mongodb.svg';
+import netlify from './assets/icons/tech/devops/netlify.svg';
+import node from './assets/icons/tech/backend/nodejs.svg';
+import npm from './assets/icons/tech/tools/npm.svg';
+import playwright from './assets/icons/tech/testing/playwright.svg';
+import postfresql from './assets/icons/tech/backend/postgresql.svg';
+import postman from './assets/icons/tech/tools/postman.svg';
+import prettier from './assets/icons/tech/tools/prettier.svg';
+import ps from './assets/icons/tech/design/ps.svg';
+import python from './assets/icons/tech/languages/python.svg';
+import react from './assets/icons/tech/frontend/reactjs.svg';
+import reactrouter from './assets/icons/tech/tools/reactrouter.svg';
+import redux from './assets/icons/tech/frontend/redux.svg';
+import sass from './assets/icons/tech/frontend/sass.svg';
+import semanticUi from './assets/icons/tech/frontend/semanticui.svg';
+import tailwind from './assets/icons/tech/frontend/tailwindcss.svg';
+import typescript from './assets/icons/tech/languages/typescript.svg';
+import vsCode from './assets/icons/tech/tools/vscode.svg';
 
+
+// Project Images
 import paperbackLogo from './assets/projects/paprback_logo_books.svg';
 import bookShelf from './assets/projects/bookshelfHero.png';
 import bhSoundLogo from './assets/projects/bhsoundLogo.svg';
@@ -36,140 +48,117 @@ import audiophileBackground from './assets/projects/image-header.jpg';
 import designoBackground from './assets/projects/designoBackground.jpg';
 import weatherAppBackground from './assets/projects/weather-app.png';
 
-const tech = [
-{
-    name: 'HTML 5',
-    icon: html
-},
-{
-    name: 'CSS 3',
-    icon: css
-},
-{
-    name: 'JavaScript',
-    icon: javascript
-},
-{
-    name: 'React',
-    icon: react
-},
-{
-    name: 'Node.js',
-    icon: node
-},
-{
-    name: 'Auth0',
-    icon: auth0
-},
-{
-    name: 'MongoDB',
-    icon: mongodb
-},
-{
-    name: 'Elephant SQL',
-    icon: postfresql
-},
-{
-    name: 'Git',
-    icon: git
-},
-{
-    name: 'GitHub',
-    icon: gitlab
-},
-{
-    name: 'VS Code',
-    icon: vs
-},
-{
-    name: 'Figma',
-    icon: figma
-},
-{
-    name: 'Bootstrap',
-    icon: bootstrap
-},
-{
-    name: 'Sass',
-    icon: sass
-},
-{
-    name: 'Tailwind',
-    icon: tailwind
-},
-{
-    name: 'Jest',
-    icon: jest
-},
-{
-    name: 'NPM',
-    icon: npm
-},
-{
-    name: 'Postman',
-    icon: postman
-},
-{
-    name: 'Photoshop',
-    icon: ps
-},
-{
-    name: 'Babel',
-    icon: babel
-},
-{
-    name: 'VS Code',
-    icon: vs
-},
-{
-    name: 'Semantic UI',
-    icon: semanticUi
-},
-{
-    name: 'Element-UI',
-    icon: elementUI
-},
-{
-    name: 'Netlify',
-    icon: netlify
-},
-{
-    name: 'Prettier',
-    icon: prettier
-},
+
+// Tech Icon Data
+const backend = [
+    { name: 'Firebase', icon: firebase },
+    { name: 'Flask', icon: flask },
+    { name: 'MongoDB', icon: mongodb },
+    { name: 'Node.js', icon: node },
+    { name: 'PostgreSQL', icon: postfresql }
 ]
+
+const design = [
+    { name: 'Figma', icon: figma },
+    { name: 'Photoshop', icon: ps }
+]
+
+const devops = [
+    { name: 'Git', icon: git },
+    { name: 'GitHub', icon: github },
+    { name: 'Heroku', icon: heroku },
+    { name: 'Netlify', icon: netlify },
+]
+
+const frontend = [
+    { name: 'Bootstrap', icon: bootstrap }, 
+    { name: 'CSS 3', icon: css },
+    { name: 'Element-UI', icon: elementUI },
+    { name: 'HTML 5', icon: html },
+    { name: 'React', icon: react },
+    { name: 'Redux', icon: redux},
+    { name: 'Sass', icon: sass },
+    { name: 'Semantic UI', icon: semanticUi },
+    { name: 'Tailwind', icon: tailwind }
+]
+
+const languages = [
+    { name: 'JavaScript', icon: javascript },
+    { name: 'Python', icon: python },
+    { name: 'TypeScript', icon: typescript }
+]
+
+const testing = [
+    { name: 'Cypress', icon: cypress },
+    { name: 'Jest', icon: jest },
+    { name: 'Playwright', icon: playwright }
+]
+
+const tools = [
+    { name: 'Auth0', icon: auth0 },
+    { name: 'Babel', icon: babel },
+    { name: 'NPM', icon: npm },
+    { name: 'Postman', icon: postman },
+    { name: 'Prettier', icon: prettier },
+    { name: 'React Router', icon: reactrouter },
+    { name: 'VS Code', icon: vsCode }
+]
+
+const tech = [
+    { name: 'Auth0', icon: auth0 },
+    { name: 'Babel', icon: babel },
+    { name: 'Bootstrap', icon: bootstrap },
+    { name: 'CSS 3', icon: css },
+    { name: 'Cypress', icon: cypress },
+    { name: 'Element-UI', icon: elementUI },
+    { name: 'Figma', icon: figma },
+    { name: 'Firebase', icon: firebase },
+    { name: 'Flask', icon: flask },
+    { name: 'Git', icon: git },
+    { name: 'GitHub', icon: github },
+    { name: 'Heroku', icon: heroku },
+    { name: 'HTML 5', icon: html },
+    { name: 'Jest', icon: jest },
+    { name: 'JavaScript', icon: javascript },
+    { name: 'MongoDB', icon: mongodb },
+    { name: 'Netlify', icon: netlify },
+    { name: 'Node.js', icon: node },
+    { name: 'NPM', icon: npm },
+    { name: 'Photoshop', icon: ps },
+    { name: 'Playwright', icon: playwright },
+    { name: 'PostgreSQL', icon: postfresql },
+    { name: 'Postman', icon: postman },
+    { name: 'Prettier', icon: prettier },
+    { name: 'Python', icon: python },
+    { name: 'React', icon: react },
+    { name: 'React Router', icon: reactrouter },
+    { name: 'Redux', icon: redux },
+    { name: 'Sass', icon: sass },
+    { name: 'Semantic UI', icon: semanticUi },
+    { name: 'Tailwind', icon: tailwind },
+    { name: 'TypeScript', icon: typescript },
+    { name: 'VS Code', icon: vsCode }
+]
+
 
 // Journey data
-
 const aboutInfo = [
-{
-    key: 1,
-    text: "I'm a Junior Frontend Developer based in Bristol, UK."
-},
-{
-    key: 2,
-    text: "Following my time as an award-winning Sound Designer, I decided to switch things up and get into Software and Web Development."
-},
-{
-    key: 3,
-    text: "I joined the School of Code's excellent programming bootcamp for a crash-course in foundation coding."
-},
-{
-    key: 4,
-    text: "Since graduating from the bootcamp I have adopted a rigourous strategy of building projects everyday, refining my knowledge and always learning as much as I can."
-},
-{
-    key: 5,
-    text: "Throughout this journey, I have embraced the mindset of aquiring new knowledge and skills."
-},
-{
-    key: 6,
-    text: "Thank you for visiting my portfolio, please check out some of my projects below. I am actively seeking new opportunities, so please get in touch!"
-}
+{ key: 1,
+    text: "I'm a Junior Frontend Developer based in Bristol, UK." },
+{ key: 2,
+    text: "Following my time as an award-winning Sound Designer, I decided to switch things up and get into Software and Web Development." },
+{ key: 3,
+    text: "I joined the School of Code's excellent programming bootcamp for a crash-course in foundation coding." },
+{ key: 4,
+    text: "Since graduating from the bootcamp I have adopted a rigourous strategy of building projects everyday, refining my knowledge and always learning as much as I can." },
+{ key: 5,
+    text: "Throughout this journey, I have embraced the mindset of aquiring new knowledge and skills." },
+{ key: 6,
+    text: "Thank you for visiting my portfolio, please check out some of my projects below. I am actively seeking new opportunities, so please get in touch!" }
 ]
 
-    // Projects data
 
+// Projects data
 const projects = [
     {
         key: 1,
@@ -246,4 +235,4 @@ const projects = [
 ]
 
 
-export { tech, aboutInfo, projects }
+export { backend, design, devops, frontend, languages, testing, tools, tech, aboutInfo, projects }

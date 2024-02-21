@@ -1,13 +1,13 @@
-import IconReact from './assets/icons/tech/reactjs.svg'
-import IconHTML from './assets/icons/tech/html5.svg'
-import IconCSS from './assets/icons/tech/css.svg'
-import IconJavaScript from './assets/icons/tech/js.svg'
-import IconNodeJS from './assets/icons/tech/nodejs.svg'
-import IconPostgreSQL from './assets/icons/tech/postgresql.svg'
-import IconJest from './assets/icons/tech/jest.svg'
-import IconFigma from './assets/icons/tech/figma.svg'
-import IconGit from './assets/icons/tech/git.svg'
+import IconReact from './assets/icons/tech/frontend/reactjs.svg'
+import IconJavaScript from './assets/icons/tech/languages/js.svg'
+import IconHTML from './assets/icons/tech/frontend/html5.svg'
+import IconCSS from './assets/icons/tech/frontend/css3.svg'
+import IconNodeJS from './assets/icons/tech/backend/nodejs.svg'
+import IconPostgreSQL from './assets/icons/tech/backend/postgresql.svg'
+import IconJest from './assets/icons/tech/testing/jest.svg'
+import IconFigma from './assets/icons/tech/design/figma.svg'
+import IconGit from './assets/icons/tech/devops/git.svg'
 
-const icons = [ IconReact, IconHTML, IconCSS, IconJavaScript, IconNodeJS, IconPostgreSQL, IconJest, IconFigma, IconGit ]
+const icons = [ IconReact, IconJavaScript, IconHTML, IconCSS, IconNodeJS, IconPostgreSQL, IconJest, IconFigma, IconGit ]
 
 export default icons

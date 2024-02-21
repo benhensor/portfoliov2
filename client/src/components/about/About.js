@@ -39,7 +39,9 @@ const AboutSection = styled(motion.section)`
     left: 0;
     top: 8em;
     width: 100%;
-    height: 50em;
+    @media screen and (max-width: 768px) {
+        top: 6em;
+    }
 `
 
 const AboutContent = styled.div`
@@ -63,7 +65,7 @@ const TextContainer = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     padding-left: 2em;
-    padding-right: 45%;
+    padding-right: 40%;
     z-index: 1;
     @media screen and (max-width: 768px) {
         padding-left: 1em;
@@ -74,15 +76,17 @@ const TextContainer = styled.div`
 const Heading = styled.div`
     display: flex;
     flex-direction: column;
+    gap: 0.5em;
     margin-bottom: 2em;
     color: var(--highlight-color);
-    h3 {
-        margin-top: 1em;
-
-    }
     @media screen and (max-width: 546px) {
+        gap: 0.5em;
+        margin-bottom: 1em;
+        h2 {
+            font-size: 2rem;
+        }
         h3 {
-        margin-top: 2em;
+            font-size: 1.4rem;
         }
     }
 `
@@ -92,19 +96,32 @@ const Paragraph = styled.div`
     flex-direction: column;
     justify-content: center;
     text-align: justify;
-    gap: 0.5em;
+    gap: 1em;
+    @media screen and (max-width: 768px) {
+        gap: 0.7em;
+    }
+    @media screen and (max-width: 546px) {
+        gap: 0.5em;
+    }
 `
 
 const Sentence = styled.p`
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: var(--text-color-md);
+    @media screen and (max-width: 768px) {
+        font-size: 1.4rem;
+        line-height: 1.5;
+    }
+    @media screen and (max-width: 546px) {
+        font-size: 1.2rem;
+    }
 `
 
 const ImageContainer = styled.div`
     position: absolute;
-    top: 50%;
+    top: 20em;
     transform: translateY(-50%);
-    right: -5%;
+    right: -4em;
     width: 25em;
     height: 25em;
     border: 2px solid var(--accent-color);
@@ -120,19 +137,17 @@ const ImageContainer = styled.div`
         }
     }
     @media screen and (max-width: 768px) {
-        top: 27%;
-        transform: translateY(-50%);
-        right: -5%;
-        width: 17em;
-        height: 17em;
+        top: 9em;
+        right: 0em;
+        width: 12em;
+        height: 12em;
         border: 2px solid var(--text-color-dk);
     }
     @media screen and (max-width: 546px) {
-        top: 20%;
-        transform: translateY(-50%);
-        right: -17%;
-        width: 17em;
-        height: 17em;
+        top: 8em;
+        right: 0em;
+        width: 10em;
+        height: 10em;
         border: 2px solid var(--text-color-dk);
     }
 `
@@ -145,9 +160,14 @@ const Image = styled.img`
     top: -6em;
     left: 1em;
     @media screen and (max-width: 768px) {
-        width: 12em;
-        top: -2em;
+        width: 8em;
+        top: -1em;
         left: 1em;
         filter: grayscale(100%);
+    }
+    @media screen and (max-width: 546px) {
+        width: 6em;
+        top: -0.5em;
+        left: 0.5em;
     }
 `
