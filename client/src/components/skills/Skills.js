@@ -15,16 +15,26 @@ export default function Skills() {
 	const skillsRef = useRef(null);
 	const contentRef = useRef(null);
 	const nodes = [
-		"Tools",
-		"Design",
-		"DevOps",
-		"Testing",
-		"Backend",
-		"Languages",
-		"Frontend",
+		"tools",
+		"design",
+		"devops",
+		"testing",
+		"backend",
+		"languages",
+		"frontend",
 	];
 	const nodeRefs = nodes.map(() => React.createRef(null));
 	const { scrollYProgress } = useScroll({ domTarget: skillsRef });
+
+	const sectionData = [
+		tools,
+		design,
+		devops,
+		testing,
+		backend,
+		languages,
+		frontend,
+	];
 
 	const skillsY = useTransform(
 		scrollYProgress,
@@ -38,15 +48,7 @@ export default function Skills() {
 		["0", "1", "1", "0"]
 	);
 
-	const [hoverState, setHoverState] = useState({
-		languages: false,
-		frontend: false,
-		backend: false,
-		testing: false,
-		devops: false,
-		design: false,
-		tools: false,
-	});
+	const [hoveredNode, setHoveredNode] = useState(null);
 	const [isAnimated, setIsAnimated] = useState(false);
 	const [containerDimensions, setContainerDimensions] = useState({
 		width: 0,
@@ -68,11 +70,11 @@ export default function Skills() {
 		return () => window.removeEventListener("resize", updateDimensions);
 	}, []);
 
-	const handleMouseEnter = (section) => {
-		setHoverState((prev) => ({ ...prev, [section]: true }));
+	const handleMouseEnter = (node) => {
+		setHoveredNode(node.toLowerCase());
 	};
-	const handleMouseLeave = (section) => {
-		setHoverState((prev) => ({ ...prev, [section]: false }));
+	const handleMouseLeave = (node) => {
+		setHoveredNode(null);
 	};
 
 	const totalNodes = 7;
@@ -101,6 +103,20 @@ export default function Skills() {
 		setIsAnimated((prev) => !prev);
 	};
 
+	const calculateSkillPosition = (nodeIndex, skillIndex, totalSkills) => {
+		const nodePosition = calculatePosition(nodeIndex);
+		const skillAngleStep = (2 * Math.PI) / totalSkills;
+		const skillRadius = 50;
+		const angle = skillAngleStep * skillIndex;
+
+		
+		console.log(nodePosition);
+		return {
+			x: nodePosition.x + Math.cos(angle) * skillRadius,
+			y: nodePosition.y + Math.sin(angle) * skillRadius,
+		};
+	};
+
 	return (
 		<SkillsSection
 			id="skills"
@@ -115,9 +131,15 @@ export default function Skills() {
 						<Node
 							key={index}
 							ref={nodeRefs[index]}
+							onMouseEnter={() =>
+								handleMouseEnter(node.toLowerCase())
+							}
+							onMouseLeave={() =>
+								handleMouseLeave(node.toLowerCase())
+							}
 							custom={index}
-							initial={{ 
-								opacity: 0, 
+							initial={{
+								opacity: 0,
 								visibility: "visible",
 								color: "#293030",
 							}}
@@ -137,6 +159,27 @@ export default function Skills() {
 							}}
 						>
 							{node}
+							{hoveredNode === node.toLowerCase() && ((
+								<Section>
+									{sectionData[nodes.indexOf(hoveredNode)].map((skill, skillIndex) => {
+										const skillPos = calculateSkillPosition(index, skillIndex, sectionData[nodes.indexOf(hoveredNode)].length);
+										return (
+											<Skill
+												key={skillIndex}
+												style={{
+													transform: `translate(${skillPos.x}px, ${skillPos.y}px)`,
+												}}
+											>
+												<img
+													src={skill.icon}
+													alt={skill.name}
+												/>
+												<p>{skill.name}</p>
+											</Skill>
+										);
+									})}
+								</Section>
+							))}
 						</Node>
 						<motion.svg
 							style={{
@@ -213,6 +256,7 @@ const SkillsContent = styled.div`
 	align-items: center;
 	overflow: hidden;
 	position: relative;
+	border: 2px solid var(--accent-color);
 `;
 
 const SkillsNode = styled(motion.h2)`
@@ -247,22 +291,64 @@ const Node = styled(motion.h4)`
 	padding: 16px;
 	z-index: 10;
 	aspect-ratio: 1 / 1;
+	text-transform: capitalize;
 	cursor: pointer;
 	transition: all 0.05s ease-in;
 	&:hover {
 		color: var(--accent-color);
+
+		&::after {
+			opacity: 1;
+		}
+	}
+	&::after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: calc(100% + 8px);
+		height: calc(100% + 8px);
+		border-radius: 50%;
+		border: 5px solid var(--button-inactive);
+		opacity: 0;
+		transition: opacity 0.1s ease-in, transform 0.1s ease-in;
+		transform: translate(-50%, -50%) scale(1);
+		box-sizing: border-box;
 	}
 `;
 
-// const Section = styled.div`
-// 	width: 100%;
-// 	height: 100%;
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// 	transition: all 0.5s ease-out;
-// 	img {
-// 		width: 5em;
-// 		height: 5em;
-// 	}
-// `;
+const Section = styled(motion.div)`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	transition: all 0.5s ease-out;
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 100000;
+	}
+	img {
+		width: 5em;
+		height: 5em;
+	}
+`;
+
+const Skill = styled(motion.div)`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5em;
+	p {
+		right: 0;
+		font-size: 1.4rem;
+	}
+`;
