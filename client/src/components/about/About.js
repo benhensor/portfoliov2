@@ -37,18 +37,19 @@ export default function About() {
 const AboutSection = styled(motion.section)`
     position: fixed;
     left: 0;
-    top: 8em;
+    top: 0;
     width: 100%;
+    height: 100vh;
     @media screen and (max-width: 768px) {
         top: 6em;
     }
 `
 
 const AboutContent = styled.div`
-    width: 100%;
     max-width: 1000px;
-    height: 100%;
-    margin: 0 auto;
+    width: 100%;
+    height: 90vh;
+    margin: 8em auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

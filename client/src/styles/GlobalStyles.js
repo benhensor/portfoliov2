@@ -72,6 +72,8 @@ const GlobalStyles = createGlobalStyle`
     }
 
     html {
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
         @media screen and (max-width: 400px) {
             font-size: 13px;
         }
@@ -90,7 +92,6 @@ const GlobalStyles = createGlobalStyle`
     }
 
     main {
-        padding-top: 4em;
         background: #111;
         margin: 0 auto;
         position: relative;
@@ -116,10 +117,6 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         color: #fff;
     }
-
-    
-
-    
 `
 
 export default GlobalStyles;

@@ -15,26 +15,26 @@ export default function Skills() {
 	const skillsRef = useRef(null);
 	const contentRef = useRef(null);
 	const nodes = [
+		"Tools",
+		"Design",
+		"DevOps",
+		"Testing",
+		"Backend",
 		"Languages",
 		"Frontend",
-		"Backend",
-		"Testing",
-		"DevOps",
-		"Design",
-		"Tools",
 	];
 	const nodeRefs = nodes.map(() => React.createRef(null));
 	const { scrollYProgress } = useScroll({ domTarget: skillsRef });
 
-	const skillsX = useTransform(
+	const skillsY = useTransform(
 		scrollYProgress,
-		[0, 0.2, 0.25, 0.4],
-		["-100%", "0%", "0%", "100%"]
+		[0, 0.2, 0.25, 0.3],
+		["200%", "0%", "0%", "-100%"]
 	);
 
 	const opacity = useTransform(
 		scrollYProgress,
-		[0, 0.2, 0.25, 0.4],
+		[0, 0.2, 0.25, 0.27],
 		["0", "1", "1", "0"]
 	);
 
@@ -47,7 +47,6 @@ export default function Skills() {
 		design: false,
 		tools: false,
 	});
-
 	const [isAnimated, setIsAnimated] = useState(false);
 	const [containerDimensions, setContainerDimensions] = useState({
 		width: 0,
@@ -78,17 +77,23 @@ export default function Skills() {
 
 	const totalNodes = 7;
 	const angleStep = (2 * Math.PI) / totalNodes;
-	const nodeRadii = [116.66, 101.74, 98.95, 87.31, 93.51, 85.6, 72.4];
+	const nodeRadii = [72.4, 85.6, 93.51, 87.31, 98.95, 116.66, 101.74];
 	const centerX = containerDimensions.width / 2;
 	const centerY = containerDimensions.height / 2;
 
 	const calculatePosition = (index) => {
 		const angle = angleStep * index;
+		let xScale = 1;
+		let yScale = 1;
+		if (containerDimensions.width < 768) {
+			xScale = 1;
+			yScale = 1.8;
+		}
 		const radius =
 			Math.min(containerDimensions.width, containerDimensions.height) / 3;
 		return {
-			x: Math.cos(angle) * radius,
-			y: Math.sin(angle) * radius,
+			x: Math.cos(angle) * radius * xScale,
+			y: Math.sin(angle) * radius * yScale,
 		};
 	};
 
@@ -100,20 +105,25 @@ export default function Skills() {
 		<SkillsSection
 			id="skills"
 			ref={skillsRef}
-			style={{ left: skillsX, opacity: opacity }}
+			style={{ top: skillsY, opacity: opacity }}
 		>
 			<SkillsContent ref={contentRef}>
 				<SkillsNode onClick={handleAnimate}>Skills</SkillsNode>
 
 				{nodes.map((node, index) => (
-					<>
+					<React.Fragment key={node}>
 						<Node
 							key={index}
 							ref={nodeRefs[index]}
 							custom={index}
-							initial={{ opacity: 0, visibility: "visible" }}
+							initial={{ 
+								opacity: 0, 
+								visibility: "visible",
+								color: "#293030",
+							}}
 							animate={{
 								opacity: isAnimated ? 1 : 0,
+								color: isAnimated ? "#FFFFFF" : "#293030",
 								x: isAnimated
 									? calculatePosition(index).x + "px"
 									: "0px",
@@ -122,9 +132,7 @@ export default function Skills() {
 									: "0px",
 							}}
 							transition={{
-								type: "spring",
-								bounce: 0.6,
-								duration: 0.5,
+								duration: 0.1,
 								ease: "easeOut",
 							}}
 						>
@@ -141,9 +149,12 @@ export default function Skills() {
 							{nodes.map((node, index) => {
 								const pos = calculatePosition(index);
 								const angle = angleStep * index;
-								const nodeRadiusAdjustment = nodeRadii[index] / 2;
-								const adjustmentX = Math.cos(angle) * nodeRadiusAdjustment;
-								const adjustmentY = Math.sin(angle) * nodeRadiusAdjustment;
+								const nodeRadiusAdjustment =
+									nodeRadii[index] / 2;
+								const adjustmentX =
+									Math.cos(angle) * nodeRadiusAdjustment;
+								const adjustmentY =
+									Math.sin(angle) * nodeRadiusAdjustment;
 								const x2 = centerX + pos.x - adjustmentX;
 								const y2 = centerY + pos.y - adjustmentY;
 
@@ -165,16 +176,14 @@ export default function Skills() {
 											strokeOpacity: isAnimated ? 1 : 0,
 										}}
 										transition={{
-											type: "spring",
-											bounce: 0.8,
-											duration: 0.5,
+											duration: 0.1,
 											ease: "easeOut",
 										}}
 									/>
 								);
 							})}
 						</motion.svg>
-					</>
+					</React.Fragment>
 				))}
 			</SkillsContent>
 		</SkillsSection>
@@ -184,10 +193,9 @@ export default function Skills() {
 const SkillsSection = styled(motion.section)`
 	position: fixed;
 	left: 0;
-	top: 4em;
+	top: 0;
 	width: 100%;
-	height: 40em;
-    user-select: none;
+	height: 100vh;
 	@media screen and (max-width: 999px) {
 		padding: var(--m-desktop);
 	}
@@ -198,8 +206,8 @@ const SkillsSection = styled(motion.section)`
 
 const SkillsContent = styled.div`
 	max-width: 1000px;
-	height: 100%;
-	margin: 0 auto;
+	height: 90vh;
+	margin: 8em auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -219,8 +227,12 @@ const SkillsNode = styled(motion.h2)`
 	padding: 40px;
 	z-index: 100;
 	cursor: pointer;
+	transition: all 0.05s ease-in;
 	&:hover {
 		color: var(--accent-color);
+	}
+	&:focus {
+		outline: none;
 	}
 `;
 
@@ -232,10 +244,11 @@ const Node = styled(motion.h4)`
 	border-radius: 50%;
 	border: 2px solid var(--accent-color);
 	background: var(--card-background-color);
-	padding: 1em;
+	padding: 16px;
 	z-index: 10;
-    aspect-ratio: 1 / 1;
+	aspect-ratio: 1 / 1;
 	cursor: pointer;
+	transition: all 0.05s ease-in;
 	&:hover {
 		color: var(--accent-color);
 	}
