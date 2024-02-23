@@ -24,13 +24,13 @@ const ContactSection = styled(motion.section)`
     left: 0;
     top: 4em;
     width: 100%;
-    height: 50em;
+    height: 100vh;
 `
 
 const ContactContent = styled.div`
     width: 100%;
     max-width: 1000px;
-    height: 100%;
+    height: 80vh;
     margin: 0 auto;
     display: flex;
     justify-content: center;

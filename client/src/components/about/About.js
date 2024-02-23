@@ -40,15 +40,12 @@ const AboutSection = styled(motion.section)`
     top: 0;
     width: 100%;
     height: 100vh;
-    @media screen and (max-width: 768px) {
-        top: 6em;
-    }
 `
 
 const AboutContent = styled.div`
     max-width: 1000px;
     width: 100%;
-    height: 90vh;
+    height: 80vh;
     margin: 8em auto;
     display: flex;
     flex-direction: column;

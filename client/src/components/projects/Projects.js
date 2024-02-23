@@ -70,7 +70,7 @@ const ProjectsSection = styled(motion.section)`
 const ProjectsContent = styled.div`
 	max-width: 1000px;
     width: 100%;
-	height: 90vh;
+	height: 80vh;
     margin: 8em auto;
 	display: flex;
 	justify-content: center;
