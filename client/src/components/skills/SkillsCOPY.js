@@ -1,6 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { motion, useTransform, useScroll } from "framer-motion";
+import { debounce } from "lodash";
 import {
 	backend,
 	design,
@@ -14,6 +15,7 @@ import {
 export default function Skills() {
 	const skillsRef = useRef(null);
 	const contentRef = useRef(null);
+
 	const sectionsTop = [
 		{ name: "languages", data: languages },
 		{ name: "frontend", data: frontend },
@@ -58,6 +60,7 @@ export default function Skills() {
 		topLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
 		bottomLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
 	});
+	const [modalData, setModalData] = useState(null);
 
 	useEffect(() => {
 		// Assuming SkillsNode is centered, calculate its center coordinates
@@ -113,22 +116,31 @@ export default function Skills() {
 		return () => window.removeEventListener("resize", updateDimensions);
 	}, []);
 
-	const handleMouseEnter = (node) => {
-		setHoveredNode(node);
-	};
-	const handleMouseLeave = () => {
-		setHoveredNode(null);
+	const debouncedSetHoveredNode = useCallback(
+		debounce((node) => {
+			setHoveredNode(node);
+		}, 100),
+		[]
+	); // Dependencies are empty, so this is created only once
+
+	const handleMouseEnter = (section) => {
+		debouncedSetHoveredNode(section.name);
+		setModalData(section.data);
 	};
 
-	const eighth = (containerDimensions.height - 200) / 8;
+	const handleMouseLeave = () => {
+		debouncedSetHoveredNode(null);
+	};
+
+	const eighth = (containerDimensions.height - 120) / 8;
 
 	const calculatePosition = (index, total, isAbove) => {
 		const spacing = eighth;
 		let y;
 		if (isAbove) {
-			y = -(total - index) * spacing - eighth * 1.3;
+			y = -(total - index) * (spacing - 20) - eighth * 1.5;
 		} else {
-			y = (index + 1) * spacing - eighth / 1.5;
+			y = (index + 1) * (spacing - 20) - eighth / 2;
 		}
 		return { x: 0, y };
 	};
@@ -166,9 +178,10 @@ export default function Skills() {
 					<Section
 						key={section.name}
 						ref={sectionTopRefs[index]}
-						onMouseEnter={() => handleMouseEnter(section.name)}
+						onMouseEnter={() => handleMouseEnter(section)}
 						onMouseLeave={handleMouseLeave}
 						custom={index}
+						$eighth={eighth}
 						initial={{
 							opacity: 0,
 							visibility: "visible",
@@ -200,13 +213,24 @@ export default function Skills() {
 				<SkillsNode onClick={handleAnimate} eighth={eighth}>
 					Skills
 				</SkillsNode>
+				{hoveredNode && (
+					<Modal $eighth={eighth}>
+						{modalData.map((skill, index) => (
+							<Skill key={index}>
+								<img src={skill.icon} alt={skill.name} />
+								<p>{skill.name}</p>
+							</Skill>
+						))}
+					</Modal>
+				)}
 				{sectionsBottom.map((section, index) => (
 					<Section
 						key={section.name}
 						ref={sectionBottomRefs[index]}
-						onMouseEnter={() => handleMouseEnter(section.name)}
+						onMouseEnter={() => handleMouseEnter(section)}
 						onMouseLeave={handleMouseLeave}
 						custom={index}
+						$eighth={eighth}
 						initial={{
 							opacity: 0,
 							visibility: "visible",
@@ -300,7 +324,6 @@ const SkillsContent = styled.div`
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	border: 2px solid var(--accent-color);
 `;
 
 const SkillsNode = styled(motion.h2)`
@@ -337,9 +360,10 @@ const Section = styled(motion.div)`
 	cursor: pointer;
 	transition: all 0.05s ease-in;
 	h2 {
+		text-align: center;
+		padding: 0.5em 1em;
 		border: 2px solid var(--accent-color);
 		background: var(--card-background-color);
-		padding: 4px 16px;
 		border-radius: 8px;
 		font-size: 1.6rem;
 	}
@@ -352,26 +376,19 @@ const Section = styled(motion.div)`
 
 const Modal = styled(motion.div)`
 	position: absolute;
-	top: 50%;
+	top: calc(50% - ${(props) => props.$eighth}px);
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 100%;
-	height: 100%;
+	height: auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
-	transition: all 0.5s ease-out;
-	div {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		z-index: 100000;
-	}
-	img {
-		width: 5em;
-		height: 5em;
-	}
+	border-radius: 8px;
+	padding: 1em;
+	gap: 2em;
+	background: rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(10px);
+	z-index: 100;
 `;
 
 const Skill = styled(motion.div)`
@@ -379,9 +396,12 @@ const Skill = styled(motion.div)`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 0.5em;
+	img {
+		width: 50px;
+		height: 50px;
+	}
 	p {
 		right: 0;
-		font-size: 1.4rem;
+		font-size: 1rem;
 	}
 `;
