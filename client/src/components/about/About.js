@@ -62,32 +62,29 @@ const AboutSection = styled(motion.section)`
 const AboutContent = styled.div`
 	max-width: 1000px;
 	width: 100%;
-	height: 85%;
+	height: 100%;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+	align-items: flex-start;
 	position: relative;
 	padding-top: 96px;
+	@media screen and (max-width: 999px) {
+		padding: 96px 2em 0 2em;
+	}
 	@media screen and (max-width: 768px) {
-		padding: 4em 2em;
+		padding: 96px 1em 0 1em;
 	}
 `
 
 const TextContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
-	padding-right: 40%;
+	align-items: flex-start;
+	width: 60%;
 	z-index: 1;
-	@media screen and (max-width: 999px) {
-		padding-left: 2em;
-	}
-	@media screen and (max-width: 768px) {
-		padding-left: 1em;
-		padding-right: 1em;
-	}
+	padding: 2.5em 0 3.5em 3.5em;
+
 `
 
 const Heading = styled.div`
@@ -138,7 +135,7 @@ const Sentence = styled.p`
 
 const ImageContainer = styled.div`
 	position: absolute;
-	top: 17.5em;
+	top: 25em;
 	transform: translateY(-50%);
 	right: -4em;
 	width: 25em;
@@ -163,7 +160,7 @@ const ImageContainer = styled.div`
 		border: 2px solid var(--text-color-dk);
 	}
 	@media screen and (max-width: 546px) {
-		top: 8em;
+		top: 13em;
 		right: 0em;
 		width: 10em;
 		height: 10em;
