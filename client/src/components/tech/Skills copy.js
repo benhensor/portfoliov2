@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
-import styled from "styled-components";
-import { motion, useTransform, useScroll } from "framer-motion";
-import { debounce } from "lodash";
+import React, { useRef, useState, useEffect, useCallback } from 'react'
+import styled from 'styled-components'
+import { motion, useTransform, useScroll } from 'framer-motion'
+import { debounce } from 'lodash'
 import {
 	backend,
 	design,
@@ -10,75 +10,75 @@ import {
 	languages,
 	testing,
 	tools,
-} from "../../data";
+} from '../../data'
 
 export default function Skills() {
-	const skillsRef = useRef(null);
-	const contentRef = useRef(null);
+	const skillsRef = useRef(null)
+	const contentRef = useRef(null)
 
 	const sectionsTop = [
-		{ name: "languages", data: languages },
-		{ name: "frontend", data: frontend },
-		{ name: "backend", data: backend },
-	];
+		{ name: 'languages', data: languages },
+		{ name: 'frontend', data: frontend },
+		{ name: 'backend', data: backend },
+	]
 	const sectionsBottom = [
-		{ name: "testing", data: testing },
-		{ name: "devops", data: devops },
-		{ name: "design", data: design },
-		{ name: "tools", data: tools },
-	];
-	const sectionTopRefs = sectionsTop.map(() => React.createRef(null));
-	const sectionBottomRefs = sectionsBottom.map(() => React.createRef(null));
-	const { scrollYProgress } = useScroll({ domTarget: skillsRef });
+		{ name: 'testing', data: testing },
+		{ name: 'devops', data: devops },
+		{ name: 'design', data: design },
+		{ name: 'tools', data: tools },
+	]
+	const sectionTopRefs = sectionsTop.map(() => React.createRef(null))
+	const sectionBottomRefs = sectionsBottom.map(() => React.createRef(null))
+	const { scrollYProgress } = useScroll({ domTarget: skillsRef })
 
 	const skillsY = useTransform(
 		scrollYProgress,
-		[0, 0.2, 0.25, 0.3],
-		["200%", "0%", "0%", "-100%"]
-	);
+		[0, 0.2, 0.3, 0.4],
+		['-200%', '0%', '0%', '100%']
+	)
 
 	const opacity = useTransform(
 		scrollYProgress,
-		[0, 0.2, 0.25, 0.27],
-		["0", "1", "1", "0"]
-	);
+		[0.1, 0.2, 0.3, 0.4],
+		['0', '1', '1', '0']
+	)
 
-	const [hoveredNode, setHoveredNode] = useState(null);
-	const [isAnimated, setIsAnimated] = useState(false);
+	const [hoveredNode, setHoveredNode] = useState(null)
+	const [isAnimated, setIsAnimated] = useState(false)
 	const [containerDimensions, setContainerDimensions] = useState({
 		width: 0,
 		height: 0,
-	});
+	})
 	const [transitionProps, setTransitionProps] = useState({
-		type: "spring",
+		type: 'spring',
 		bounce: 0.85,
 		stiffness: 1000,
 		duration: 0.3,
-		ease: "easeOut",
-	});
+		ease: 'easeOut',
+	})
 	const [lineCoords, setLineCoords] = useState({
 		topLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
 		bottomLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
-	});
-	const [modalData, setModalData] = useState(null);
+	})
+	const [modalData, setModalData] = useState(null)
 
 	useEffect(() => {
 		// Assuming SkillsNode is centered, calculate its center coordinates
 		const skillsNodeX = contentRef.current
 			? contentRef.current.offsetWidth / 2
-			: 0;
+			: 0
 		// Adjust centerY based on your layout specifics
 		const skillsNodeY = contentRef.current
 			? contentRef.current.offsetHeight / 2
-			: 0;
+			: 0
 
 		// Calculate positions for the first index of sectionsTop and the last of sectionsBottom
-		const topSectionPos = calculatePosition(0, sectionsTop.length, true);
+		const topSectionPos = calculatePosition(0, sectionsTop.length, true)
 		const bottomSectionPos = calculatePosition(
 			sectionsBottom.length - 1,
 			sectionsBottom.length,
 			false
-		);
+		)
 
 		setLineCoords({
 			topLine: {
@@ -93,85 +93,85 @@ export default function Skills() {
 				x2: skillsNodeX + bottomSectionPos.x, // Adjust if necessary
 				y2: skillsNodeY + bottomSectionPos.y, // Adjust if necessary
 			},
-		});
+		})
 	}, [
 		isAnimated,
 		containerDimensions,
 		sectionsTop.length,
 		sectionsBottom.length,
-	]);
+	])
 
 	useEffect(() => {
 		const updateDimensions = () => {
 			if (contentRef.current) {
-				const dimensions = contentRef.current.getBoundingClientRect();
+				const dimensions = contentRef.current.getBoundingClientRect()
 				setContainerDimensions({
 					width: dimensions.width,
 					height: dimensions.height,
-				});
+				})
 			}
-		};
-		updateDimensions();
-		window.addEventListener("resize", updateDimensions);
-		return () => window.removeEventListener("resize", updateDimensions);
-	}, []);
+		}
+		updateDimensions()
+		window.addEventListener('resize', updateDimensions)
+		return () => window.removeEventListener('resize', updateDimensions)
+	}, [])
 
 	const debouncedSetHoveredNode = useCallback(
 		debounce((node) => {
-			setHoveredNode(node);
+			setHoveredNode(node)
 		}, 100),
 		[]
-	); // Dependencies are empty, so this is created only once
+	) // Dependencies are empty, so this is created only once
 
 	const handleMouseEnter = (section) => {
-		debouncedSetHoveredNode(section.name);
-		setModalData(section.data);
-	};
+		debouncedSetHoveredNode(section.name)
+		setModalData(section.data)
+	}
 
 	const handleMouseLeave = () => {
-		debouncedSetHoveredNode(null);
-	};
+		debouncedSetHoveredNode(null)
+	}
 
-	const eighth = (containerDimensions.height - 120) / 8;
+	const eighth = (containerDimensions.height - 120) / 8
 
 	const calculatePosition = (index, total, isAbove) => {
-		const spacing = eighth;
-		let y;
+		const spacing = eighth
+		let y
 		if (isAbove) {
-			y = -(total - index) * (spacing - 20) - eighth * 1.5;
+			y = -(total - index) * (spacing - 20) - eighth * 1.5
 		} else {
-			y = (index + 1) * (spacing - 20) - eighth / 2;
+			y = (index + 1) * (spacing - 20) - eighth / 2
 		}
-		return { x: 0, y };
-	};
+		return { x: 0, y }
+	}
 
 	const handleAnimate = () => {
 		if (!isAnimated) {
-			setIsAnimated(true);
+			setIsAnimated(true)
 			setTransitionProps({
-				type: "spring",
+				type: 'spring',
 				bounce: 0.1,
 				stiffness: 1000,
 				duration: 0.1,
-				ease: "easeOut",
-			});
+				ease: 'easeOut',
+			})
 		} else {
-			setIsAnimated(false);
+			setIsAnimated(false)
 			setTransitionProps({
-				type: "none",
+				type: 'none',
 				bounce: 0.8,
 				stiffness: 1000,
 				duration: 0.1,
-				ease: "easeOut",
-			});
+				ease: 'easeOut',
+			})
 		}
-	};
+	}
 
 	return (
 		<SkillsSection
 			id="skills"
 			ref={skillsRef}
-			style={{ top: skillsY, opacity: opacity }}
+			style={{ top: skillsY, opacity: opacity, marginTop: '20px' }}
 		>
 			<SkillsContent ref={contentRef}>
 				{sectionsTop.map((section, index) => (
@@ -184,25 +184,25 @@ export default function Skills() {
 						$eighth={eighth}
 						initial={{
 							opacity: 0,
-							visibility: "visible",
-							color: "#293030",
+							visibility: 'visible',
+							color: '#293030',
 						}}
 						animate={{
 							opacity: isAnimated ? 1 : 0,
-							color: isAnimated ? "#FFFFFF" : "#293030",
+							color: isAnimated ? '#FFFFFF' : '#293030',
 							x: isAnimated
 								? calculatePosition(
 										index,
 										sectionsTop.length,
 										true
-								  ).x + "px"
+								  ).x + 'px'
 								: 0,
 							y: isAnimated
 								? calculatePosition(
 										index,
 										sectionsTop.length,
 										true
-								  ).y + "px"
+								  ).y + 'px'
 								: 0,
 						}}
 						transition={transitionProps}
@@ -211,7 +211,7 @@ export default function Skills() {
 					</Section>
 				))}
 				<SkillsNode onClick={handleAnimate} eighth={eighth}>
-					Skills
+					Stack
 				</SkillsNode>
 				{hoveredNode && (
 					<Modal $eighth={eighth}>
@@ -233,25 +233,25 @@ export default function Skills() {
 						$eighth={eighth}
 						initial={{
 							opacity: 0,
-							visibility: "visible",
-							color: "#293030",
+							visibility: 'visible',
+							color: '#293030',
 						}}
 						animate={{
 							opacity: isAnimated ? 1 : 0,
-							color: isAnimated ? "#FFFFFF" : "#293030",
+							color: isAnimated ? '#FFFFFF' : '#293030',
 							x: isAnimated
 								? calculatePosition(
 										index,
 										sectionsBottom.length,
 										false
-								  ).x + "px"
+								  ).x + 'px'
 								: 0,
 							y: isAnimated
 								? calculatePosition(
 										index,
 										sectionsBottom.length,
 										false
-								  ).y + "px"
+								  ).y + 'px'
 								: 0,
 						}}
 						transition={transitionProps}
@@ -261,11 +261,11 @@ export default function Skills() {
 				))}
 				<motion.svg
 					style={{
-						position: "absolute",
+						position: 'absolute',
 						top: 0,
 						left: 0,
-						width: "100%",
-						height: "100%",
+						width: '100%',
+						height: '100%',
 					}}
 				>
 					<motion.line
@@ -299,7 +299,7 @@ export default function Skills() {
 				</motion.svg>
 			</SkillsContent>
 		</SkillsSection>
-	);
+	)
 }
 
 const SkillsSection = styled(motion.section)`
@@ -309,25 +309,28 @@ const SkillsSection = styled(motion.section)`
 	width: 100%;
 	height: 100vh;
 	scroll-snap-align: start;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	@media screen and (max-width: 999px) {
 		padding: var(--m-desktop);
 	}
 	@media screen and (max-width: 768px) {
 		padding: var(--m-mobile);
 	}
-`;
+`
 
 const SkillsContent = styled.div`
 	max-width: 1000px;
 	width: 100%;
-	height: 100%;
+	height: 85%;
 	margin: 0 auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: relative;
 	border: 2px solid var(--accent-color);
-`;
+`
 
 const SkillsNode = styled(motion.h2)`
 	position: absolute;
@@ -351,7 +354,7 @@ const SkillsNode = styled(motion.h2)`
 	&:focus {
 		outline: none;
 	}
-`;
+`
 
 const Section = styled(motion.div)`
 	position: absolute;
@@ -375,7 +378,7 @@ const Section = styled(motion.div)`
 			color: var(--border-color);
 		}
 	}
-`;
+`
 
 const Modal = styled(motion.div)`
 	position: absolute;
@@ -393,7 +396,7 @@ const Modal = styled(motion.div)`
 	background: rgba(121, 107, 107, 0.1);
 	backdrop-filter: blur(10px);
 	z-index: 100;
-`;
+`
 
 const Skill = styled(motion.div)`
 	display: flex;
@@ -407,4 +410,4 @@ const Skill = styled(motion.div)`
 	p {
 		font-size: 1rem;
 	}
-`;
+`

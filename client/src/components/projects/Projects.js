@@ -1,29 +1,29 @@
-import React, { useRef, useState } from "react";
-import styled from "styled-components";
-import { motion, useTransform, useScroll } from "framer-motion";
-import ProjectPanel from "./ProjectPanel";
-import { projects } from "../../data";
+import React, { useRef, useState } from 'react'
+import styled from 'styled-components'
+import { motion, useTransform, useScroll } from 'framer-motion'
+import ProjectPanel from './ProjectPanel'
+import { projects } from '../../data'
 
 export default function Projects() {
-	const projectsRef = useRef(null);
-	const { scrollYProgress } = useScroll({ domTarget: projectsRef });
+	const projectsRef = useRef(null)
+	const { scrollYProgress } = useScroll({ domTarget: projectsRef })
 
-	const [activeProject, setActiveProject] = useState(0);
+	const [activeProject, setActiveProject] = useState(0)
 
 	const toggleProject = (index) => {
-		setActiveProject(activeProject === index ? null : index);
-	};
+		setActiveProject(activeProject === index ? null : index)
+	}
 
 	const projectsYPosition = useTransform(
 		scrollYProgress,
-		[0.1, 0.4, 0.45, 0.7],
-		["-200%", "0%", "0%", "100%"]
-	);
+		[0.4, 0.6, 0.7, 0.8],
+		['-200%', '0%', '0%', '100%']
+	)
 	const opacity = useTransform(
 		scrollYProgress,
-		[0.25, 0.4, 0.45, 0.6],
-		["0", "1", "1", "0"]
-	);
+		[0.5, 0.6, 0.7, 0.8],
+		['0', '1', '1', '0']
+	)
 
 	return (
 		<ProjectsSection
@@ -50,34 +50,38 @@ export default function Projects() {
 				</ProjectGallery>
 			</ProjectsContent>
 		</ProjectsSection>
-	);
+	)
 }
 
 const ProjectsSection = styled(motion.section)`
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100vh;
 	scroll-snap-align: start;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	@media screen and (max-width: 999px) {
 		padding: var(--m-desktop);
 	}
 	@media screen and (max-width: 768px) {
 		padding: var(--m-mobile);
 	}
-`;
+`
 
 const ProjectsContent = styled.div`
 	max-width: 1000px;
-    width: 100%;
-	height: 80vh;
-    margin: 8em auto;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border: 2px solid var(--accent-color);
-`;
+	padding-top: 96px;
+`
 
 const ProjectGallery = styled.div`
 	display: flex;
@@ -94,4 +98,4 @@ const ProjectGallery = styled.div`
 	ProjectGallery * {
 		margin: 0;
 	}
-`;
+`

@@ -54,13 +54,13 @@ export default function Header () {
             let scrollToValue = 0; // Default to top if none of the cases match
     
             switch (value) { // Use the value to switch, not the section element
-                case 'skills':
+                case 'tech':
                     scrollToValue = (siteHeight * 0.2) - headerOffset;
                     break;
-                case 'projects':
+                case 'about':
                     scrollToValue = (siteHeight * 0.4) - headerOffset;
                     break;
-                case 'about':
+                case 'projects':
                     scrollToValue = (siteHeight * 0.6) - headerOffset;
                     break;
                 case 'contact':
@@ -96,12 +96,12 @@ export default function Header () {
                         <a href='#home' onClick={scrollToTop}>
                             <img src={Logo} alt='Ben Hensor Development' />
                         </a>
-                        <HeaderName style={{ opacity: headerNameOpacity }}>Ben Hensor Dev</HeaderName>
+                        <HeaderName style={{ opacity: headerNameOpacity }}>benHensor.dev</HeaderName>
                     </LogoContainer>
                     <HeaderMenu>
-                        <NavLink to='skills' name='Skills' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
-                        <NavLink to='projects' name='Projects' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
+                        <NavLink to='tech' name='Tech Stack' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
                         <NavLink to='about' name='About' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
+                        <NavLink to='projects' name='Projects' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
                         <NavLink to='contact' name={<StyledSend style={{ width: '1.4em', rotate: '-45deg' }}/>} activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink}  />             
                     </HeaderMenu>
                     <MenuControls aria-label='Toggle navigation' aria-expanded={isOpen} onClick={() => toggleMenu(!isOpen)}>
@@ -111,7 +111,7 @@ export default function Header () {
             </HeaderContent>
         </StyledHeader>
         <MobileMenu $isOpen={isOpen}>
-            <NavLink to='skills' name='Skills' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
+            <NavLink to='tech' name='Tech Stack' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
             <NavLink to='projects' name='Projects' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
             <NavLink to='about' name='About' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
             <NavLink to='contact' name={<StyledSend/>} activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink}  />

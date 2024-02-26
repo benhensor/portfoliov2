@@ -144,17 +144,13 @@ const tech = [
 // Journey data
 const aboutInfo = [
 { key: 1,
-    text: "I'm a Junior Frontend Developer based in Bristol, UK." },
+    text: "I'm a Frontend React Developer based in Bristol, UK." },
 { key: 2,
-    text: "Following my time as an award-winning Sound Designer, I decided to switch things up and get into Software and Web Development." },
+    text: "Following a successful career as an award-winning Sound Designer, I decided to break into web development." },
 { key: 3,
-    text: "I joined the School of Code's excellent programming bootcamp for a crash-course in foundation coding." },
+    text: "Thank you for visiting my portfolio, you can check out some of my projects below." },
 { key: 4,
-    text: "Since graduating from the bootcamp I have adopted a rigourous strategy of building projects everyday, refining my knowledge and always learning as much as I can." },
-{ key: 5,
-    text: "Throughout this journey, I have embraced the mindset of aquiring new knowledge and skills." },
-{ key: 6,
-    text: "Thank you for visiting my portfolio, please check out some of my projects below. I am actively seeking new opportunities, so please get in touch!" }
+    text: "I am actively seeking new opportunities so please get in touch!" },
 ]
 
 

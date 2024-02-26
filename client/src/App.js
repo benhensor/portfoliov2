@@ -1,37 +1,37 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from './components/header/Header'
-import Skills from './components/skills/Skills'
+import TechStack from './components/tech/TechStack'
 import Projects from './components/projects/Projects'
 import About from './components/about/About'
 import Contact from './components/contact/Contact'
 
-export default function App() {    
-
-    return (
-        <Container>
-            <Header />
-            <Main>
-                <Skills />
-                <Projects />
+export default function App() {
+	return (
+		<Container>
+			<Header />
+			<Main>
+				<TechStack />
                 <About />
-                <Contact />
-            </Main>
-        </Container>
-    )
+				<Projects />
+				<Contact />
+			</Main>
+		</Container>
+	)
 }
 
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 2400vh;
-    scroll-snap-type: y mandatory;
+	display: flex;
+	flex-direction: column;
+	height: 1200vh;
+	scroll-snap-type: y mandatory;
 `
 
 const Main = styled.main`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin: 60em auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	background: #111;
+	position: relative;
 `

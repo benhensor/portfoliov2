@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 import '../assets/fonts/fonts.css'
 
 const GlobalStyles = createGlobalStyle`
@@ -91,12 +91,6 @@ const GlobalStyles = createGlobalStyle`
         min-height: 100vh;
     }
 
-    main {
-        background: #111;
-        margin: 0 auto;
-        position: relative;
-    }
-
     p {
         font-size: 1.1em;
         line-height: 27px;
@@ -119,4 +113,4 @@ const GlobalStyles = createGlobalStyle`
     }
 `
 
-export default GlobalStyles;
+export default GlobalStyles
