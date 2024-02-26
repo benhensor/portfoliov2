@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from './components/header/Header'
-import Skills from './components/skills/SkillsCOPY'
+import Skills from './components/skills/Skills'
 import Projects from './components/projects/Projects'
 import About from './components/about/About'
 import Contact from './components/contact/Contact'
@@ -24,7 +24,8 @@ export default function App() {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    height: 2400vh;
+    scroll-snap-type: y mandatory;
 `
 
 const Main = styled.main`

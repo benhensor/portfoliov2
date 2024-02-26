@@ -9,11 +9,11 @@ export default function About() {
     const aboutRef = useRef(null)
     const { scrollYProgress } = useScroll({ domTarget: aboutRef })
 
-    const left = useTransform(scrollYProgress, [0.4, 0.6, 0.65, 0.8], ['-100%', '0%', '0%', '100%'])
+    const top = useTransform(scrollYProgress, [0.4, 0.6, 0.65, 0.8], ['-100em', '0em', '0em', '100em'])
     const opacity = useTransform(scrollYProgress, [0.45, 0.6, 0.65, 0.75], ['0', '1', '1', '0'])
 
     return (
-        <AboutSection id='about' ref={aboutRef} style={{ left: left, opacity: opacity }}>
+        <AboutSection id='about' ref={aboutRef} style={{ top: top, opacity: opacity }}>
             <AboutContent>
                     <TextContainer>
                         <Heading>
@@ -40,6 +40,7 @@ const AboutSection = styled(motion.section)`
     top: 0;
     width: 100%;
     height: 100vh;
+    scroll-snap-align: start;
 `
 
 const AboutContent = styled.div`
@@ -53,6 +54,7 @@ const AboutContent = styled.div`
     align-items: center;
     position: relative;
     padding-top: 4em;
+    border: 2px solid var(--accent-color);
     @media screen and (max-width: 768px) {
         padding: 4em 2em;
     }

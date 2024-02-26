@@ -59,6 +59,7 @@ const ProjectsSection = styled(motion.section)`
     top: 0;
     width: 100%;
     height: 100vh;
+	scroll-snap-align: start;
 	@media screen and (max-width: 999px) {
 		padding: var(--m-desktop);
 	}
@@ -75,6 +76,7 @@ const ProjectsContent = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border: 2px solid var(--accent-color);
 `;
 
 const ProjectGallery = styled.div`

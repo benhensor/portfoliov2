@@ -88,7 +88,7 @@ const GlobalStyles = createGlobalStyle`
         background-color: var(--background-static);
         overflow-x: hidden;
         width: 100vw;
-        min-height: 2400vh;
+        min-height: 100vh;
     }
 
     main {

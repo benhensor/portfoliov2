@@ -25,6 +25,7 @@ const ContactSection = styled(motion.section)`
     top: 4em;
     width: 100%;
     height: 100vh;
+    scroll-snap-align: start;
 `
 
 const ContactContent = styled.div`
@@ -37,6 +38,7 @@ const ContactContent = styled.div`
     align-items: center;
     background-color: var(--accent-color);
     padding: var(--m-desktop);
+    border: 2px solid var(--accent-color);
     @media screen and (max-width: 768px) {
         padding: var(--m-mobile);   
     }
