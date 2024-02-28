@@ -67,8 +67,8 @@ const AboutContent = styled.div`
 	height: 100%;
 	margin: 0 auto;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	flex-direction: column;
+	justify-content: flex-start;
 	padding-top: 96px;
 	
 	@media screen and (max-width: 999px) {
@@ -82,11 +82,6 @@ const AboutContent = styled.div`
 const AboutInfo = styled.div`
 	position: relative;
 	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border: 2px solid var(--accent-color);
-	border-radius: 8px;
 `
 
 const TextContainer = styled.div`
@@ -149,7 +144,7 @@ const Sentence = styled.p`
 
 const ImageContainer = styled.div`
 	position: absolute;
-	top: 0;
+	top: 3em;
 	right: -3em;
 	width: 25em;
 	height: 25em;

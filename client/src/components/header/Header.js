@@ -56,7 +56,7 @@ export default function Header () {
     
             switch (value) { // Use the value to switch, not the section element
                 case 'tech':
-                    scrollToValue = (siteHeight * 0.2) - headerOffset;
+                    scrollToValue = (siteHeight * 0.1) - headerOffset;
                     break;
                 case 'about':
                     scrollToValue = (siteHeight * 0.4) - headerOffset;

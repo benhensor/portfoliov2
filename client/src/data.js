@@ -8,6 +8,7 @@ import elementUI from './assets/icons/tech/frontend/elementui.svg';
 import figma from './assets/icons/tech/design/figma.svg';
 import firebase from './assets/icons/tech/backend/firebase.svg';
 import flask from './assets/icons/tech/backend/flask.svg';
+import framermotion from './assets/icons/tech/frontend/framermotion.svg';
 import git from './assets/icons/tech/devops/git.svg';
 import github from './assets/icons/tech/devops/github.svg';
 import heroku from './assets/icons/tech/devops/heroku.svg';
@@ -73,12 +74,11 @@ const devops = [
 const frontend = [
     { name: 'Bootstrap', icon: bootstrap }, 
     { name: 'CSS 3', icon: css },
-    { name: 'Element-UI', icon: elementUI },
+    { name: 'Framer-Motion', icon: framermotion },
     { name: 'HTML 5', icon: html },
     { name: 'React', icon: react },
     { name: 'Redux', icon: redux},
     { name: 'Sass', icon: sass },
-    { name: 'Semantic UI', icon: semanticUi },
     { name: 'Tailwind', icon: tailwind }
 ]
 
@@ -97,9 +97,7 @@ const testing = [
 const tools = [
     { name: 'Auth0', icon: auth0 },
     { name: 'Babel', icon: babel },
-    { name: 'NPM', icon: npm },
     { name: 'Postman', icon: postman },
-    { name: 'Prettier', icon: prettier },
     { name: 'React Router', icon: reactrouter },
     { name: 'VS Code', icon: vsCode }
 ]
