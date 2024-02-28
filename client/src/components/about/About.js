@@ -26,22 +26,24 @@ export default function About() {
 			style={{ top: top, opacity: opacity }}
 		>
 			<AboutContent>
-				<TextContainer>
-					<Heading>
-						<h2>Hi, I'm Ben.</h2>
-						<h3>Welcome to my portfolio!</h3>
-					</Heading>
-					<Paragraph>
-						{aboutInfo.map((sentence) => (
-							<Sentence key={sentence.key}>
-								{sentence.text}
-							</Sentence>
-						))}
-					</Paragraph>
-				</TextContainer>
-				<ImageContainer>
-					<Image src={mugshot} alt="" />
-				</ImageContainer>
+				<AboutInfo>
+					<TextContainer>
+						<Heading>
+							<h2>Hi, I'm Ben.</h2>
+							<h3>Welcome to my portfolio!</h3>
+						</Heading>
+						<Paragraph>
+							{aboutInfo.map((sentence) => (
+								<Sentence key={sentence.key}>
+									{sentence.text}
+								</Sentence>
+							))}
+						</Paragraph>
+					</TextContainer>
+					<ImageContainer>
+						<Image src={mugshot} alt="" />
+					</ImageContainer>
+				</AboutInfo>
 			</AboutContent>
 		</AboutSection>
 	)
@@ -65,10 +67,10 @@ const AboutContent = styled.div`
 	height: 100%;
 	margin: 0 auto;
 	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	position: relative;
+	justify-content: center;
+	align-items: center;
 	padding-top: 96px;
+	
 	@media screen and (max-width: 999px) {
 		padding: 96px 2em 0 2em;
 	}
@@ -77,14 +79,26 @@ const AboutContent = styled.div`
 	}
 `
 
+const AboutInfo = styled.div`
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: 2px solid var(--accent-color);
+	border-radius: 8px;
+`
+
 const TextContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	width: 60%;
 	z-index: 1;
 	padding: 2.5em 0 3.5em 3.5em;
-
+	width: 60%;
+	@media screen and (max-width: 768px) {
+		width: 80%;
+	}
 `
 
 const Heading = styled.div`
@@ -135,9 +149,8 @@ const Sentence = styled.p`
 
 const ImageContainer = styled.div`
 	position: absolute;
-	top: 25em;
-	transform: translateY(-50%);
-	right: -4em;
+	top: 0;
+	right: -3em;
 	width: 25em;
 	height: 25em;
 	border: 2px solid var(--accent-color);
@@ -153,14 +166,12 @@ const ImageContainer = styled.div`
 		}
 	}
 	@media screen and (max-width: 768px) {
-		top: 9em;
 		right: 0em;
-		width: 12em;
-		height: 12em;
+		width: 15em;
+		height: 15em;
 		border: 2px solid var(--text-color-dk);
 	}
 	@media screen and (max-width: 546px) {
-		top: 13em;
 		right: 0em;
 		width: 10em;
 		height: 10em;
@@ -176,7 +187,7 @@ const Image = styled.img`
 	top: -2.7em;
 	left: 2.5em;
 	@media screen and (max-width: 768px) {
-		width: 8em;
+		width: 10em;
 		top: -1em;
 		left: 1em;
 		filter: grayscale(100%);

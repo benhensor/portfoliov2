@@ -1,41 +1,44 @@
 import React, { useRef, useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { motion, useTransform, useScroll } from 'framer-motion'
-import CircleVec1 from '../../assets/img/circleVec1.svg'
-import CircleVec2 from '../../assets/img/circleVec2.svg'
-import CircleVec3 from '../../assets/img/circleVec3.svg'
-import CircleVec4 from '../../assets/img/circleVec4.svg'
+import HeroAnimation from './HeroAnimation'
+import HeroPhrases from './HeroPhrases'
 import 'animate.css'
+
+const containerVariants = {
+	animate: {
+		transition: {
+			delayChildren: 0.4,
+			staggerChildren: 0.1,
+		},
+	},
+};
+  
+  const letterVariants = {
+	initial: { y: -200, opacity: 0 },
+	animate: {
+		y: 0,
+		opacity: 1,
+		transition: {
+			ease: "easeOut",
+			duration: 0.3,
+		},
+	},
+};
 
 export default function Hero() {
 	const heroRef = useRef(null)
 	const { scrollYProgress } = useScroll({ domTarget: heroRef })
 	const heroHeight = useTransform(
-		scrollYProgress,
-		[0, 0.2],
-		['100vh', '2vh']
-	)
+		scrollYProgress, 
+		[0, 0.2], 
+		['100vh', '2vh'])
 	const heroBorder = useTransform(
 		scrollYProgress,
 		[0, 0.2],
 		['0.2em solid, #00c5c500', '0.2em solid #00c5c5']
 	)
-	const circleOneBottom = useTransform(
-		scrollYProgress,
-		[0, 0.2],
-		['29em', '-48em']
-	)
-	const circleTwoBottom = useTransform(
-		scrollYProgress,
-		[0, 0.2],
-		['29em', '-48em']
-	)
-	const circleThreeBottom = useTransform(
-		scrollYProgress,
-		[0, 0.2],
-		['29em', '-48em']
-	)
-	const circleFourBottom = useTransform(
+	const circleBottom = useTransform(
 		scrollYProgress,
 		[0, 0.2],
 		['29em', '-48em']
@@ -45,35 +48,30 @@ export default function Hero() {
 		[0, 0.2],
 		['14em', '-4em']
 	)
-	const textOpacity = useTransform(scrollYProgress, [0, 0.15], [0.75, 0])
+	const textOpacity = useTransform(
+		scrollYProgress, 
+		[0, 0.15], 
+		[0.75, 0]
+	)
 
-	const textRotate = ['Frontend Developer', 'React Wizard', 'MERN Legend', 'Cat Fanatic!']
-	const [currentPhrase, setCurrentPhrase] = useState(0)
-
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setCurrentPhrase(
-				(prevPhrase) => (prevPhrase + 1) % textRotate.length
-			)
-		}, 3500)
-
-		return () => clearInterval(interval)
-	}, [textRotate.length])
-
-	const renderPhrases = () => {
-		return textRotate.map((phrase, index) => (
-			<Phrase
-				key={index}
-				className={`text-phrase ${
-					index === currentPhrase
-						? 'animate__animated animate__fadeIn'
-						: 'animate__animated animate__fadeOut'
-				}`}
+	const HeroTitleAnimation = ({ title }) => {
+		return (
+			<HeroTitle
+				variants={containerVariants}
+				initial='initial'
+				animate='animate'
 			>
-				{phrase}
-			</Phrase>
-		))
-	}
+				{title.split('').map((letter, index) => (
+					<motion.span
+						key={index}
+						variants={letterVariants}
+					>
+						{letter === " " ? "\u00A0" : letter}
+					</motion.span>
+				))}
+			</HeroTitle>
+		);
+	};
 
 	return (
 		<HeroSection
@@ -81,33 +79,13 @@ export default function Hero() {
 			style={{ height: heroHeight, borderBottom: heroBorder }}
 		>
 			<HeroContent>
-				<HeroAnimation>
-					<Circle
-						$id="one"
-						src={CircleVec1}
-						style={{ bottom: circleOneBottom }}
-					/>
-					<Circle
-						$id="two"
-						src={CircleVec2}
-						style={{ bottom: circleTwoBottom }}
-					/>
-					<Circle
-						$id="three"
-						src={CircleVec3}
-						style={{ bottom: circleThreeBottom }}
-					/>
-					<Circle
-						$id="four"
-						src={CircleVec4}
-						style={{ bottom: circleFourBottom }}
-					/>
-				</HeroAnimation>
+				<HeroAnimation circleBottom={circleBottom} />
 				<HeroTitleContainer
 					style={{ paddingTop: textPaddingTop, opacity: textOpacity }}
 				>
-					<HeroTitle>Ben Hensor</HeroTitle>
-					<Phrases>{renderPhrases()}</Phrases>
+					{/* <HeroTitle>Ben Hensor</HeroTitle> */}
+					<HeroTitleAnimation title='Ben Hensor'/>
+					<HeroPhrases />
 				</HeroTitleContainer>
 			</HeroContent>
 		</HeroSection>
@@ -136,91 +114,11 @@ const HeroContent = styled.div`
 	justify-content: center;
 `
 
-const HeroAnimation = styled.div`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`
-
-const Circle = styled(motion.img)`
-	position: absolute;
-	width: 100em;
-	height: 100em;
-	mix-blend-mode: screen;
-	opacity: 0.5;
-	${({ $id }) =>
-		$id === 'one' &&
-		`
-        animation: rotateA 20s linear infinite;
-        scale: 200%;
-        filter: var(--blurA);
-        @keyframes rotateA {
-            0% {
-            transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    `}
-	${({ $id }) =>
-		$id === 'two' &&
-		`
-        animation: rotateB 24s linear infinite;
-        scale: 300%;
-        filter: var(--blurB);
-        @keyframes rotateB {
-            0% {
-                transform: rotate(360deg);
-            }
-            100% {
-                transform: rotate(0deg);
-            }
-        }
-    `}
-    ${({ $id }) =>
-		$id === 'three' &&
-		`
-        animation: rotateC 28s linear infinite;
-        scale: 200%;
-        filter: var(--blurC);
-        @keyframes rotateC {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    `}
-    ${({ $id }) =>
-		$id === 'four' &&
-		`
-        animation: rotateD 32s linear infinite;
-        scale: 300%;
-        filter: var(--blurD);
-        @keyframes rotateD {
-            0% {
-                transform: rotate(360deg);
-            }
-            100% {
-                transform: rotate(0deg);
-            }
-        }
-    `}
-`
-
 const HeroTitleContainer = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	mix-blend-mode: screen;
 `
 
 const gradientAnimation = keyframes`
@@ -235,7 +133,7 @@ const gradientAnimation = keyframes`
   }
 `
 
-const HeroTitle = styled.h1`
+const HeroTitle = styled(motion.h1)`
 	font-family: 'Centra', sans-serif;
 	font-size: 7em;
 	text-align: center;
@@ -248,7 +146,15 @@ const HeroTitle = styled.h1`
 	background-clip: text;
 	color: #ffffff75;
 	mix-blend-mode: overlay;
+	
 	animation: ${gradientAnimation} 20s ease infinite;
+	-webkit-animation: ${gradientAnimation} 20s ease infinite;
+	white-space: nowrap;
+	& > span {
+		display: inline-block; // Important for individual letter animation
+		-webkit-background-clip: text;
+		background-clip: text;
+	}
 	@media screen and (max-width: 999px) {
 		font-size: 6em;
 	}
@@ -260,32 +166,3 @@ const HeroTitle = styled.h1`
 	}
 `
 
-const Phrases = styled.div`
-	position: relative;
-	width: 100%;
-	align-content: center;
-`
-
-const Phrase = styled(motion.h2)`
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 100%;
-	font-size: 3em;
-	text-align: center;
-	letter-spacing: 1rem;
-	line-height: 1;
-	display: block;
-	text-transform: uppercase;
-	word-wrap: normal;
-	opacity: 0;
-	@media screen and (max-width: 999px) {
-		font-size: 2.5em;
-	}
-	@media screen and (max-width: 768px) {
-		font-size: 1.5em;
-	}
-	@media screen and (max-width: 546px) {
-		font-size: 0.7em;
-	}
-`

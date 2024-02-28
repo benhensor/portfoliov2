@@ -46,6 +46,7 @@ export default function Header () {
         setIsOpen(prevIsOpen => !prevIsOpen)
     }, [])
 
+
     const onUpdateActiveLink = useCallback((value) => {
         if (activeLink !== value) {
             setActiveLink(value);
@@ -75,16 +76,21 @@ export default function Header () {
                 behavior: 'smooth',
             });
             setIsOpen(false);
+            console.log(activeLink)
         }
     }, [activeLink]);
     
-
 
     const scrollToTop = useCallback(() => {
         onUpdateActiveLink('home')
     }, [onUpdateActiveLink])
 
-    const headerNameOpacity = useTransform(scrollYProgress, [0, 0.2], ['0.3', '1'])
+
+    const headerNameOpacity = useTransform(
+        scrollYProgress, 
+        [0, 0.2], 
+        ['0.3', '1']
+    )
 
     return (<>
         <StyledHeader id='home' ref={headerRef} $scrolled={scrolled}>
@@ -102,7 +108,7 @@ export default function Header () {
                         <NavLink to='tech' name='Tech Stack' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
                         <NavLink to='about' name='About' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
                         <NavLink to='projects' name='Projects' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
-                        <NavLink to='contact' name={<StyledSend style={{ width: '1.4em', rotate: '-45deg' }}/>} activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink}  />             
+                        <NavLink to='contact' name={<StyledSend $activeLink={activeLink === 'contact'} style={{ rotate: '-45deg' }} />} activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink}  />             
                     </HeaderMenu>
                     <MenuControls aria-label='Toggle navigation' aria-expanded={isOpen} onClick={() => toggleMenu(!isOpen)}>
                         {isOpen ? <StyledFaTimes /> : <StyledFaBars />}
@@ -114,7 +120,7 @@ export default function Header () {
             <NavLink to='tech' name='Tech Stack' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
             <NavLink to='projects' name='Projects' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
             <NavLink to='about' name='About' activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink} />
-            <NavLink to='contact' name={<StyledSend/>} activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink}  />
+            <NavLink to='contact' name={<StyledSend $activeLink={activeLink === 'contact'} />} activeLink={activeLink} onUpdateActiveLink={onUpdateActiveLink}  />
             <Icons>
                 <a href='https://github.com/benhensor' rel='noreferrer' target='_blank'>
                     <img src={NavIcon1} alt='Github' />

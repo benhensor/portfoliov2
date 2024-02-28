@@ -9,6 +9,7 @@ export default function NavLink({ to, name, activeLink, onUpdateActiveLink }) {
                 $activeLink={activeLink === to}
                 onClick={(e) => {
                     e.preventDefault()
+                    window.history.pushState({}, '', `#${to}`) // Manually update the url
                     onUpdateActiveLink(to)
                 }}
             >
@@ -27,4 +28,7 @@ const A = styled.a`
     font-size: var(--text-l);
     text-decoration: none;
     transition: 0.1s ease-in-out;
+    &:hover {
+        color: var(--button-hover);
+    }
 `

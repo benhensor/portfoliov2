@@ -109,12 +109,15 @@ export const Contact = styled.li`
         border: none;
         background-color: transparent;
         rotate: -45deg;
+        &:hover {
+            color: var(--button-hover);
+        }
     }
 `
 export const StyledSend = styled(Send)`
     width: 1.5em;
     & path {
-        fill: white;
+        fill: ${({ $activeLink }) => $activeLink ? 'var(--button-hover)' : 'white'};
     }
     &:hover {
         & path {
