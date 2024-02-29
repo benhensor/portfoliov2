@@ -10,12 +10,12 @@ export default function About() {
 
 	const top = useTransform(
 		scrollYProgress,
-		[0.2, 0.4, 0.5, 0.6],
+		[0.2, 0.3, 0.5, 0.6],
 		['200%', '0%', '0%', '-100%']
 	)
 	const opacity = useTransform(
 		scrollYProgress,
-		[0.3, 0.4, 0.5, 0.55],
+		[0.2, 0.3, 0.5, 0.55],
 		['0', '1', '1', '0']
 	)
 
@@ -70,7 +70,7 @@ const AboutContent = styled.div`
 	flex-direction: column;
 	justify-content: flex-start;
 	padding-top: 96px;
-	
+	position: relative;
 	@media screen and (max-width: 999px) {
 		padding: 96px 2em 0 2em;
 	}
@@ -80,7 +80,8 @@ const AboutContent = styled.div`
 `
 
 const AboutInfo = styled.div`
-	position: relative;
+	position: absolute;
+	top: 20%;
 	width: 100%;
 `
 
@@ -148,7 +149,7 @@ const ImageContainer = styled.div`
 	right: -3em;
 	width: 25em;
 	height: 25em;
-	border: 2px solid var(--accent-color);
+	border: 2px solid var(--orange);
 	border-radius: 40% 60% 60% 40% / 70% 30% 70% 30%;
 	background: #000;
 	animation: morph 10s linear infinite alternate;

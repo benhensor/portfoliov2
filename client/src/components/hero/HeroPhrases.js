@@ -16,6 +16,7 @@ export default function HeroPhrases() {
 		'React Wizard',
 		'MERN Legend',
 		'Cat Fanatic!',
+		'Sausage!'
 	]
 
 	useEffect(() => {

@@ -56,7 +56,7 @@ const gradientAnimation = keyframes`
 
 const HeroTitle = styled(motion.h1)`
 	font-family: 'Centra', sans-serif;
-	font-size: 7em;
+	font-size: 10rem;
 	text-align: center;
 	text-transform: uppercase;
 	letter-spacing: 1rem;

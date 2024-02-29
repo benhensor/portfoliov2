@@ -7,13 +7,12 @@ const GlobalStyles = createGlobalStyle`
         ::-webkit-scrollbar {display:none;}
 
         /* Global Colours */
-        --accent-color: #de9e36;
-        --highlight-color: #fafbdf;
-        --border-color: #00c5c5;
-        --aux-highlight-color: #d8fdfe;
-        --wave-highlight-color: #0eebe7;
-        --background-color: linear-gradient(180deg, #141717 0%, #1d1f20 100%);
-        --card-background-color: linear-gradient(to bottom right, #2f3636, #171e1e);
+        --orange: #de9e36;
+        --ltOrange: #fafbdf;
+        --blue: #00c5c5;
+        --ltBlue: #d8fdfe;
+        --background-card: linear-gradient(to bottom right, #2f3636, #171e1e);
+        --background-gradient: linear-gradient(180deg, #141717 0%, #1d1f20 100%);
         --background-static: #141717;
 
         /* Button Colors */

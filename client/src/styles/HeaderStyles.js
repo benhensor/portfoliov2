@@ -20,7 +20,7 @@ export const HeaderContent = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    border-bottom: 0.2em solid var(--border-color);
+    border-bottom: 0.2em solid var(--blue);
 `
 
 export const Navbar = styled.nav`
@@ -55,7 +55,7 @@ export const Border = styled.div`
     width: 5em;
     height: 5em;
     border-radius: 50%;
-    border: 0.2em solid var(--border-color);
+    border: 0.2em solid var(--blue);
     background-color: var(--background-static);
 `
 

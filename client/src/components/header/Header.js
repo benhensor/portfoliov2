@@ -59,7 +59,7 @@ export default function Header () {
                     scrollToValue = (siteHeight * 0.1) - headerOffset;
                     break;
                 case 'about':
-                    scrollToValue = (siteHeight * 0.4) - headerOffset;
+                    scrollToValue = (siteHeight * 0.3) - headerOffset;
                     break;
                 case 'projects':
                     scrollToValue = (siteHeight * 0.6) - headerOffset;

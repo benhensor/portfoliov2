@@ -36,6 +36,5 @@ const Main = styled.main`
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	background: #111;
 	position: relative;
 `
