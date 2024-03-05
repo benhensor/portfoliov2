@@ -4,26 +4,27 @@ import { motion, useTransform } from 'framer-motion'
 
 export default function TechHeading({ text, scrollYProgress }) {
 
-    const scale = useTransform(scrollYProgress, [0, 0.1, 0.3], [0, 1, 2])
-    const opacity = useTransform(scrollYProgress, [0, 0.1, 0.2], [0, 1, 0])
+    const scale = useTransform(scrollYProgress, [0, 0.2, 0.3], [0, 1, 2])
+    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.25, 0.3], [0, 1, 0, 0])
     const blur = useTransform(
         scrollYProgress,
-        [0, 0.1, 0.3],
+        [0, 0.2, 0.25, 0.3],
         [
             'blur(50px)',
             'blur(0px',
-            'blur(10px',
+            'blur(20px',
+            'blur(40px',
         ]
     )
     const color = useTransform(
         scrollYProgress,
-        [0, 0.1],
+        [0, 0.2],
         ['#141717', '#FFF']
     )
     const letterSpacing = useTransform(
         scrollYProgress,
-        [0, 0.1, 0.3],
-        ['-64px', '16px', '64px']
+        [0, 0.2, 0.3],
+        ['-64px', '12px', '64px']
     )
     return (
         <Heading

@@ -4,6 +4,7 @@ import { motion, useTransform, useScroll } from 'framer-motion'
 import HeroAnimation from './HeroAnimation'
 import HeroTitleAnimation from './HeroTitleAnimation'
 import HeroPhrases from './HeroPhrases'
+import HeroArrow from './HeroArrow'
 import 'animate.css'
 
 
@@ -12,27 +13,27 @@ export default function Hero() {
 	const { scrollYProgress } = useScroll({ domTarget: heroRef })
 	const heroHeight = useTransform(
 		scrollYProgress, 
-		[0, 0.1], 
+		[0, 0.2], 
 		['100vh', '2vh']
 	)
 	const heroBorder = useTransform(
 		scrollYProgress,
-		[0, 0.1],
+		[0, 0.2],
 		['0.2em solid, #00c5c500', '0.2em solid #00c5c5']
 	)
 	const circleBottom = useTransform(
 		scrollYProgress,
-		[0, 0.1],
+		[0, 0.2],
 		['29em', '-48em']
 	)
 	const textPaddingTop = useTransform(
 		scrollYProgress,
-		[0, 0.1],
-		['14em', '-4em']
+		[0, 0.2],
+		['14em', '0em']
 	)
 	const textOpacity = useTransform(
 		scrollYProgress, 
-		[0, 0.1], 
+		[0, 0.2], 
 		[0.75, 0]
 	)
 
@@ -48,7 +49,9 @@ export default function Hero() {
 				>
 					<HeroTitleAnimation title='Ben Hensor'/>
 					<HeroPhrases />
+					<HeroArrow />
 				</HeroTitleContainer>
+				
 			</HeroContent>
 		</HeroSection>
 	)
@@ -74,6 +77,7 @@ const HeroContent = styled.div`
 	height: 100%;
 	display: flex;
 	justify-content: center;
+	
 `
 
 const HeroTitleContainer = styled(motion.div)`

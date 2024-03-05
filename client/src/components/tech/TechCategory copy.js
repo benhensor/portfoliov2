@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { motion, useTransform } from 'framer-motion'
 
@@ -10,37 +10,24 @@ export default function TechCategory({
 	onHover,
 	onHoverLeave,
 }) {
-	const opacity = useTransform(
-		scrollYProgress,
-		[0.15, 0.2, 0.275, 0.3],
-		[0, 1, 1, 0]
-	)
+
+	useEffect(() => {
+		console.log('isHovered:', isHovered)
+	}, [isHovered])
+
+	
+	const opacity = useTransform(scrollYProgress, [0.2, 0.3, 0.35, 0.4], [0, 1, 1, 0])
 	const categoryFilter = useTransform(
 		scrollYProgress,
-		[0.2, 0.25, 0.315, 0.325],
-		['blur(10px', 'blur(0px)', 'blur(10px)', 'blur(40px)']
+		[0.15, 0.25, 0.3, 0.4],
+		['blur(10px', 'blur(0px)', 'blur(0px)', 'blur(10px']
 	)
 	const letterSpacing = useTransform(
 		scrollYProgress,
-		[0.2, 0.25, 0.3],
-		['0rem', '1rem', '5rem']
+		[0.2, 0.25, 0.3, 0.375],
+		['0rem', '1rem', '2rem', '4rem']
 	)
 
-	const [showTechCards, setShowTechCards] = useState(false)
-
-	useEffect(() => {
-		const checkOpacity = () => {
-			// Assuming the opacity is 0 between 0.275 and 0.3 of scroll progress
-			const currentProgress = scrollYProgress.get()
-			const shouldShowTechCards =
-				currentProgress >= 0.245 && currentProgress <= 0.26
-			setShowTechCards(shouldShowTechCards)
-		}
-
-		const unsubscribe = scrollYProgress.on('change', checkOpacity)
-
-		return () => unsubscribe()
-	}, [scrollYProgress])
 
 	return (
 		<TechSection
@@ -51,12 +38,12 @@ export default function TechCategory({
 			style={{ opacity: opacity, filter: categoryFilter }}
 		>
 			<motion.h2
-				layout="position"
+				layout="position" // restricts the layout change to position only
 				style={{ letterSpacing: letterSpacing }}
 			>
 				{title}
 			</motion.h2>
-			{isHovered && showTechCards && (
+			{isHovered && (
 				<motion.div>
 					{skillSet.map((skill, index) => {
 						const totalDelay = (skillSet.length - 1) * 0.05
@@ -103,13 +90,14 @@ const TechSection = styled(motion.section)`
 	align-items: center;
 	gap: 1rem;
 	padding: 1rem;
+    &:hover {
+        cursor: pointer;
+    }
 	h2 {
 		text-transform: uppercase;
-		color: ${(props) =>
-			props.$ishovered ? 'var(--blue)' : 'var(--text-color)'};
+		color: ${(props) => (props.$ishovered ? 'var(--blue)' : 'var(--text-color)')};
 		text-align: center;
-		transition: color 0.3s ease;
-		font-size: 2rem;
+        transition: color 0.3s ease;
 		@media screen and (max-width: 768px) {
 			font-size: 1.5rem;
 		}

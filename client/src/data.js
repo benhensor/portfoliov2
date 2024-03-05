@@ -140,16 +140,20 @@ const tech = [
 
 
 // Journey data
-const aboutInfo = [
-{ key: 1,
-    text: "I'm a Frontend React Developer based in Bristol, UK." },
-{ key: 2,
-    text: "Following a successful career as an award-winning Sound Designer, I decided to break into web development." },
-{ key: 3,
-    text: "Thank you for visiting my portfolio, you can check out some of my projects below." },
-{ key: 4,
-    text: "I am actively seeking new opportunities so please get in touch!" },
-]
+const aboutInfo = {
+    heading: "Hi, I'm Ben",
+    subHeading: "Welcome to my portfolio!",
+    sentences: [
+        { key: 1,
+            text: "I'm a Frontend React Developer based in Bristol, UK." },
+        { key: 2,
+            text: "Following a successful career as an award-winning Sound Designer, I decided to break into web development." },
+        { key: 3,
+            text: "Thank you for visiting my portfolio, you can check out some of my projects below." },
+        { key: 4,
+            text: "I am actively seeking new opportunities so please get in touch!" }
+    ]
+}
 
 
 // Projects data

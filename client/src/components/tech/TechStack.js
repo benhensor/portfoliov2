@@ -13,7 +13,7 @@ export default function TechStack() {
 
 	const opacity = useTransform(
 		scrollYProgress,
-		[0, 0.1, 0.25, 0.3],
+		[0, 0.2, 0.3, 0.4],
 		['0', '1', '1', '0']
 	)
 

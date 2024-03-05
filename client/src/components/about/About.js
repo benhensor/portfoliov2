@@ -8,14 +8,19 @@ export default function About() {
 	const aboutRef = useRef(null)
 	const { scrollYProgress } = useScroll({ domTarget: aboutRef })
 
+	const display = useTransform(
+		scrollYProgress,
+		[0, 0.3, 0.4, 0.5, 0.6],
+		['none', 'block', 'block', 'block', 'none']
+	)
 	const top = useTransform(
 		scrollYProgress,
-		[0.2, 0.3, 0.5, 0.6],
-		['200%', '0%', '0%', '-100%']
+		[0.3, 0.4, 0.4, 0.5, 0.6],
+		['100%', '0%', '0%', '0%', '100%']
 	)
 	const opacity = useTransform(
 		scrollYProgress,
-		[0.2, 0.3, 0.5, 0.55],
+		[0.3, 0.4, 0.5, 0.6],
 		['0', '1', '1', '0']
 	)
 
@@ -23,22 +28,18 @@ export default function About() {
 		<AboutSection
 			id="about"
 			ref={aboutRef}
-			style={{ top: top, opacity: opacity }}
+			style={{ display: display, top: top, opacity: opacity }}
 		>
 			<AboutContent>
 				<AboutInfo>
 					<TextContainer>
-						<Heading>
-							<h2>Hi, I'm Ben.</h2>
-							<h3>Welcome to my portfolio!</h3>
-						</Heading>
-						<Paragraph>
-							{aboutInfo.map((sentence) => (
-								<Sentence key={sentence.key}>
-									{sentence.text}
-								</Sentence>
-							))}
-						</Paragraph>
+						<h2>{aboutInfo.heading}</h2>
+						<h3>{aboutInfo.subHeading}</h3>
+						{aboutInfo.sentences.map((sentence) => (
+							<p key={sentence.key}>
+								{sentence.text}
+							</p>
+						))}
 					</TextContainer>
 					<ImageContainer>
 						<Image src={mugshot} alt="" />
@@ -67,91 +68,64 @@ const AboutContent = styled.div`
 	height: 100%;
 	margin: 0 auto;
 	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	padding-top: 96px;
+	justify-content: center;
 	position: relative;
-	@media screen and (max-width: 999px) {
-		padding: 96px 2em 0 2em;
-	}
-	@media screen and (max-width: 768px) {
-		padding: 96px 1em 0 1em;
-	}
+	padding: 0;
 `
 
 const AboutInfo = styled.div`
 	position: absolute;
 	top: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
+	@media screen and (max-width: 999px) {
+		padding: var(--m-desktop);
+	}
+	@media screen and (max-width: 768px) {
+		padding: var(--m-mobile);
+		flex-direction: column-reverse;
+		top: 10%;
+	}
+	@media screen and (max-width: 546px) {
+		top: 5%;
+	}
 `
 
 const TextContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	z-index: 1;
-	padding: 2.5em 0 3.5em 3.5em;
-	width: 60%;
-	@media screen and (max-width: 768px) {
-		width: 80%;
-	}
-`
-
-const Heading = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 2rem;
-	color: var(--highlight-color);
+	justify-content: center;
+	text-align: left;
+	padding: 0 2rem 0 3.2rem;
 	h2 {
-		font-size: 4rem;
+		font-size: 2.5rem;
+		margin-bottom: 0.5rem;
 	}
 	h3 {
-		font-size: 3rem;
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
 	}
-	@media screen and (max-width: 546px) {
-		gap: 0.5em;
-		margin-bottom: 1em;
-		h2 {
-			font-size: 2rem;
-		}
-		h3 {
-			font-size: 1.4rem;
-		}
+	p {
+		margin-bottom: 1rem;
 	}
-`
-
-const Paragraph = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: justify;
-	gap: 1rem;
 	@media screen and (max-width: 768px) {
-		gap: 0.7em;
-	}
-	@media screen and (max-width: 546px) {
-		gap: 0.5em;
-	}
-`
-
-const Sentence = styled.p`
-	font-size: 1.6rem;
-	color: var(--text-color-md);
-	@media screen and (max-width: 768px) {
-		font-size: 1.4rem;
-		line-height: 1.5;
+		align-items: center;
+		text-align: center;
+		width: 60%;
+		padding: 0;
 	}
 `
 
 const ImageContainer = styled.div`
-	position: absolute;
-	top: 3em;
-	right: -3em;
-	width: 25em;
+	z-index: -1;
+	min-width: 25em;
 	height: 25em;
 	border: 2px solid var(--orange);
 	border-radius: 40% 60% 60% 40% / 70% 30% 70% 30%;
-	background: #000;
+	background: #111;
 	animation: morph 10s linear infinite alternate;
 	@keyframes morph {
 		0% {
@@ -162,16 +136,10 @@ const ImageContainer = styled.div`
 		}
 	}
 	@media screen and (max-width: 768px) {
-		right: 0em;
-		width: 15em;
-		height: 15em;
-		border: 2px solid var(--text-color-dk);
+		scale: 0.8;
 	}
 	@media screen and (max-width: 546px) {
-		right: 0em;
-		width: 10em;
-		height: 10em;
-		border: 2px solid var(--text-color-dk);
+		scale: 0.6;
 	}
 `
 
@@ -182,15 +150,4 @@ const Image = styled.img`
 	position: relative;
 	top: -2.7em;
 	left: 2.5em;
-	@media screen and (max-width: 768px) {
-		width: 10em;
-		top: -1em;
-		left: 1em;
-		filter: grayscale(100%);
-	}
-	@media screen and (max-width: 546px) {
-		width: 6em;
-		top: -0.5em;
-		left: 0.5em;
-	}
 `
