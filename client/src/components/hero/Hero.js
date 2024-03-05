@@ -14,7 +14,7 @@ export default function Hero() {
 	const heroHeight = useTransform(
 		scrollYProgress, 
 		[0, 0.2], 
-		['100vh', '2vh']
+		['100em', '2em']
 	)
 	const heroBorder = useTransform(
 		scrollYProgress,

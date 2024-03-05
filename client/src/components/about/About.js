@@ -70,7 +70,7 @@ const AboutContent = styled.div`
 	display: flex;
 	justify-content: center;
 	position: relative;
-	padding: 0;
+	padding-top: 10.6rem;
 `
 
 const AboutInfo = styled.div`
@@ -99,7 +99,6 @@ const TextContainer = styled.div`
 	align-items: flex-start;
 	justify-content: center;
 	text-align: left;
-	padding: 0 2rem 0 3.2rem;
 	h2 {
 		font-size: 2.5rem;
 		margin-bottom: 0.5rem;
@@ -114,12 +113,12 @@ const TextContainer = styled.div`
 	@media screen and (max-width: 768px) {
 		align-items: center;
 		text-align: center;
-		width: 60%;
 		padding: 0;
 	}
 `
 
 const ImageContainer = styled.div`
+	position: relative;
 	z-index: -1;
 	min-width: 25em;
 	height: 25em;
@@ -140,6 +139,7 @@ const ImageContainer = styled.div`
 	}
 	@media screen and (max-width: 546px) {
 		scale: 0.6;
+		margin-bottom: -5rem;
 	}
 `
 

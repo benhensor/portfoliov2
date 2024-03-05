@@ -80,7 +80,7 @@ const ProjectsContent = styled.div`
 	justify-content: center;
 	align-items: center;
 	border: 2px solid var(--accent-color);
-	padding-top: 96px;
+	padding-top: 10.6rem;
 `
 
 const ProjectGallery = styled.div`
