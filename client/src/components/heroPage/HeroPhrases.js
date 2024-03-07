@@ -14,7 +14,7 @@ export default function HeroPhrases() {
 	const textRotate = [
 		'Frontend Developer',
 		'Sound Designer',
-		'Cat Fanatic!',
+		'Cat Fanatic!'
 	]
 
 	useEffect(() => {

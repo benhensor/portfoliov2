@@ -11,24 +11,22 @@ export default function TechStack() {
 
 	const { scrollYProgress } = useScroll({ domTarget: techRef })
 
-	const opacity = useTransform(
+	const top = useTransform(
 		scrollYProgress,
-		[0, 0.2, 0.3, 0.4],
-		['0', '1', '1', '0']
+		[0.2, 0.3, 0.55, 0.65],
+		['-200%', '0%', '0%', '200%']
 	)
 
 	return (
 		<TechStackContainer
 			id="tech"
 			ref={techRef}
-			style={{ opacity: opacity }}
+			style={{ 
+				top: top,
+			}}
 		>
 			<TechContent ref={contentRef}>
-				<TechHeading
-					text={'Tech Stack'}
-					scrollYProgress={scrollYProgress}
-				>
-				</TechHeading>
+				<TechHeading scrollYProgress={scrollYProgress} />
 				<TechCategories scrollYProgress={scrollYProgress} />
 			</TechContent>
 		</TechStackContainer>
@@ -37,8 +35,6 @@ export default function TechStack() {
 
 const TechStackContainer = styled(motion.div)`
 	position: fixed;
-	left: 0;
-	top: 0;
 	width: 100%;
 	height: 100vh;
 	scroll-snap-align: start;
@@ -57,7 +53,7 @@ const TechContent = styled.div`
 	max-width: 1000px;
 	width: 100%;
 	height: 100%;
-	padding-top: 10.6rem;
+	padding-top: 9.6rem;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;

@@ -8,19 +8,14 @@ export default function About() {
 	const aboutRef = useRef(null)
 	const { scrollYProgress } = useScroll({ domTarget: aboutRef })
 
-	const display = useTransform(
-		scrollYProgress,
-		[0, 0.3, 0.4, 0.5, 0.6],
-		['none', 'block', 'block', 'block', 'none']
-	)
 	const top = useTransform(
 		scrollYProgress,
-		[0.3, 0.4, 0.4, 0.5, 0.6],
-		['100%', '0%', '0%', '0%', '100%']
+		[0, 0.2, 0.3, 0.4],
+		['-100%', '0%', '0%', '100%']
 	)
 	const opacity = useTransform(
 		scrollYProgress,
-		[0.3, 0.4, 0.5, 0.6],
+		[0.15, 0.2, 0.3, 0.35],
 		['0', '1', '1', '0']
 	)
 
@@ -28,7 +23,10 @@ export default function About() {
 		<AboutSection
 			id="about"
 			ref={aboutRef}
-			style={{ display: display, top: top, opacity: opacity }}
+			style={{ 
+				top: top,
+				opacity: opacity 
+			}}
 		>
 			<AboutContent>
 				<AboutInfo>
@@ -52,14 +50,13 @@ export default function About() {
 
 const AboutSection = styled(motion.section)`
 	position: fixed;
-	left: 0;
-	top: 0;
 	width: 100%;
 	height: 100vh;
 	scroll-snap-align: start;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
 `
 
 const AboutContent = styled.div`
@@ -70,7 +67,7 @@ const AboutContent = styled.div`
 	display: flex;
 	justify-content: center;
 	position: relative;
-	padding-top: 10.6rem;
+	padding-top: 9.6rem;
 `
 
 const AboutInfo = styled.div`
@@ -93,31 +90,40 @@ const AboutInfo = styled.div`
 	}
 `
 
-const TextContainer = styled.div`
+const TextContainer = styled(motion.div)`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
 	text-align: left;
+	padding: 0 2rem;
 	h2 {
-		font-size: 2.5rem;
+		font-family: var(--font-poppins);
+		font-size: clamp(2.5rem, 5vw, 3.5rem);
 		margin-bottom: 0.5rem;
+		color: var(--orange);
 	}
 	h3 {
-		font-size: 1.5rem;
+		font-family: var(--font-poppins);
+		font-size: clamp(1.6rem, 3vw, 2.5rem);
 		margin-bottom: 1rem;
+		color: var(--ltOrange);
 	}
 	p {
-		margin-bottom: 1rem;
+		font-family: var(--font-poppins);
+		font-size: clamp(1.2rem, 3vw, 1.6rem);
+		margin-bottom: 1.6rem;
+		color: var(--text-color-md);
 	}
 	@media screen and (max-width: 768px) {
 		align-items: center;
-		text-align: center;
-		padding: 0;
+		text-align: justify;
+		padding: 0 6rem;
 	}
 `
 
-const ImageContainer = styled.div`
+const ImageContainer = styled(motion.div)`
 	position: relative;
 	z-index: -1;
 	min-width: 25em;

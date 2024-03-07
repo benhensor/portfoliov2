@@ -145,11 +145,11 @@ const aboutInfo = {
     subHeading: "Welcome to my portfolio!",
     sentences: [
         { key: 1,
-            text: "I'm a Frontend React Developer based in Bristol, UK." },
+            text: "I'm a Frontend Developer based in Bristol, UK." },
         { key: 2,
-            text: "Following a successful career as an award-winning Sound Designer, I decided to break into web development." },
+            text: "Following a successful career as a Sound Designer, I decided to pursue a fresh challenge and get into Web Development!" },
         { key: 3,
-            text: "Thank you for visiting my portfolio, you can check out some of my projects below." },
+            text: "I am passionate about technology and design, always looking to create immersive user experiences..." },
         { key: 4,
             text: "I am actively seeking new opportunities so please get in touch!" }
     ]

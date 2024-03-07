@@ -12,18 +12,23 @@ export default function TechCategory({
 }) {
 	const opacity = useTransform(
 		scrollYProgress,
-		[0.15, 0.2, 0.275, 0.3],
+		[0.4, 0.45, 0.5, 0.55],
 		[0, 1, 1, 0]
 	)
 	const categoryFilter = useTransform(
 		scrollYProgress,
-		[0.2, 0.25, 0.315, 0.325],
-		['blur(10px', 'blur(0px)', 'blur(10px)', 'blur(40px)']
+		[0.4, 0.45, 0.5, 0.65],
+		['blur(10px', 'blur(0px)', 'blur(0px)', 'blur(40px)']
 	)
 	const letterSpacing = useTransform(
 		scrollYProgress,
-		[0.2, 0.25, 0.3],
-		['0rem', '1rem', '5rem']
+		[0.4, 0.45, 0.5, 0.6],
+		['0rem', '1rem', '2rem', '15rem']
+	)
+	const marginLeft = useTransform(
+		scrollYProgress,
+		[0.4, 0.45, 0.5, 0.6],
+		['0rem', '1rem', '2rem', '10rem']
 	)
 
 	const [showTechCards, setShowTechCards] = useState(false)
@@ -33,7 +38,7 @@ export default function TechCategory({
 			// Assuming the opacity is 0 between 0.275 and 0.3 of scroll progress
 			const currentProgress = scrollYProgress.get()
 			const shouldShowTechCards =
-				currentProgress >= 0.245 && currentProgress <= 0.26
+				currentProgress >= 0.45 && currentProgress <= 0.5
 			setShowTechCards(shouldShowTechCards)
 		}
 
@@ -48,11 +53,14 @@ export default function TechCategory({
 			onMouseEnter={onHover}
 			onMouseLeave={onHoverLeave}
 			$ishovered={isHovered}
-			style={{ opacity: opacity, filter: categoryFilter }}
+			style={{ 
+				opacity: opacity,
+				filter: categoryFilter,
+			}}
 		>
 			<motion.h2
 				layout="position"
-				style={{ letterSpacing: letterSpacing }}
+				style={{ letterSpacing: letterSpacing, marginLeft: marginLeft }}
 			>
 				{title}
 			</motion.h2>
@@ -103,6 +111,7 @@ const TechSection = styled(motion.section)`
 	align-items: center;
 	gap: 1rem;
 	padding: 1rem;
+	opacity: 1;
 	h2 {
 		text-transform: uppercase;
 		color: ${(props) =>

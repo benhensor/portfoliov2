@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { motion, useTransform, useScroll } from 'framer-motion'
 import HeroAnimation from './HeroAnimation'
@@ -10,31 +10,29 @@ import HeroArrow from './HeroArrow'
 export default function Hero() {
 	const heroRef = useRef(null)
 	const { scrollYProgress } = useScroll({ domTarget: heroRef })
-
-	const startEnd = [0, 0.2]
 	const heroHeight = useTransform(
 		scrollYProgress, 
-		startEnd, 
+		[0, 0.2], 
 		['100em', '2em']
 	)
 	const heroBorder = useTransform(
 		scrollYProgress,
-		startEnd,
+		[0, 0.2],
 		['0.2em solid, #00c5c500', '0.2em solid #00c5c5']
 	)
 	const circleBottom = useTransform(
 		scrollYProgress,
-		startEnd,
+		[0, 0.2],
 		['29em', '-48em']
 	)
 	const textPaddingTop = useTransform(
 		scrollYProgress,
-		startEnd,
-		['15%', '0%']
+		[0, 0.2],
+		['14em', '0em']
 	)
 	const textOpacity = useTransform(
 		scrollYProgress, 
-		startEnd, 
+		[0, 0.2], 
 		[0.75, 0]
 	)
 
@@ -46,7 +44,7 @@ export default function Hero() {
 			<HeroContent>
 				<HeroAnimation circleBottom={circleBottom} />
 				<HeroTitleContainer
-					style={{ top: textPaddingTop, opacity: textOpacity }}
+					style={{ paddingTop: textPaddingTop, opacity: textOpacity }}
 				>
 					<HeroTitleAnimation title='Ben Hensor'/>
 					<HeroPhrases />
@@ -59,7 +57,6 @@ export default function Hero() {
 }
 
 const HeroSection = styled(motion.div)`
-	position: fixed;
 	width: 100vw;
 	margin: 4em auto 0 auto;
 	background-color: #000;
@@ -68,7 +65,8 @@ const HeroSection = styled(motion.div)`
 	align-items: center;
 	justify-content: center;
 	user-select: none;
-	overflow: hidden;
+	overflow-x: hidden;
+	position: fixed;
 	z-index: 10;
 `
 
@@ -82,7 +80,6 @@ const HeroContent = styled.div`
 `
 
 const HeroTitleContainer = styled(motion.div)`
-	position: absolute;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

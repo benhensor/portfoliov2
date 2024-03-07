@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { FaChevronDown } from 'react-icons/fa'
 
@@ -60,19 +60,6 @@ const Arrow = styled(FaChevronDown)`
 		100% {
 			opacity: 0;
 			transform: translateY(2.5rem);
-		}
-	}
-	@media screen and (max-width: 768px) {
-		font-size: 3rem;
-		&:nth-child(1) {
-			top: 30px;
-		}
-		&:nth-child(2) {
-			animation-delay: -0.2s;
-		}
-		&:nth-child(3) {
-			bottom: 30px;
-			animation-delay: -0.4s;
 		}
 	}
 `

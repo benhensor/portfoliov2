@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
 
         /* Global Colours */
         --orange: #de9e36;
-        --ltOrange: #fafbdf;
+        --ltOrange: #f9fad0;
         --blue: #00c5c5;
         --ltBlue: #d8fdfe;
         --background-card: linear-gradient(to bottom right, #2f3636, #171e1e);
@@ -69,6 +69,7 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         min-width: 0;
         content: none;
+        ${'' /* outline: 1px solid red; */}
     }
 
     html {
@@ -88,7 +89,6 @@ const GlobalStyles = createGlobalStyle`
         background-color: var(--background-static);
         overflow-x: hidden;
         width: 100vw;
-        min-height: 100vh;
     }
 
     p {

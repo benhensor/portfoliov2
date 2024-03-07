@@ -83,6 +83,6 @@ const HeroTitle = styled(motion.h1)`
 		font-size: 4em;
 	}
 	@media screen and (max-width: 546px) {
-		font-size: 2em;
+		font-size: 2.2em;
 	}
 `

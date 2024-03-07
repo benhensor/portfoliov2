@@ -11,17 +11,19 @@ export default function Projects() {
 	const [activeProject, setActiveProject] = useState(0)
 
 	const toggleProject = (index) => {
-		setActiveProject(activeProject === index ? null : index)
+		if (activeProject !== index) {
+			setActiveProject(index)
+		}
 	}
 
-	const projectsYPosition = useTransform(
+	const top = useTransform(
 		scrollYProgress,
 		[0.4, 0.6, 0.7, 0.8],
 		['-200%', '0%', '0%', '100%']
 	)
 	const opacity = useTransform(
 		scrollYProgress,
-		[0.5, 0.6, 0.7, 0.8],
+		[0.4, 0.6, 0.7, 0.8],
 		['0', '1', '1', '0']
 	)
 
@@ -29,7 +31,7 @@ export default function Projects() {
 		<ProjectsSection
 			id="projects"
 			ref={projectsRef}
-			style={{ top: projectsYPosition, opacity: opacity }}
+			style={{ top: top, opacity: opacity }}
 		>
 			<ProjectsContent>
 				<ProjectGallery>
@@ -55,8 +57,6 @@ export default function Projects() {
 
 const ProjectsSection = styled(motion.section)`
 	position: fixed;
-	left: 0;
-	top: 0;
 	width: 100%;
 	height: 100vh;
 	scroll-snap-align: start;
@@ -72,6 +72,7 @@ const ProjectsSection = styled(motion.section)`
 `
 
 const ProjectsContent = styled.div`
+	position: relative;
 	max-width: 1000px;
 	width: 100%;
 	height: 100%;
@@ -80,15 +81,18 @@ const ProjectsContent = styled.div`
 	justify-content: center;
 	align-items: center;
 	border: 2px solid var(--accent-color);
-	padding-top: 10.6rem;
+	padding-top: 9.6rem;
 `
 
 const ProjectGallery = styled.div`
+	position: absolute;
+	top: 15%;
 	display: flex;
+	align-items: center;
 	width: 100%;
-	height: 100%;
+	height: 40rem;
 	gap: 1rem;
-	background-color: #222;
+	background-color: transparent;
 	border-radius: calc((0.25rem * 2) + (0.25rem * 2));
 	padding: 1rem;
 	@media screen and (max-width: 999px) {

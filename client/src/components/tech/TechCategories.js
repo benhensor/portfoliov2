@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { motion, useTransform, useScroll } from 'framer-motion'
 import styled from 'styled-components'
 import TechCategory from './TechCategory'
 import {
@@ -25,8 +26,14 @@ export default function TechCategories({ scrollYProgress }) {
         { title: 'Tools', skillSet: tools },
     ]
 
+    const top = useTransform(
+		scrollYProgress,
+		[0.3, 0.35, 0.55, 0.6],
+		['-217%', '17%', '17%', '217%']
+	)
+
     return (
-        <TechCategoriesContainer>
+        <TechCategoriesContainer style={{ top: top }}>
             {sections.map((section, index) => (
                 <TechCategory
                     key={index}
@@ -42,9 +49,8 @@ export default function TechCategories({ scrollYProgress }) {
     )
 }
 
-const TechCategoriesContainer = styled.div`
+const TechCategoriesContainer = styled(motion.div)`
 	position: absolute;
-	top: 20%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
