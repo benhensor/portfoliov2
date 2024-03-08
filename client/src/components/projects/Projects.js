@@ -23,7 +23,7 @@ export default function Projects() {
 	)
 	const opacity = useTransform(
 		scrollYProgress,
-		[0.4, 0.6, 0.7, 0.8],
+		[0.575, 0.6, 0.7, 0.75],
 		['0', '1', '1', '0']
 	)
 
@@ -96,10 +96,8 @@ const ProjectGallery = styled.div`
 	border-radius: calc((0.25rem * 2) + (0.25rem * 2));
 	padding: 1rem;
 	@media screen and (max-width: 999px) {
+		top: 7%;
 		flex-direction: column;
-		height: 100%;
-	}
-	ProjectGallery * {
-		margin: 0;
+		height: 80%;
 	}
 `

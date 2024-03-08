@@ -28,7 +28,7 @@ export default function TechCategories({ scrollYProgress }) {
 
     const top = useTransform(
 		scrollYProgress,
-		[0.3, 0.35, 0.55, 0.6],
+		[0.3, 0.35, 0.65, 0.75],
 		['-217%', '17%', '17%', '217%']
 	)
 

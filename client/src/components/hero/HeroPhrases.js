@@ -72,6 +72,6 @@ const Phrase = styled(motion.h2)`
 		font-size: 1.5em;
 	}
 	@media screen and (max-width: 546px) {
-		font-size: 0.7em;
+		font-size: 0.6em;
 	}
 `

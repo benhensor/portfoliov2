@@ -13,7 +13,7 @@ export default function TechStack() {
 
 	const top = useTransform(
 		scrollYProgress,
-		[0.2, 0.3, 0.55, 0.65],
+		[0.2, 0.3, 0.65, 0.75],
 		['-200%', '0%', '0%', '200%']
 	)
 

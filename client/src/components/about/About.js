@@ -112,25 +112,28 @@ const TextContainer = styled(motion.div)`
 	}
 	p {
 		font-family: var(--font-poppins);
-		font-size: clamp(1.2rem, 3vw, 1.6rem);
+		font-size: clamp(1rem, 3vw, 1.6rem);
 		margin-bottom: 1.6rem;
 		color: var(--text-color-md);
 	}
 	@media screen and (max-width: 768px) {
 		align-items: center;
 		text-align: justify;
-		padding: 0 6rem;
+		padding: 0 10rem;
+	}
+	@media screen and (max-width: 546px) {
+		padding: 0 5rem;
 	}
 `
 
 const ImageContainer = styled(motion.div)`
 	position: relative;
 	z-index: -1;
-	min-width: 25em;
-	height: 25em;
+	min-width: 35rem;
+	height: 35rem;
 	border: 2px solid var(--orange);
 	border-radius: 40% 60% 60% 40% / 70% 30% 70% 30%;
-	background: #111;
+	background: #000;
 	animation: morph 10s linear infinite alternate;
 	@keyframes morph {
 		0% {
@@ -141,19 +144,33 @@ const ImageContainer = styled(motion.div)`
 		}
 	}
 	@media screen and (max-width: 768px) {
-		scale: 0.8;
+
+		min-width: 23rem;
+		height: 23rem;
 	}
 	@media screen and (max-width: 546px) {
-		scale: 0.6;
-		margin-bottom: -5rem;
+		min-width: 15rem;
+		height: 15rem;
+		margin-top: 5rem;
+		margin-bottom: 2rem;
 	}
 `
 
 const Image = styled.img`
-	width: 18em;
+	width: 25rem;
 	height: auto;
 	object-position: center;
 	position: relative;
 	top: -2.7em;
 	left: 2.5em;
+	@media screen and (max-width: 768px) {
+		top: -2.5em;
+		left: 2.5em;
+		width: 15rem;
+	}
+	@media screen and (max-width: 546px) {
+		top: -2rem;
+		left: 2rem;
+		width: 10rem;
+	}
 `

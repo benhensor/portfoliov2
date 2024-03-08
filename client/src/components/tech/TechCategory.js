@@ -12,7 +12,7 @@ export default function TechCategory({
 }) {
 	const opacity = useTransform(
 		scrollYProgress,
-		[0.4, 0.45, 0.5, 0.55],
+		[0.4, 0.45, 0.5, 0.65],
 		[0, 1, 1, 0]
 	)
 	const categoryFilter = useTransform(
@@ -22,12 +22,12 @@ export default function TechCategory({
 	)
 	const letterSpacing = useTransform(
 		scrollYProgress,
-		[0.4, 0.45, 0.5, 0.6],
+		[0.4, 0.45, 0.5, 0.7],
 		['0rem', '1rem', '2rem', '15rem']
 	)
 	const marginLeft = useTransform(
 		scrollYProgress,
-		[0.4, 0.45, 0.5, 0.6],
+		[0.4, 0.45, 0.5, 0.7],
 		['0rem', '1rem', '2rem', '10rem']
 	)
 

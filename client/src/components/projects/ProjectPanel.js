@@ -21,7 +21,7 @@ export default function ProjectPanel({
 				aria-expanded={isOpen}
 				onClick={() => toggleProject(index)}
 			>
-				<ProjectImage src={image} alt={title} isOpen={isOpen} />
+				<ProjectImage src={image} alt={title} $isOpen={isOpen} />
 				
 				<ProjectContent
 					aria-labelledby="project-title"
@@ -29,18 +29,28 @@ export default function ProjectPanel({
 					role="region"
 					$isOpen={isOpen}
 				>
-					<ProjectTitle $isOpen={isOpen}>{title}</ProjectTitle>
-					<ProjectDescription $isOpen={isOpen}>
-						{description}
-					</ProjectDescription>
-					<ProjectLinks $isOpen={isOpen}>
-						<a href={live} target="_blank" rel="noreferrer">
-							Live
-						</a>
-						<a href={code} target="_blank" rel="noreferrer">
-							Code
-						</a>
-					</ProjectLinks>
+					{isOpen && (
+						<>
+							<ProjectTitle
+								$isOpen={isOpen}
+							>
+								{title}
+							</ProjectTitle>
+							<ProjectDescription
+								$isOpen={isOpen}
+							>
+								{description}
+							</ProjectDescription>
+							<ProjectLinks>
+								<a href={live} target="_blank" rel="noreferrer">
+									Live
+								</a>
+								<a href={code} target="_blank" rel="noreferrer">
+									Code
+								</a>
+							</ProjectLinks>
+						</>
+					)}
 				</ProjectContent>
 			</ProjectTrigger>
 		</ProjectContainer>
@@ -55,24 +65,21 @@ const ProjectImage = styled.img`
 	object-fit: cover;
 	opacity: 1;
 	z-index: -1;
-	filter: brightness(0.5);
-	transition: filter 500ms;
+	filter: ${(props) => (props.$isOpen ? 'brightness(0.5)' : 'brightness(1)')};
+	transition: all 500ms;
 `
 
 // content
 const ProjectContent = styled.div`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 	height: 80%;
 	width: 80%;
-	transition: all flex-basis 1500ms, flex-grow 500ms;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
 	gap: 1rem;
+	opacity: ${(props) => (props.$isOpen ? '1' : '0')};
+	transition: opacity 500ms 250ms;
 `
 
 // panel
@@ -87,8 +94,8 @@ const ProjectContainer = styled.div`
 			: 'calc((0.25rem * 2) + 5rem)'};
 	overflow: hidden;
 	padding: 0.75rem;
-	padding-right: calc(-0.75rem * 4);
-	border-radius: calc((0.25rem) + (0.25rem));
+	padding-right: 2rem;
+	border-radius: 1rem;
 
 	@media (prefers-reduced-motion: no-preference) {
 		& {
@@ -99,14 +106,6 @@ const ProjectContainer = styled.div`
 	&:has([aria-expanded='true']) {
 		flex-basis: clamp(15rem, 40vh, 20rem);
 		flex-grow: 1;
-		${ProjectImage} {
-			filter: brightness(0.4);
-		}
-		${ProjectContent} > p {
-			transform: translateY(0);
-			opacity: 1;
-			transition: transform 500ms, opacity 500ms;
-		}
 	}
 
 	&:focus-within {
@@ -136,14 +135,14 @@ const ProjectTrigger = styled.button`
 
 // title
 const ProjectTitle = styled(motion.span)`
-
+	display: block;
+	word-wrap: nowrap;
 	color: var(--ltOrange);
 	font-size: var(--text-xxl);
 	font-weight: 700;
-	position: absolute;
-	top: 0;
+	transform: ${(props) => (props.$isOpen ? 'translateY(0)' : 'translateY(4rem)')};
 	opacity: ${(props) => (props.$isOpen ? '1' : '0')};
-	transition: opacity 500ms 250ms;
+	transition: opacity 500ms 250ms, transform 500ms 250ms;
 
 	@media (max-width: 44.999em) {
 		&::after {
@@ -160,34 +159,18 @@ const ProjectTitle = styled(motion.span)`
 `
 
 const ProjectDescription = styled(motion.p)`
-	position: absolute;
-	bottom: 10%;
 	width: 100%;
-	transform: translateY(4rem);
-	text-align: left;
-	opacity: 0;
-	transition: transform 500ms 500ms, opacity 500ms 500ms;
-	&:has([aria-hidden='true']) {
-		transform: translateY(0);
-		opacity: 1;
-	}
-	&:has([aria-hidden='false']) {
-		display: none;
-	}
+	text-align: center;
+	transform: ${(props) => (props.$isOpen ? 'translateY(0)' : 'translateY(4rem)')};
+	opacity: ${(props) => (props.$isOpen ? '1' : '0')};
+	transition: opacity 500ms 250ms, transform 500ms 250ms;
 `
 
 const ProjectLinks = styled(motion.div)`
-	position: absolute;
-	bottom: 0;
 	width: 100%;
 	display: flex;
+	justify-content: center;
 	gap: 2rem;
-	transition: transform 500ms 500ms, opacity 500ms 500ms;
-	&:has([aria-hidden='true']) {
-		transform: translateY(0);
-		opacity: 1;
-	}
-	&:has([aria-hidden='false']) {
-		display: none;
-	}
+	transform: ${(props) => (props.$isOpen ? 'translateY(0)' : 'translateY(4rem)')};
+	transition: transform 500ms 500ms;
 `

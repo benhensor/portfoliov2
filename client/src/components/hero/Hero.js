@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { motion, useTransform, useScroll } from 'framer-motion'
 import HeroAnimation from './HeroAnimation'
@@ -15,7 +15,7 @@ export default function Hero() {
 	const heroHeight = useTransform(
 		scrollYProgress, 
 		startEnd, 
-		['100em', '2em']
+		['120em', '2em']
 	)
 	const heroBorder = useTransform(
 		scrollYProgress,
@@ -25,7 +25,7 @@ export default function Hero() {
 	const circleBottom = useTransform(
 		scrollYProgress,
 		startEnd,
-		['29em', '-48em']
+		['40em', '-48em']
 	)
 	const textPaddingTop = useTransform(
 		scrollYProgress,
