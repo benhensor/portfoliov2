@@ -47,16 +47,17 @@ export default function App() {
 const AppContainer = styled.main`
 	display: flex;
 	flex-direction: column;
-	scroll-snap-type: y mandatory;
-	overflow-y: scroll;
-	height: 1000vh; // hero scrolling only works with 1000vh. 100vh makes the page scroll snapping work
+	// height: 100vh; // hero scrolling only works with 1000vh. 100vh makes the page scroll snapping work
 	position: relative;
 `
 
 const AppContent = styled.div`
 	margin-top: 4em;
+	scroll-snap-type: y mandatory;
+	overflow-y: scroll;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
+	height: 400vh;
 `
