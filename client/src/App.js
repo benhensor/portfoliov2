@@ -42,7 +42,7 @@ export default function App() {
 			</AppContainer>
 		</AnimatePresence>
 	)
-}
+} 
 
 const AppContainer = styled.main`
 	display: flex;
