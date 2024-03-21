@@ -2,15 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { AnimatePresence } from 'framer-motion'
 import Header from './components/header/Header'
-import About from './components/about/About'
-import TechStack from './components/tech/TechStack'
-import Projects from './components/projects/Projects'
-import Contact from './components/contact/Contact'
-// import HeroPage from './pages/HeroPage'
-// import TechStackPage from './pages/TechStackPage'
-// import AboutPage from './pages/AboutPage'
-// import ProjectsPage from './pages/ProjectsPage'
-// import ContactPage from './pages/ContactPage'
+import TechStackPage from './pages/TechStackPage'
+import AboutPage from './pages/AboutPage'
+import ProjectsPage from './pages/ProjectsPage'
+import ContactPage from './pages/ContactPage'
 
 export default function App() {
 	return (
@@ -18,15 +13,10 @@ export default function App() {
 			<Container>
 				<Header />
 				<Content>
-					<About />
-					<TechStack />
-					<Projects />
-					<Contact />
-					{/* <HeroPage />
 					<TechStackPage />
 					<AboutPage />
 					<ProjectsPage />
-					<ContactPage /> */}
+					<ContactPage />
 				</Content>
 			</Container>
 		</AnimatePresence>
