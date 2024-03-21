@@ -23,7 +23,8 @@ const containerVariants = {
 	},
 };
 
-export default function HeroTitleAnimation({ title }) {
+export default function HeroTitleAnimation() {
+		const title = 'Ben Hensor';
     return (
         <HeroTitle
             variants={containerVariants}

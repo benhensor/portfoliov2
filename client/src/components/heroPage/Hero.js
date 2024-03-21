@@ -1,51 +1,22 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
-import { motion, useTransform, useScroll } from 'framer-motion'
 import HeroAnimation from './HeroAnimation'
 import HeroTitleAnimation from './HeroTitleAnimation'
 import HeroPhrases from './HeroPhrases'
 import HeroArrow from './HeroArrow'
 
 
-export default function Hero() {
+export default function Hero({ scrolled }) {
 	const heroRef = useRef(null)
-	const { scrollYProgress } = useScroll({ domTarget: heroRef })
-	const heroHeight = useTransform(
-		scrollYProgress, 
-		[0, 0.2], 
-		['100em', '2em']
-	)
-	const heroBorder = useTransform(
-		scrollYProgress,
-		[0, 0.2],
-		['0.2em solid, #00c5c500', '0.2em solid #00c5c5']
-	)
-	const circleBottom = useTransform(
-		scrollYProgress,
-		[0, 0.2],
-		['29em', '-48em']
-	)
-	const textPaddingTop = useTransform(
-		scrollYProgress,
-		[0, 0.2],
-		['14em', '0em']
-	)
-	const textOpacity = useTransform(
-		scrollYProgress, 
-		[0, 0.2], 
-		[0.75, 0]
-	)
 
 	return (
 		<HeroSection
 			ref={heroRef}
-			style={{ height: heroHeight, borderBottom: heroBorder }}
+			$scrolled={scrolled}
 		>
 			<HeroContent>
-				<HeroAnimation circleBottom={circleBottom} />
-				<HeroTitleContainer
-					style={{ paddingTop: textPaddingTop, opacity: textOpacity }}
-				>
+				<HeroAnimation />
+				<HeroTitleContainer $scrolled={scrolled}>
 					<HeroTitleAnimation title='Ben Hensor'/>
 					<HeroPhrases />
 					<HeroArrow />
@@ -56,17 +27,19 @@ export default function Hero() {
 	)
 }
 
-const HeroSection = styled(motion.div)`
+const HeroSection = styled.div`
+	position: fixed;
+	top: 4em;
 	width: 100vw;
-	margin: 4em auto 0 auto;
+	height: ${({ $scrolled }) => $scrolled ? '2em' : '100%'};
+	border-bottom: ${({ $scrolled }) => $scrolled ? '0.2em solid var(--blue)' : 'none'};
+	min-height: 0;
 	background-color: #000;
-	transition: background-color 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	user-select: none;
-	overflow-x: hidden;
-	position: fixed;
+	/* overflow: hidden; */
 	z-index: 10;
 `
 
@@ -79,9 +52,14 @@ const HeroContent = styled.div`
 	
 `
 
-const HeroTitleContainer = styled(motion.div)`
+const HeroTitleContainer = styled.div`
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	mix-blend-mode: screen;
+	opacity: ${({ $scrolled }) => $scrolled ? 0 : 1};
+	transition: all 0.1s ease-in-out;
 `

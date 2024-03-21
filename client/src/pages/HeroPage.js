@@ -1,37 +1,33 @@
 import React, { useRef }  from 'react'
 import styled from 'styled-components'
-import { motion, useTransform, useScroll } from 'framer-motion'
 import HeroAnimation from '../components/heroPage/HeroAnimation'
 
-export default function Hero() {
+export default function Hero({ scrolled }) {
 
     const heroRef = useRef(null)
-    const { scrollYProgress } = useScroll({ domTarget: heroRef })
-    const circleBottom = useTransform(
-		scrollYProgress,
-		[0, 0.2],
-		['20em', '-48em']
-	)
 
 	return (
-		<HeroContainer ref={heroRef}>
+		<HeroContainer ref={heroRef} $scrolled={scrolled}>
             <HeroContent>
-                <HeroAnimation circleBottom={circleBottom}/>
+                <HeroAnimation/>
             </HeroContent>
         </HeroContainer>
 	)
 }
 
-const HeroContainer = styled(motion.section)`
-  scroll-snap-align: start !important;
+const HeroContainer = styled.section`
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   outline: 2px solid red;
   width: 100vw;
-  height: 200vh;
+  height: 100vh;
   margin: 4em auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  position: relative;
+  position: ${props => props.$scrolled ? 'fixed' : 'relative'};
+  top: ${props => props.$scrolled ? '4em' : 'auto'};
+  border-bottom: ${({ $scrolled }) => $scrolled ? '0.2em solid var(--blue)' : 'none'};
   @media screen and (max-width: 999px) {
 		padding: var(--m-desktop);
 	}

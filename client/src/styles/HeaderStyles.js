@@ -9,7 +9,6 @@ export const StyledHeader = styled.header`
 	align-items: flex-end;
 	justify-content: center;
 	width: 100vw;
-    height: 100%;
 	height: 4em;
     background-color: var(--background-static);
     user-select: none;
@@ -80,12 +79,14 @@ export const LogoContainer = styled.div`
     }
 `
 
-export const HeaderName = styled(motion.h1)`
+export const HeaderName = styled.h1`
     font-size: 1.5em;
     font-weight: 100;
     margin-left: 0.5em;
     z-index: 100;
     color: #FFFFFF;
+    opacity: ${({ $scrolled }) => $scrolled ? 1 : 0.2};
+    transition: all 0.5s ease-in-out;
     @media screen and (max-width: 768px) {
         font-size: 1.2em;
     }
