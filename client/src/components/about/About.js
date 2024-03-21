@@ -15,7 +15,31 @@ export default function About() {
 	)
 	const opacity = useTransform(
 		scrollYProgress,
-		[0.15, 0.2, 0.3, 0.35],
+		[0.15, 0.2, 0.35, 0.4],
+		['0', '1', '1', '0']
+	)
+
+	const aboutBGYPosition = useTransform(
+		scrollYProgress,
+		[0, 0.2, 0.4],
+		['100%', '25%', '0%']
+	)
+
+	const aboutBGOpacity = useTransform(
+		scrollYProgress,
+		[0, 0.15],
+		['0', '1']
+	)
+
+	const imgDisplay = useTransform(
+		scrollYProgress,
+		[0, 0.2, 0.4, 0.41],
+		['none', 'block', 'block', 'none']
+	)
+
+	const imgOpacity = useTransform(
+		scrollYProgress,
+		[0.2, 0.25, 0.35, 0.4],
 		['0', '1', '1', '0']
 	)
 
@@ -28,6 +52,14 @@ export default function About() {
 				opacity: opacity 
 			}}
 		>
+			<AboutBackground 
+				style={{ 
+					top: aboutBGYPosition,
+					opacity: aboutBGOpacity
+				}}
+			>
+				ABOUT
+			</AboutBackground>
 			<AboutContent>
 				<AboutInfo>
 					<TextContainer>
@@ -39,8 +71,14 @@ export default function About() {
 							</p>
 						))}
 					</TextContainer>
-					<ImageContainer>
-						<Image src={mugshot} alt="" />
+					<ImageContainer
+						style={{ 
+							display: imgDisplay,
+							opacity: imgOpacity
+						}}
+					>
+						<div></div>
+						<Image src={mugshot} alt="Ben Hensor" />
 					</ImageContainer>
 				</AboutInfo>
 			</AboutContent>
@@ -52,14 +90,31 @@ const AboutSection = styled(motion.section)`
 	position: fixed;
 	width: 100%;
 	height: 100vh;
-	scroll-snap-align: start;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
+	outline: 1px solid red;
 `
 
-const AboutContent = styled.div`
+const AboutBackground = styled(motion.div)`
+	position: fixed;
+	left: 20%;
+	font-size: 10em;
+	font-weight: 900;
+	color: var(--text-color-dk);
+	z-index: -1;
+	@media screen and (max-width: 768px) {
+		font-size: 8em;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	@media screen and (max-width: 546px) {
+		font-size: 6em;
+	}
+`
+
+
+const AboutContent = styled(motion.div)`
 	max-width: 1000px;
 	width: 100%;
 	height: 100%;
@@ -68,6 +123,7 @@ const AboutContent = styled.div`
 	justify-content: center;
 	position: relative;
 	padding-top: 9.6rem;
+	mix-blend-mode: add;
 `
 
 const AboutInfo = styled.div`
@@ -117,17 +173,23 @@ const TextContainer = styled(motion.div)`
 		color: var(--text-color-md);
 	}
 	@media screen and (max-width: 768px) {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
 		align-items: center;
 		text-align: justify;
-		padding: 0 10rem;
+		padding: 0 5rem;
 	}
 	@media screen and (max-width: 546px) {
-		padding: 0 5rem;
+		padding: 0 3rem;
 	}
 `
 
 const ImageContainer = styled(motion.div)`
-	position: relative;
+	position: fixed;
+	top: 20%;
+	right: 15%;
 	z-index: -1;
 	min-width: 35rem;
 	height: 35rem;
@@ -143,12 +205,17 @@ const ImageContainer = styled(motion.div)`
 			border-radius: 40% 60%;
 		}
 	}
-	@media screen and (max-width: 768px) {
 
+	@media screen and (max-width: 768px) {
+		top: 15%;
+		right: 50%;
+		transform: translateX(50%);
 		min-width: 23rem;
 		height: 23rem;
+
 	}
 	@media screen and (max-width: 546px) {
+		top: 10%;
 		min-width: 15rem;
 		height: 15rem;
 		margin-top: 5rem;

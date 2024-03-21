@@ -10,29 +10,30 @@ import HeroArrow from './HeroArrow'
 export default function Hero() {
 	const heroRef = useRef(null)
 	const { scrollYProgress } = useScroll({ domTarget: heroRef })
+	const startEnd = [0, 0.2]
 	const heroHeight = useTransform(
 		scrollYProgress, 
-		[0, 0.2], 
+		startEnd, 
 		['100em', '2em']
 	)
 	const heroBorder = useTransform(
 		scrollYProgress,
-		[0, 0.2],
+		startEnd,
 		['0.2em solid, #00c5c500', '0.2em solid #00c5c5']
 	)
 	const circleBottom = useTransform(
 		scrollYProgress,
-		[0, 0.2],
+		startEnd,
 		['29em', '-48em']
 	)
 	const textPaddingTop = useTransform(
 		scrollYProgress,
-		[0, 0.2],
+		startEnd,
 		['14em', '0em']
 	)
 	const textOpacity = useTransform(
 		scrollYProgress, 
-		[0, 0.2], 
+		startEnd, 
 		[0.75, 0]
 	)
 

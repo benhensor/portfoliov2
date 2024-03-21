@@ -6,34 +6,24 @@ import About from './components/about/About'
 import TechStack from './components/tech/TechStack'
 import Projects from './components/projects/Projects'
 import Contact from './components/contact/Contact'
-// import HeroPage from './pages/HeroPage'
-// import TechStackPage from './pages/TechStackPage'
-// import AboutPage from './pages/AboutPage'
-// import ProjectsPage from './pages/ProjectsPage'
-// import ContactPage from './pages/ContactPage'
 
 export default function App() {
 	return (
 		<AnimatePresence>
-			<Container>
+			<AppContainer>
 				<Header />
-				<Content>
+				<AppContent>
 					<About />
 					<TechStack />
 					<Projects />
 					<Contact />
-					{/* <HeroPage />
-					<TechStackPage />
-					<AboutPage />
-					<ProjectsPage />
-					<ContactPage /> */}
-				</Content>
-			</Container>
+				</AppContent>
+			</AppContainer>
 		</AnimatePresence>
 	)
 }
 
-const Container = styled.main`
+const AppContainer = styled.main`
 	display: flex;
 	flex-direction: column;
 	height: 1000vh;
@@ -41,7 +31,7 @@ const Container = styled.main`
 	overflow-y: scroll;
 `
 
-const Content = styled.div`
+const AppContent = styled.div`
 	position: fixed;
 	top: 0;
 	left: 0;

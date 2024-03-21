@@ -67,10 +67,10 @@ export default function Header() {
 					value // Use the value to switch, not the section element
 				) {
 					case 'about':
-						scrollToValue = (siteHeight * 0.2) - (siteHeight * 0.0195)
+						scrollToValue = (siteHeight * 0.2) - (siteHeight * 0.02)
 						break
 					case 'tech':
-						scrollToValue = (siteHeight * 0.4) - (siteHeight * 0.0395)
+						scrollToValue = (siteHeight * 0.4) - (siteHeight * 0.04)
 						break
 					case 'projects':
 						scrollToValue = (siteHeight * 0.6) - (siteHeight * 0.06)
