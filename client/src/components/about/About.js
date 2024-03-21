@@ -52,15 +52,15 @@ export default function About() {
 				opacity: opacity 
 			}}
 		>
-			<AboutBackground 
-				style={{ 
-					top: aboutBGYPosition,
-					opacity: aboutBGOpacity
-				}}
-			>
-				ABOUT
-			</AboutBackground>
 			<AboutContent>
+				<AboutBackground 
+					style={{ 
+						top: aboutBGYPosition,
+						opacity: aboutBGOpacity
+					}}
+				>
+					ABOUT
+				</AboutBackground>
 				<AboutInfo>
 					<TextContainer>
 						<h2>{aboutInfo.heading}</h2>
@@ -96,9 +96,21 @@ const AboutSection = styled(motion.section)`
 	outline: 1px solid red;
 `
 
+const AboutContent = styled(motion.div)`
+	max-width: 1000px;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	padding-top: 9.6rem;
+	mix-blend-mode: add;
+`
+
 const AboutBackground = styled(motion.div)`
-	position: fixed;
-	left: 20%;
+	position: absolute;
+	left: 10%;
 	font-size: 10em;
 	font-weight: 900;
 	color: var(--text-color-dk);
@@ -111,19 +123,6 @@ const AboutBackground = styled(motion.div)`
 	@media screen and (max-width: 546px) {
 		font-size: 6em;
 	}
-`
-
-
-const AboutContent = styled(motion.div)`
-	max-width: 1000px;
-	width: 100%;
-	height: 100%;
-	margin: 0 auto;
-	display: flex;
-	justify-content: center;
-	position: relative;
-	padding-top: 9.6rem;
-	mix-blend-mode: add;
 `
 
 const AboutInfo = styled.div`
@@ -147,13 +146,15 @@ const AboutInfo = styled.div`
 `
 
 const TextContainer = styled(motion.div)`
-	position: relative;
+	position: absolute;
+	top: 20%;
+	left: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
+	width: 60%;
 	text-align: left;
-	padding: 0 2rem;
 	h2 {
 		font-family: var(--font-poppins);
 		font-size: clamp(2.5rem, 5vw, 3.5rem);
@@ -172,9 +173,11 @@ const TextContainer = styled(motion.div)`
 		margin-bottom: 1.6rem;
 		color: var(--text-color-md);
 	}
+	@media screen and (max-width: 999px) {
+		padding: var(--m-desktop);
+	}
 	@media screen and (max-width: 768px) {
-		position: absolute;
-		top: 100%;
+		top: 50%;
 		left: 50%;
 		transform: translateX(-50%);
 		align-items: center;
@@ -187,9 +190,9 @@ const TextContainer = styled(motion.div)`
 `
 
 const ImageContainer = styled(motion.div)`
-	position: fixed;
+	position: absolute;
 	top: 20%;
-	right: 15%;
+	right: 0;
 	z-index: -1;
 	min-width: 35rem;
 	height: 35rem;
@@ -207,7 +210,7 @@ const ImageContainer = styled(motion.div)`
 	}
 
 	@media screen and (max-width: 768px) {
-		top: 15%;
+		top: 20%;
 		right: 50%;
 		transform: translateX(50%);
 		min-width: 23rem;
