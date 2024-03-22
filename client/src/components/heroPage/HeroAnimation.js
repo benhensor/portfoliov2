@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
 import CircleVec1 from '../../assets/img/circleVec1.svg'
 import CircleVec2 from '../../assets/img/circleVec2.svg'
 import CircleVec3 from '../../assets/img/circleVec3.svg'
 import CircleVec4 from '../../assets/img/circleVec4.svg'
 
-export default function HeroAnimation({ circleBottom }) {
+export default function HeroAnimation() {
   return (
     <HeroAnimationContainer>
         {[CircleVec1, CircleVec2, CircleVec3, CircleVec4].map((src, index) => (
@@ -14,7 +13,6 @@ export default function HeroAnimation({ circleBottom }) {
                 key={index}
                 src={src}
                 $id={`circle${index + 1}`}
-                style={{ bottom: circleBottom }}
             />
         ))}
     </HeroAnimationContainer>
@@ -23,22 +21,22 @@ export default function HeroAnimation({ circleBottom }) {
 
 const HeroAnimationContainer = styled.div`
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 100%;
-	height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 200em;
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    scroll-behavior: none;
+  scroll-behavior: none;
 `
 
-const Circle = styled(motion.img)`
+const Circle = styled.img`
   position: absolute;
-  width: 100em;
-  height: 100em;
+  width: 100%;
+  height: 100%;
   mix-blend-mode: screen;
   opacity: 0.5;
   ${({ $id }) => {

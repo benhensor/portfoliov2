@@ -9,7 +9,6 @@ export const StyledHeader = styled.header`
 	align-items: flex-end;
 	justify-content: center;
 	width: 100vw;
-    height: 100%;
 	height: 4em;
     background-color: var(--background-static);
     user-select: none;
@@ -41,7 +40,7 @@ export const Navbar = styled.nav`
 
 export const Block = styled.div`
     position: absolute;
-    top: -1em;
+    top: -1.4rem;
     left: -2em;
     width: 7em;
     height: 4em;
@@ -65,27 +64,34 @@ export const LogoContainer = styled.div`
     position: relative;
     height: 100%;
     z-index: 100;
-    a { 
+    button { 
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 5rem;
+        height: 5rem;
         img {
-            width: 3em;
-            height: 3em;
+            width: 5rem;
+            height: 5rem;
             border-radius: 50%; 
             background-color: var(--background-static);           
         }
     }
 `
 
-export const HeaderName = styled(motion.h1)`
+export const HeaderName = styled.h1`
     font-size: 1.5em;
     font-weight: 100;
     margin-left: 0.5em;
     z-index: 100;
     color: #FFFFFF;
+    opacity: ${({ $scrolled }) => $scrolled ? 1 : 0.2};
+    transition: all 0.5s ease-in-out;
     @media screen and (max-width: 768px) {
         font-size: 1.2em;
     }

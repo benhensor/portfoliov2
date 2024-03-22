@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react'
-import { useTransform, useScroll } from 'framer-motion'
 import NavLink from './NavLink'
 import {
 	StyledHeader,
@@ -17,90 +16,39 @@ import {
 	MobileMenu,
 	Icons,
 } from '../../styles/HeaderStyles'
-import Hero from '../hero/Hero'
 import NavIcon1 from '../../assets/icons/nav-icon1.svg'
 import NavIcon2 from '../../assets/icons/nav-icon2.svg'
 import NavIcon3 from '../../assets/icons/nav-icon3.svg'
 import Logo from '../../assets/img/logo2023.png'
 
-export default function Header() {
+export default function Header({ scrolled, scrollToRef }) {
 	const headerRef = useRef(null)
-	const { scrollYProgress } = useScroll({ domTarget: headerRef })
 
 	const [activeLink, setActiveLink] = useState('home')
 	const [isOpen, setIsOpen] = useState(false)
-	const [scrolled, setScrolled] = useState(false)
-
-	useEffect(() => {
-		const onScroll = () => {
-			// Total height of the document
-			const docHeight = document.documentElement.scrollHeight
-			// Height of the viewport
-			const viewportHeight = window.innerHeight
-			// Maximum amount that can be scrolled
-			const maxScroll = docHeight - viewportHeight
-			// Current scroll position normalized between 0 and 1
-			const normalizedScroll = window.scrollY / maxScroll
-
-			console.log(normalizedScroll) // Log the normalized scroll position
-			setScrolled(window.scrollY > 50)
-		}
-
-		window.addEventListener('scroll', onScroll)
-
-		return () => window.removeEventListener('scroll', onScroll)
-	}, [])
 
 	const toggleMenu = useCallback(() => {
 		setIsOpen((prevIsOpen) => !prevIsOpen)
 	}, [])
 
-	const onUpdateActiveLink = useCallback(
-		(value) => {
-			if (activeLink !== value) {
-				setActiveLink(value)
-				const siteHeight = document.documentElement.scrollHeight
-				const offset = siteHeight * 0.04
-				let scrollToValue = 0 // Default to top if none of the cases match
+	const onUpdateActiveLink = useCallback((pageRef) => {
+		setActiveLink(pageRef)
+	}, [])
 
-				switch (
-					value // Use the value to switch, not the section element
-				) {
-					case 'about':
-						scrollToValue = (siteHeight * 0.2) - (siteHeight * 0.02)
-						break
-					case 'tech':
-						scrollToValue = (siteHeight * 0.4) - (siteHeight * 0.04)
-						break
-					case 'projects':
-						scrollToValue = (siteHeight * 0.6) - (siteHeight * 0.06)
-						break
-					case 'contact':
-						scrollToValue = (siteHeight * 0.8) - (siteHeight * 0.08)
-						break
-					default:
-						scrollToValue = 0 // Optional, as it's already set above
-						break
-				}
-				window.scrollTo({
-					top: scrollToValue,
-					behavior: 'smooth',
-				})
-				setIsOpen(false)
-			}
-		},
-		[activeLink]
-	)
+	const navigateToSection = (pageRef) => {
+		setActiveLink(pageRef)
+		const ref = scrollToRef[pageRef]
+		if (ref && ref.current) {
+			setTimeout(() => {
+				ref.current.scrollIntoView({ behavior: 'smooth' })
+			}, 100)
+		}
+	}
 
 	const scrollToTop = useCallback(() => {
-		onUpdateActiveLink('home')
-	}, [onUpdateActiveLink])
-
-	const headerNameOpacity = useTransform(
-		scrollYProgress,
-		[0, 0.2],
-		['0.3', '1']
-	)
+		setActiveLink('home')
+		window.scrollTo({ top: 0, behavior: 'smooth' })
+	}, [setActiveLink])
 
 	return (
 		<>
@@ -110,42 +58,38 @@ export default function Header() {
 						<LogoContainer>
 							<Border></Border>
 							<Block></Block>
-							<a href="#home" onClick={scrollToTop}>
+							<button onClick={scrollToTop}>
 								<img src={Logo} alt="Ben Hensor Development" />
-							</a>
-							<HeaderName style={{ opacity: headerNameOpacity }}>
+							</button>
+							<HeaderName $scrolled={scrolled}>
 								benHensor.dev
 							</HeaderName>
 						</LogoContainer>
 						<HeaderMenu>
 							<NavLink
-								to="about"
 								name="About"
-								activeLink={activeLink}
-								onUpdateActiveLink={onUpdateActiveLink}
+								activeLink={activeLink === 'about'}
+								onClick={() => navigateToSection('about')}
 							/>
 							<NavLink
-								to="tech"
 								name="Tech Stack"
-								activeLink={activeLink}
-								onUpdateActiveLink={onUpdateActiveLink}
+								activeLink={activeLink === 'tech'}
+								onClick={() => navigateToSection('tech')}
 							/>
 							<NavLink
-								to="projects"
 								name="Projects"
-								activeLink={activeLink}
-								onUpdateActiveLink={onUpdateActiveLink}
+								activeLink={activeLink === 'projects'}
+								onClick={() => navigateToSection('projects')}
 							/>
 							<NavLink
-								to="contact"
 								name={
 									<StyledSend
 										$activeLink={activeLink === 'contact'}
 										style={{ rotate: '-45deg' }}
 									/>
 								}
-								activeLink={activeLink}
-								onUpdateActiveLink={onUpdateActiveLink}
+								activeLink={activeLink === 'contact'}
+								onClick={() => navigateToSection('contact')}
 							/>
 						</HeaderMenu>
 						<MenuControls
@@ -160,28 +104,24 @@ export default function Header() {
 			</StyledHeader>
 			<MobileMenu $isOpen={isOpen}>
 				<NavLink
-					to="about"
 					name="About"
-					activeLink={activeLink}
-					onUpdateActiveLink={onUpdateActiveLink}
+					activeLink={activeLink === 'about'}
+					onClick={() => navigateToSection('about')}
 				/>
 				<NavLink
-					to="tech"
 					name="Tech Stack"
-					activeLink={activeLink}
-					onUpdateActiveLink={onUpdateActiveLink}
+					activeLink={activeLink === 'tech'}
+					onClick={() => navigateToSection('tech')}
 				/>
 				<NavLink
-					to="projects"
 					name="Projects"
-					activeLink={activeLink}
-					onUpdateActiveLink={onUpdateActiveLink}
+					activeLink={activeLink === 'projects'}
+					onClick={() => navigateToSection('projects')}
 				/>
 				<NavLink
-					to="contact"
 					name={<StyledSend $activeLink={activeLink === 'contact'} />}
-					activeLink={activeLink}
-					onUpdateActiveLink={onUpdateActiveLink}
+					activeLink={activeLink === 'contact'}
+					onClick={() => navigateToSection('contact')}
 				/>
 				<Icons>
 					<a
@@ -207,7 +147,6 @@ export default function Header() {
 					</a>
 				</Icons>
 			</MobileMenu>
-			<Hero />
 		</>
 	)
 }

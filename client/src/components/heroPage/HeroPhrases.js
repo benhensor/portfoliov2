@@ -13,7 +13,8 @@ export default function HeroPhrases() {
 
 	const textRotate = [
 		'Frontend Developer',
-		'Sound Designer',
+		'Web Designer',
+		'Sound Editor',
 		'Cat Fanatic!'
 	]
 

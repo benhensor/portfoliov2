@@ -1,34 +1,34 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function NavLink({ to, name, activeLink, onUpdateActiveLink }) {
+export default function NavLink({ name, activeLink, onClick }) {
     return (
         <Li>
-            <A
-                href={`#${to}`}
-                $activeLink={activeLink === to}
-                onClick={(e) => {
-                    e.preventDefault()
-                    window.history.pushState({}, '', `#${to}`) // Manually update the url
-                    onUpdateActiveLink(to)
-                }}
+            <Button 
+                onClick={onClick}
+                $activeLink={activeLink}
             >
                 {name}
-            </A>
+            </Button>
         </Li>
-    )
+    );
 }
 
 const Li = styled.li`
     list-style: none;
-`
+`;
 
-const A = styled.a`
-    color: ${({ $activeLink }) => ($activeLink ? 'var(--button-hover)' : 'var(--text)')};
+const Button = styled.button`
+    background: none;
+    border: none;
+    color: ${({ $activeLink }) => $activeLink ? 'var(--orange)' : 'var(--white)'};
     font-size: var(--text-l);
-    text-decoration: none;
-    transition: 0.1s ease-in-out;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
     &:hover {
-        color: var(--button-hover);
+        color: var(--orange); 
     }
-`
+    &:focus {
+        outline: none;
+    }
+`;
