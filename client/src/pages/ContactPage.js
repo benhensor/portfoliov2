@@ -1,27 +1,11 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
+import { Page } from '../styles/GlobalStyles'
 
-export default function ContactPage() {
+const Contact = forwardRef((props, ref) => {
   return (
-    <ContactContainer>Contact</ContactContainer>
+    <Page ref={ref}>Contact</Page>
   )
-}
+})
 
-const ContactContainer = styled.section`
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  outline: 2px solid red;
-  width: 100%;
-  max-width: 1000px;
-  height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media screen and (max-width: 999px) {
-		padding: var(--m-desktop);
-	}
-	@media screen and (max-width: 768px) {
-		padding: var(--m-mobile);
-	}
-`
+export default Contact

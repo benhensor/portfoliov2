@@ -40,7 +40,7 @@ export const Navbar = styled.nav`
 
 export const Block = styled.div`
     position: absolute;
-    top: -1em;
+    top: -1.4rem;
     left: -2em;
     width: 7em;
     height: 4em;
@@ -64,15 +64,20 @@ export const LogoContainer = styled.div`
     position: relative;
     height: 100%;
     z-index: 100;
-    a { 
+    button { 
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 5rem;
+        height: 5rem;
         img {
-            width: 3em;
-            height: 3em;
+            width: 5rem;
+            height: 5rem;
             border-radius: 50%; 
             background-color: var(--background-static);           
         }

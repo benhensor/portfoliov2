@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { AnimatePresence } from 'framer-motion'
+import { Page } from './styles/GlobalStyles'
 import Header from './components/header/Header'
 import Hero from './components/heroPage/Hero'
-import HeroPage from './pages/HeroPage'
-import TechStackPage from './pages/TechStackPage'
-import AboutPage from './pages/AboutPage'
-import ProjectsPage from './pages/ProjectsPage'
-import ContactPage from './pages/ContactPage'
+import About from './pages/AboutPage'
+import TechStack from './pages/TechStackPage'
+import Projects from './pages/ProjectsPage'
+import Contact from './pages/ContactPage'
 
 export default function App() {
+	const aboutRef = useRef(null)
+	const techStackRef = useRef(null)
+	const projectsRef = useRef(null)
+	const contactRef = useRef(null)
 
 	const [scrolled, setScrolled] = useState(false)
 
@@ -30,14 +34,24 @@ export default function App() {
 	return (
 		<AnimatePresence>
 			<AppContainer>
-				<Header scrolled={scrolled}/>
+				<Header 
+					scrolled={scrolled}
+					scrollToRef={{ about: aboutRef, tech: techStackRef, projects: projectsRef, contact: contactRef }}
+					/>
 				<Hero scrolled={scrolled} />
 				<AppContent>
-					
-					<AboutPage />
-					<TechStackPage />
-					<ProjectsPage />
-					<ContactPage />
+					<Page>
+						<About ref={aboutRef} scrolled={scrolled}/>
+					</Page>
+					<Page>
+						<TechStack ref={techStackRef} />
+					</Page>
+					<Page>
+						<Projects ref={projectsRef} />
+					</Page>
+					<Page>
+						<Contact ref={contactRef} />
+					</Page>
 				</AppContent>
 			</AppContainer>
 		</AnimatePresence>
@@ -47,8 +61,6 @@ export default function App() {
 const AppContainer = styled.main`
 	display: flex;
 	flex-direction: column;
-	// height: 100vh; // hero scrolling only works with 1000vh. 100vh makes the page scroll snapping work
-	position: relative;
 `
 
 const AppContent = styled.div`
@@ -59,5 +71,5 @@ const AppContent = styled.div`
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	height: 400vh;
+	height: 100vh;
 `

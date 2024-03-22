@@ -30,6 +30,9 @@ export default function Hero({ scrolled }) {
 const HeroSection = styled.div`
 	position: fixed;
 	top: 4em;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	width: 100vw;
 	height: ${({ $scrolled }) => $scrolled ? '2em' : '100%'};
 	border-bottom: ${({ $scrolled }) => $scrolled ? '0.2em solid var(--blue)' : 'none'};
@@ -49,6 +52,7 @@ const HeroContent = styled.div`
 	height: 100%;
 	display: flex;
 	justify-content: center;
+	overflow: hidden;
 	
 `
 

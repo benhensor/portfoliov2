@@ -16,116 +16,40 @@ import {
 	MobileMenu,
 	Icons,
 } from '../../styles/HeaderStyles'
-// import Hero from '../heroPage/Hero'
 import NavIcon1 from '../../assets/icons/nav-icon1.svg'
 import NavIcon2 from '../../assets/icons/nav-icon2.svg'
 import NavIcon3 from '../../assets/icons/nav-icon3.svg'
 import Logo from '../../assets/img/logo2023.png'
 
-export default function Header({ scrolled }) {
+export default function Header({ scrolled, scrollToRef }) {
 	const headerRef = useRef(null)
 
 	const [activeLink, setActiveLink] = useState('home')
 	const [isOpen, setIsOpen] = useState(false)
-	// const [scrolled, setScrolled] = useState(false)
-
-	// const docHeight = document.documentElement.scrollHeight
-
-	// useEffect(() => {
-	// 	const onScroll = () => {
-
-	// 	if (window.scrollY > 50) {
-	// 			setScrolled(true)
-	// 	} else {
-	// 			setScrolled(false)
-	// 	}
-	// 	}
-	// 	window.addEventListener('scroll', onScroll)
-	// 	return () => window.removeEventListener('scroll', onScroll)
-	// }, [])
-
-	// useEffect(() => {
-	// 	const onScroll = () => {
-	// 		// Height of the viewport
-	// 		const viewportHeight = window.innerHeight
-	// 		// Maximum amount that can be scrolled
-	// 		const maxScroll = docHeight - viewportHeight
-	// 		// Current scroll position normalized between 0 and 1
-	// 		const normalizedScroll = window.scrollY / maxScroll
-
-	// 		console.log(normalizedScroll) // Log the normalized scroll position
-	// 		setScrolled(window.scrollY > 50)
-	// 	}
-
-	// 	window.addEventListener('scroll', onScroll)
-
-	// 	return () => window.removeEventListener('scroll', onScroll)
-	// }, [])
 
 	const toggleMenu = useCallback(() => {
 		setIsOpen((prevIsOpen) => !prevIsOpen)
 	}, [])
 
-	const onUpdateActiveLink = useCallback((value) => {
-		if (activeLink === value) {
-				return
-		}
-		setActiveLink(value)
-		const section = document.getElementById(value)
-		const header = document.querySelector('header')
-		if (section && header) {
-				const headerHeight = header.offsetHeight
-				const targetPosition = section.offsetTop - (headerHeight)
-		
-				setTimeout(() => {
-						window.scrollTo({
-						top: targetPosition,
-						behavior: 'smooth',
-						})
-				}, 100)
-		}
-		setIsOpen(false)
-	}, [activeLink])
+	const onUpdateActiveLink = useCallback((pageRef) => {
+		setActiveLink(pageRef)
+	}, [])
 
-	// const onUpdateActiveLink = useCallback(
-	// 	(value) => {
-	// 		if (activeLink !== value) {
-	// 			setActiveLink(value)
-	// 			const offset = docHeight * 0.04
-	// 			let scrollToValue = 0 // Default to top if none of the cases match
 
-	// 			switch (
-	// 				value // Use the value to switch, not the section element
-	// 			) {
-	// 				case 'about':
-	// 					scrollToValue = (docHeight * 0.2) - (docHeight * 0.0195)
-	// 					break
-	// 				case 'tech':
-	// 					scrollToValue = (docHeight * 0.4) - (docHeight * 0.0395)
-	// 					break
-	// 				case 'projects':
-	// 					scrollToValue = (docHeight * 0.6) - (docHeight * 0.06)
-	// 					break
-	// 				case 'contact':
-	// 					scrollToValue = (docHeight * 0.8) - (docHeight * 0.08)
-	// 					break
-	// 				default:
-	// 					scrollToValue = 0 // Optional, as it's already set above
-	// 					break
-	// 			}
-	// 			window.scrollTo({
-	// 				top: scrollToValue,
-	// 				behavior: 'smooth',
-	// 			})
-	// 			setIsOpen(false)
-	// 		}
-	// 	},
-	// 	[]
-	// )
+	const navigateToSection = (pageRef) => {
+		setActiveLink(pageRef)
+		const ref = scrollToRef[pageRef]
+		if (ref && ref.current) {
+			setTimeout(() => {
+				ref.current.scrollIntoView({ behavior: 'smooth' })
+			}, 100)
+		}
+	}
 
 	const scrollToTop = useCallback(() => {
-		onUpdateActiveLink('home')
-	}, [onUpdateActiveLink])
+		setActiveLink('home')
+		window.scrollTo({ top: 0, behavior: 'smooth' })
+	}, [setActiveLink])
 
 	return (
 		<>
@@ -135,42 +59,38 @@ export default function Header({ scrolled }) {
 						<LogoContainer>
 							<Border></Border>
 							<Block></Block>
-							<a href="#home" onClick={scrollToTop}>
+							<button onClick={scrollToTop}>
 								<img src={Logo} alt="Ben Hensor Development" />
-							</a>
+							</button>
 							<HeaderName $scrolled={scrolled}>
 								benHensor.dev
 							</HeaderName>
 						</LogoContainer>
 						<HeaderMenu>
 							<NavLink
-								to="about"
 								name="About"
-								activeLink={activeLink}
-								onUpdateActiveLink={onUpdateActiveLink}
+								activeLink={activeLink === 'about'}
+								onClick={() => navigateToSection('about')}
 							/>
 							<NavLink
-								to="tech"
 								name="Tech Stack"
-								activeLink={activeLink}
-								onUpdateActiveLink={onUpdateActiveLink}
+								activeLink={activeLink === 'tech'}
+								onClick={() => navigateToSection('tech')}
 							/>
 							<NavLink
-								to="projects"
 								name="Projects"
-								activeLink={activeLink}
-								onUpdateActiveLink={onUpdateActiveLink}
+								activeLink={activeLink === 'projects'}
+								onClick={() => navigateToSection('projects')}
 							/>
 							<NavLink
-								to="contact"
 								name={
 									<StyledSend
 										$activeLink={activeLink === 'contact'}
 										style={{ rotate: '-45deg' }}
 									/>
 								}
-								activeLink={activeLink}
-								onUpdateActiveLink={onUpdateActiveLink}
+								activeLink={activeLink === 'contact'}
+								onClick={() => navigateToSection('contact')}
 							/>
 						</HeaderMenu>
 						<MenuControls
@@ -185,28 +105,24 @@ export default function Header({ scrolled }) {
 			</StyledHeader>
 			<MobileMenu $isOpen={isOpen}>
 				<NavLink
-					to="about"
 					name="About"
-					activeLink={activeLink}
-					onUpdateActiveLink={onUpdateActiveLink}
+					activeLink={activeLink === 'about'}
+					onClick={() => navigateToSection('about')}
 				/>
 				<NavLink
-					to="tech"
 					name="Tech Stack"
-					activeLink={activeLink}
-					onUpdateActiveLink={onUpdateActiveLink}
+					activeLink={activeLink === 'tech'}
+					onClick={() => navigateToSection('tech')}
 				/>
 				<NavLink
-					to="projects"
 					name="Projects"
-					activeLink={activeLink}
-					onUpdateActiveLink={onUpdateActiveLink}
+					activeLink={activeLink === 'projects'}
+					onClick={() => navigateToSection('projects')}
 				/>
 				<NavLink
-					to="contact"
 					name={<StyledSend $activeLink={activeLink === 'contact'} />}
-					activeLink={activeLink}
-					onUpdateActiveLink={onUpdateActiveLink}
+					activeLink={activeLink === 'contact'}
+					onClick={() => navigateToSection('contact')}
 				/>
 				<Icons>
 					<a
@@ -232,7 +148,6 @@ export default function Header({ scrolled }) {
 					</a>
 				</Icons>
 			</MobileMenu>
-			{/* <Hero scrolled={scrolled}/> */}
 		</>
 	)
 }
