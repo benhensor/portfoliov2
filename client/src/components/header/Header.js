@@ -31,17 +31,13 @@ export default function Header({ scrolled, scrollToRef }) {
 		setIsOpen((prevIsOpen) => !prevIsOpen)
 	}, [])
 
-	const onUpdateActiveLink = useCallback((pageRef) => {
-		setActiveLink(pageRef)
-	}, [])
-
-
 	const navigateToSection = (pageRef) => {
 		setActiveLink(pageRef)
 		const ref = scrollToRef[pageRef]
 		if (ref && ref.current) {
 			setTimeout(() => {
 				ref.current.scrollIntoView({ behavior: 'smooth' })
+				setIsOpen(false)
 			}, 100)
 		}
 	}
