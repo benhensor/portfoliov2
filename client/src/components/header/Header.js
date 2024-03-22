@@ -35,7 +35,6 @@ export default function Header({ scrolled, scrollToRef }) {
 		setActiveLink(pageRef)
 	}, [])
 
-
 	const navigateToSection = (pageRef) => {
 		setActiveLink(pageRef)
 		const ref = scrollToRef[pageRef]

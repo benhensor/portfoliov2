@@ -9,12 +9,12 @@ export default function Contact() {
 	const contactYPosition = useTransform(
 		scrollYProgress,
 		[0.6, 0.8, 0.9, 1],
-		['200%', '0%', '0%', '-100%']
+		['200%', '0%', '0%', '0%']
 	)
 	const opacity = useTransform(
 		scrollYProgress,
 		[0.7, 0.8, 0.9, 1],
-		['0', '1', '1', '0']
+		['0', '1', '1', '1']
 	)
 
 	return (
@@ -34,11 +34,11 @@ const ContactSection = styled(motion.section)`
 	left: 0;
 	top: 0;
 	width: 100%;
-	height: 100vh;
-	scroll-snap-align: start;
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	outline: 1px solid red;
 `
 
 const ContactContent = styled.div`

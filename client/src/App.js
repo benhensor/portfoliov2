@@ -9,6 +9,7 @@ import TechStack from './pages/TechStackPage'
 import Projects from './pages/ProjectsPage'
 import Contact from './pages/ContactPage'
 
+
 export default function App() {
 	const aboutRef = useRef(null)
 	const techStackRef = useRef(null)
@@ -34,6 +35,7 @@ export default function App() {
 	return (
 		<AnimatePresence>
 			<AppContainer>
+
 				<Header 
 					scrolled={scrolled}
 					scrollToRef={{ about: aboutRef, tech: techStackRef, projects: projectsRef, contact: contactRef }}

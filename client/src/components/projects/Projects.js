@@ -23,7 +23,7 @@ export default function Projects() {
 	)
 	const opacity = useTransform(
 		scrollYProgress,
-		[0.575, 0.6, 0.7, 0.75],
+		[0.55, 0.6, 0.7, 0.75],
 		['0', '1', '1', '0']
 	)
 
@@ -59,10 +59,10 @@ const ProjectsSection = styled(motion.section)`
 	position: fixed;
 	width: 100%;
 	height: 100vh;
-	scroll-snap-align: start;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	outline: 1px solid red;
 	@media screen and (max-width: 999px) {
 		padding: var(--m-desktop);
 	}
