@@ -38,7 +38,7 @@ const About = forwardRef((props, ref) => {
 			},
 		},
 	}
-
+ 
 	const primaryVariants = {
 		hidden: { opacity: 0 },
 		visible: {
