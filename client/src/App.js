@@ -21,7 +21,6 @@ export default function App() {
 		const onScroll = () => {
 
 		if (window.scrollY > 50) {
-			console.log('scrolled', scrolled)
 				setScrolled(true)
 		} else {
 				setScrolled(false)
