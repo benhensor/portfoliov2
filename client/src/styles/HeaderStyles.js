@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { ReactComponent as Send } from '../assets/icons/send.svg'
 
