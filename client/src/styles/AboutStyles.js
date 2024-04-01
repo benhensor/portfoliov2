@@ -84,3 +84,24 @@ export const Image = styled.img`
 		width: 10rem;
 	}
 `
+
+export const CVButton = styled(motion.button)`
+	margin-top: 2rem;
+	padding: 1rem 2rem;
+	font-size: 1.6rem;
+	font-weight: 700;
+	background: var(--orange);
+	color: var(--text-color-dk);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.1s ease;
+	&:hover {
+		background: var(--ltOrange);
+		color: var(--text-color-dk);
+	}
+	@media screen and (max-width: 768px) {
+		bottom: 1rem;
+		right: 1rem;
+	}
+`

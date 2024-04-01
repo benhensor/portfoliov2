@@ -4,12 +4,14 @@ import { motion, useInView, useAnimation } from 'framer-motion'
 import { Page } from '../styles/GlobalStyles'
 import { aboutInfo } from '../data'
 import profile from '../assets/img/profile.png'
+import CV from '../assets/docs/BenHensor_CV_Mar_2024.pdf'
 import { 
 	AboutContent,
 	BGWord,
 	TextContainer,
 	ImageContainer,
 	Image,
+	CVButton,
  } from '../styles/AboutStyles'
 
 const About = forwardRef((props, ref) => {
@@ -28,6 +30,13 @@ const About = forwardRef((props, ref) => {
 	useEffect(() => {
 		controls.start(isVisible ? 'visible' : 'hidden')
 	}, [isVisible, controls])
+
+	const downloadPDF = () => {
+		const link = document.createElement('a')
+		link.href = CV
+		link.download = 'BenHensorCV.pdf'
+		link.click()
+	}
 
 	const contentVariants = {
 		hidden: { opacity: 0 },
@@ -127,7 +136,14 @@ const About = forwardRef((props, ref) => {
 								{sentence.text}
 							</motion.p>
 						))}
+						<CVButton
+							onClick={downloadPDF}
+							variants={itemVariants}
+						>
+							CV
+						</CVButton>
 					</motion.div>
+					
 				</TextContainer>
 				<ImageContainer variants={primaryVariants}>
 					<Image src={profile} alt="" />
