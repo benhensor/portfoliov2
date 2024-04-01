@@ -8,6 +8,7 @@ import About from './pages/AboutPage'
 import TechStack from './pages/TechStackPage'
 import Projects from './pages/ProjectsPage'
 import Contact from './pages/ContactPage'
+import Cat from './components/cat/Cat'
 
 
 export default function App() {
@@ -17,6 +18,10 @@ export default function App() {
 	const contactRef = useRef(null)
 
 	const [scrolled, setScrolled] = useState(false)
+
+	useEffect(() => {
+		window.scrollTo({ top: 0, behavior: 'smooth' })
+	}, [])
 
 	useEffect(() => {
 		const onScroll = () => {
@@ -52,6 +57,9 @@ export default function App() {
 					</Page>
 					<Page>
 						<Contact ref={contactRef} />
+					</Page>
+					<Page>
+						<Cat />
 					</Page>
 				</AppContent>
 			</AppContainer>
