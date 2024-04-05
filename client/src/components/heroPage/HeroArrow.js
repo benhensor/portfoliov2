@@ -15,6 +15,8 @@ export default function HeroArrow() {
 }
 
 const Container = styled.div`
+	position: absolute;
+	top: 5em;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

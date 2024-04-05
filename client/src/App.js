@@ -18,6 +18,7 @@ export default function App() {
 	const contactRef = useRef(null)
 
 	const [scrolled, setScrolled] = useState(false)
+	const [activeLink, setActiveLink] = useState('home')
 
 	useEffect(() => {
 		window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -43,20 +44,22 @@ export default function App() {
 				<Header 
 					scrolled={scrolled}
 					scrollToRef={{ about: aboutRef, tech: techStackRef, projects: projectsRef, contact: contactRef }}
+					activeLink={activeLink}
+					setActiveLink={setActiveLink}
 					/>
 				<Hero scrolled={scrolled} />
 				<AppContent>
 					<Page>
-						<About ref={aboutRef} scrolled={scrolled}/>
+						<About ref={aboutRef} scrolled={scrolled} setActiveLink={setActiveLink}/>
 					</Page>
 					<Page>
-						<TechStack ref={techStackRef} />
+						<TechStack ref={techStackRef} setActiveLink={setActiveLink} />
 					</Page>
 					<Page>
-						<Projects ref={projectsRef} />
+						<Projects ref={projectsRef} setActiveLink={setActiveLink} />
 					</Page>
 					<Page>
-						<Contact ref={contactRef} />
+						<Contact ref={contactRef} setActiveLink={setActiveLink} />
 					</Page>
 					<Page>
 						<Cat />

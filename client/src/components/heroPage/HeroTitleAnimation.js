@@ -6,13 +6,13 @@ const containerVariants = {
 	animate: {
 		transition: {
 			delayChildren: 0.4,
-			staggerChildren: 0.1,
+			staggerChildren: 0.05,
 		},
 	},
 };
   
   const letterVariants = {
-	initial: { y: -200, opacity: 0 },
+	initial: { y: 200, opacity: 0 },
 	animate: {
 		y: 0,
 		opacity: 1,

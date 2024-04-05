@@ -1,10 +1,15 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { motion, useInView } from 'framer-motion'
 import { Page } from '../styles/GlobalStyles'
 import MailIcon from '../assets/icons/mailPlane.svg'
 import { FcCheckmark } from "react-icons/fc";
 
 const Contact = forwardRef((props, ref) => {
+
+  const { setActiveLink } = props
+  const contactRef = useRef(null)
+  const isInView = useInView(contactRef, { amount: 0.5 })
 
   const [formDetails, setFormDetails] = useState({
     name: '',
@@ -15,6 +20,12 @@ const Contact = forwardRef((props, ref) => {
   const [buttonText, setButtonText] = useState('SEND')
   const [formErrors, setFormErrors] = useState({})
   const [status, setStatus] = useState({})
+
+  useEffect(() => {
+    if (isInView) {
+      setActiveLink('contact')
+    }
+  }, [isInView, setActiveLink])
 
   const updateForm = (e) => {
     const { name, value } = e.target
@@ -84,9 +95,9 @@ const Contact = forwardRef((props, ref) => {
 
 
   return (
-    <Page ref={ref}>
+    <Page ref={ref} id="contact">
       <ContactSection>
-        <ContactContent>
+        <ContactContent ref={contactRef}>
           <ContactHeader><span><ContactIcon src={MailIcon} alt='Mail Icon' /></span>Contact Me</ContactHeader>
           
           <ContactForm onSubmit={submitEmail}>
@@ -139,7 +150,7 @@ const Contact = forwardRef((props, ref) => {
               />
               {formErrors.phone ? null : formDetails.phone.match(/^\d{9,16}$/g) && <ValidIcon><FcCheckmark /></ValidIcon>}
             </InputWrapper>
-            <ContactButton type='submit'>{buttonText}</ContactButton>
+            <ContactButton type='submit' aria-label="Send">{buttonText}</ContactButton>
           </ContactForm>
           {status.message && <ContactStatus>{status.message}</ContactStatus>}
         </ContactContent>
@@ -281,7 +292,8 @@ const ContactButton = styled.button`
   font-size: 1em;
   border-radius: 0.5rem;
   background: var(--orange);
-  color: var(--text-color-lt);
+  color: var(--text-color-dk);
+  font-weight: 700;
   border: none;
   cursor: pointer;
   transition: all 0.3s;

@@ -16,15 +16,14 @@ import {
 	MobileMenu,
 	Icons,
 } from '../../styles/HeaderStyles'
-import NavIcon1 from '../../assets/icons/nav-icon1.svg'
-import NavIcon2 from '../../assets/icons/nav-icon2.svg'
-import NavIcon3 from '../../assets/icons/nav-icon3.svg'
-import Logo from '../../assets/img/logo2023.png'
+import NavIcon1 from '../../icons/NavIcon1'
+import NavIcon2 from '../../icons/NavIcon2'
+import NavIcon3 from '../../icons/NavIcon3'
+import Logo from '../../assets/img/logo2023.webp'
 
-export default function Header({ scrolled, scrollToRef }) {
+export default function Header({ scrolled, scrollToRef, activeLink, setActiveLink }) {
+	
 	const headerRef = useRef(null)
-
-	const [activeLink, setActiveLink] = useState('home')
 	const [isOpen, setIsOpen] = useState(false)
 
 	const toggleMenu = useCallback(() => {
@@ -55,7 +54,7 @@ export default function Header({ scrolled, scrollToRef }) {
 						<LogoContainer>
 							<Border></Border>
 							<Block></Block>
-							<button onClick={scrollToTop}>
+							<button type="button" aria-label="Logo, scroll to top" onClick={scrollToTop}>
 								<img src={Logo} alt="Ben Hensor Development" />
 							</button>
 							<HeaderName $scrolled={scrolled}>
@@ -90,6 +89,7 @@ export default function Header({ scrolled, scrollToRef }) {
 							/>
 						</HeaderMenu>
 						<MenuControls
+							type="button"
 							aria-label="Toggle navigation"
 							aria-expanded={isOpen}
 							onClick={() => toggleMenu(!isOpen)}
@@ -122,25 +122,28 @@ export default function Header({ scrolled, scrollToRef }) {
 				/>
 				<Icons>
 					<a
+						aria-label="Visit my Github profile"
 						href="https://github.com/benhensor"
 						rel="noreferrer"
 						target="_blank"
 					>
-						<img src={NavIcon1} alt="Github" />
+						<NavIcon1 />
 					</a>
 					<a
+						aria-label="Visit my LinkedIn profile"
 						href="https://www.linkedin.com/in/benhensor/"
 						rel="noreferrer"
 						target="_blank"
 					>
-						<img src={NavIcon2} alt="LinkedIn" />
+						<NavIcon2 />
 					</a>
 					<a
+						aria-label="Visit my IMDb profile"
 						href="https://www.imdb.com/name/nm5978088/?ref_=rvi_nm"
 						rel="noreferrer"
 						target="_blank"
 					>
-						<img src={NavIcon3} alt="IMDb" />
+						<NavIcon3 />
 					</a>
 				</Icons>
 			</MobileMenu>

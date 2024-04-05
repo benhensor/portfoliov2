@@ -1,35 +1,45 @@
 import React, { forwardRef, useRef, useEffect } from 'react'
-import useMousePosition from '../hooks/useMousePosition'
 import { motion, useInView, useAnimation } from 'framer-motion'
 import { Page } from '../styles/GlobalStyles'
 import { aboutInfo } from '../data'
-import profile from '../assets/img/profile.png'
+import profile from '../assets/img/profile.webp'
 import CV from '../assets/docs/BenHensor_CV_Mar_2024.pdf'
+import BackgroundWord from '../components/text/BackgroundWord'
 import { 
 	AboutContent,
-	BGWord,
+	BGWordStyles,
 	TextContainer,
 	ImageContainer,
 	Image,
+	ContactButton,
 	CVButton,
  } from '../styles/AboutStyles'
 
 const About = forwardRef((props, ref) => {
-	const { scrolled } = props
+	const { scrolled, setActiveLink } = props
 	const contentRef = useRef(null)
 	const isInView = useInView(contentRef, { amount: 0.5 })
 	const controls = useAnimation()
 	const isVisible = isInView && scrolled
-	const mousePosition = useMousePosition()
 
 	const { heading, subHeading, sentences } = aboutInfo
 
-	const yPercent = (mousePosition.y / window.innerHeight) * 100 - 50
-	const transformElement1 = `translateY(${yPercent / 0}px)`
+	useEffect(() => {
+		if (isVisible) {
+			setActiveLink('about')
+		} else if (!isVisible) {
+			setActiveLink('')
+		}
+	}, [scrolled, isVisible, setActiveLink])
 
 	useEffect(() => {
 		controls.start(isVisible ? 'visible' : 'hidden')
-	}, [isVisible, controls])
+	}, [isVisible, controls ])
+
+	const scrollToContact = () => {
+		document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })
+		setActiveLink('contact')
+	}
 
 	const downloadPDF = () => {
 		const link = document.createElement('a')
@@ -118,14 +128,23 @@ const About = forwardRef((props, ref) => {
 				animate={controls}
 				variants={contentVariants}
 			>
-				<BGWord style={{ transform: transformElement1 }}>ABOUT</BGWord>
+			
+				<BackgroundWord
+					text="ABOUT"
+					el="span"
+					style={ BGWordStyles }
+				/>
+
 				<TextContainer>
+
 					<motion.h1 variants={primaryVariants} style={text.heading}>
 						{heading}
 					</motion.h1>
+
 					<motion.h2 variants={secondaryVariants} style={text.subHeading}>
 						{subHeading}
 					</motion.h2>
+
 					<motion.div variants={sentenceVariants}>
 						{sentences.map((sentence) => (
 							<motion.p
@@ -136,18 +155,33 @@ const About = forwardRef((props, ref) => {
 								{sentence.text}
 							</motion.p>
 						))}
+
+						<ContactButton
+							type="button"
+							aria-label='Contact me'
+							onClick={scrollToContact}
+							variants={itemVariants}
+						>
+							CONTACT ME
+						</ContactButton>
+
 						<CVButton
+							type="button"
+							aria-label='Download CV as PDF'
 							onClick={downloadPDF}
 							variants={itemVariants}
 						>
 							CV
 						</CVButton>
+
 					</motion.div>
 					
 				</TextContainer>
+
 				<ImageContainer variants={primaryVariants}>
 					<Image src={profile} alt="" />
 				</ImageContainer>
+
 			</AboutContent>
 		</Page>
 	)

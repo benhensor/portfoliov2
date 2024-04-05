@@ -1,11 +1,136 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { motion , useInView, useAnimation } from 'framer-motion'
 import { Page } from '../styles/GlobalStyles'
+import TechCategory from '../components/tech/TechCategory'
+import {
+	backend,
+	design,
+	devops,
+	frontend,
+	languages,
+	testing,
+	tools,
+} from '../data'
 
 const TechStack = forwardRef((props, ref) => {
+
+  const { scrolled, setActiveLink } = props
+  const techRef = useRef(null)
+  const isInView = useInView(techRef, { amount: 0.5 })
+	const controls = useAnimation()
+
+  const [hoveredCategory, setHoveredCategory] = useState(null)
+
+  useEffect(() => {
+    if (isInView) {
+      setActiveLink('tech')
+    }
+  }, [isInView, setActiveLink])
+  
+  useEffect(() => {
+		controls.start(isInView ? 'visible' : 'hidden')
+	}, [isInView, controls])
+
+  const sections = [
+    { title: 'Languages', skillSet: languages },
+    { title: 'Frontend', skillSet: frontend },
+    { title: 'Backend', skillSet: backend },
+    { title: 'Testing', skillSet: testing },
+    { title: 'DevOps', skillSet: devops },
+    { title: 'Design', skillSet: design },
+    { title: 'Tools', skillSet: tools },
+  ]
+
+  const contentVariants = {
+		hidden: { opacity: 0 },
+		visible: {
+			opacity: 1,
+			transition: {
+				staggerChildren: 3,
+			},
+		},
+	}
+
+  const itemVariants = {
+		hidden: { opacity: 0, y: 50 },
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: {
+				duration: 0.5,
+			},
+		},
+	}
+
   return (
-    <Page ref={ref}>Tech Stack</Page>
+    <Page ref={ref}>
+      <Content
+        ref={techRef}
+        initial="hidden"
+        animate={controls}
+        variants={contentVariants}
+      >
+        <BGWord
+          style={{ opacity: isInView ? 1 : 0, transition: 'all 0.5s ease-in-out' }}
+        >
+          TECH STACK
+        </BGWord>
+        <TechCategoriesContainer>
+          {sections.map((section, index) => (
+            <TechCategory
+              key={index}
+              title={section.title}
+              skillSet={section.skillSet}
+              isHovered={hoveredCategory === section.title}
+              onHover={() => setHoveredCategory(section.title)}
+              onHoverLeave={() => setHoveredCategory(null)}
+              initial="hidden"
+              animate="visible"
+              variants={itemVariants}
+            />
+          ))}
+        </TechCategoriesContainer>
+      </Content>
+    </Page>
   )
 })
 
 export default TechStack
+
+const Content = styled(motion.div)`
+  display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+  width: 100%;
+	@media screen and (max-width: 768px) {
+		flex-direction: column;
+	}
+`
+
+const BGWord = styled(motion.span)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  font-size: clamp(4rem, 14vw, 15rem);
+  font-weight: 700;
+  color: var(--text-color-dk);
+  z-index: -1;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+  }
+`
+
+const TechCategoriesContainer = styled(motion.div)`
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+`

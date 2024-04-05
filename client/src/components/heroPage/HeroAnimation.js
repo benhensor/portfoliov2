@@ -1,19 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-import CircleVec1 from '../../assets/img/circleVec1.svg'
-import CircleVec2 from '../../assets/img/circleVec2.svg'
-import CircleVec3 from '../../assets/img/circleVec3.svg'
-import CircleVec4 from '../../assets/img/circleVec4.svg'
+import CircleOne from '../../icons/CircleOne'
+import CircleTwo from '../../icons/CircleTwo'
+import CircleThree from '../../icons/CircleThree'
+import CircleFour from '../../icons/CircleFour'
 
 export default function HeroAnimation() {
+  const circles = [<CircleOne/>, <CircleTwo/>, <CircleThree/>, <CircleFour/>]
   return (
     <HeroAnimationContainer>
-        {[CircleVec1, CircleVec2, CircleVec3, CircleVec4].map((src, index) => (
+        {circles.map((circle, index) => (
             <Circle
                 key={index}
-                src={src}
                 $id={`circle${index + 1}`}
-            />
+            >{circle}</Circle>
         ))}
     </HeroAnimationContainer>
   )
@@ -33,10 +33,13 @@ const HeroAnimationContainer = styled.div`
   scroll-behavior: none;
 `
 
-const Circle = styled.img`
+const Circle = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   mix-blend-mode: screen;
   opacity: 0.5;
   ${({ $id }) => {
