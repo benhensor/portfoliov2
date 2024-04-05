@@ -1,51 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { motion, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 export default function TechCategory({
 	title,
 	skillSet,
-	scrollYProgress,
 	isHovered,
 	onHover,
 	onHoverLeave,
 }) {
-	const opacity = useTransform(
-		scrollYProgress,
-		[0.4, 0.45, 0.5, 0.65],
-		[0, 1, 1, 0]
-	)
-	const categoryFilter = useTransform(
-		scrollYProgress,
-		[0.4, 0.45, 0.5, 0.65],
-		['blur(10px', 'blur(0px)', 'blur(0px)', 'blur(40px)']
-	)
-	const letterSpacing = useTransform(
-		scrollYProgress,
-		[0.4, 0.45, 0.5, 0.7],
-		['0rem', '1rem', '2rem', '15rem']
-	)
-	const marginLeft = useTransform(
-		scrollYProgress,
-		[0.4, 0.45, 0.5, 0.7],
-		['0rem', '1rem', '2rem', '10rem']
-	)
 
 	const [showTechCards, setShowTechCards] = useState(false)
 
 	useEffect(() => {
-		const checkOpacity = () => {
-			// Assuming the opacity is 0 between 0.275 and 0.3 of scroll progress
-			const currentProgress = scrollYProgress.get()
-			const shouldShowTechCards =
-				currentProgress >= 0.45 && currentProgress <= 0.5
-			setShowTechCards(shouldShowTechCards)
+		if (isHovered) {
+			setShowTechCards(true)
 		}
-
-		const unsubscribe = scrollYProgress.on('change', checkOpacity)
-
-		return () => unsubscribe()
-	}, [scrollYProgress])
+	}, [isHovered])
 
 	return (
 		<TechSection
@@ -53,14 +24,9 @@ export default function TechCategory({
 			onMouseEnter={onHover}
 			onMouseLeave={onHoverLeave}
 			$ishovered={isHovered}
-			style={{ 
-				opacity: opacity,
-				filter: categoryFilter,
-			}}
 		>
 			<motion.h2
 				layout="position"
-				style={{ letterSpacing: letterSpacing, marginLeft: marginLeft }}
 			>
 				{title}
 			</motion.h2>
@@ -117,6 +83,7 @@ const TechSection = styled(motion.section)`
 		color: ${(props) =>
 			props.$ishovered ? 'var(--blue)' : 'var(--text-color)'};
 		text-align: center;
+		letter-spacing: 0.5em;
 		transition: color 0.3s ease;
 		font-size: 2rem;
 		@media screen and (max-width: 768px) {

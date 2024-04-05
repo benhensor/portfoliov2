@@ -27,9 +27,29 @@ export const BGWord = styled.span`
 	}
 `
 
+export const BGWordStyles = {
+	position: 'absolute',
+	top: '5rem',
+	left: '5rem',
+	fontSize: 'clamp(4rem, 20vw, 15rem)',
+	fontWeight: '700',
+	color: 'var(--text-color-dk)',
+	zIndex: '-1',
+	'@media screen and (max-width: 768px)': {
+		width: '100%',
+		top: '60%',
+		left: '0',
+		textAlign: 'center',
+	},
+}
+
+
 export const TextContainer = styled(motion.div)`
 	position: relative;
 	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
 	@media screen and (max-width: 768px) {
 		text-align: center;
 		padding: 0 5rem;
@@ -82,6 +102,27 @@ export const Image = styled.img`
 		top: -2rem;
 		left: 2rem;
 		width: 10rem;
+	}
+`
+
+export const ContactButton = styled(motion.button)`
+	margin: 2rem 2rem 0 0;
+	padding: 1rem 2rem;
+	font-size: 1.6rem;
+	font-weight: 700;
+	background: var(--orange);
+	color: var(--text-color-dk);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.1s ease;
+	&:hover {
+		background: var(--ltOrange);
+		color: var(--text-color-dk);
+	}
+	@media screen and (max-width: 768px) {
+		bottom: 1rem;
+		right: 1rem;
 	}
 `
 

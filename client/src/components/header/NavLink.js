@@ -5,6 +5,8 @@ export default function NavLink({ name, activeLink, onClick }) {
     return (
         <Li>
             <Button 
+                type="button"
+                aria-label={`Scroll to ${name} section`}
                 onClick={onClick}
                 $activeLink={activeLink}
             >

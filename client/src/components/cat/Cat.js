@@ -3,9 +3,9 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Page } from '../../styles/GlobalStyles'
 import styled from 'styled-components'
-import catFace from '../../assets/img/catFaceBanner.png'
-import leftEye from '../../assets/img/leftEye.png'
-import rightEye from '../../assets/img/rightEye.png'
+import catFace from '../../assets/img/catFaceBanner.webp'
+import leftEye from '../../assets/img/leftEye.webp'
+import rightEye from '../../assets/img/rightEye.webp'
 import Footer from '../footer/Footer'
 
 const CatSection = styled(motion.section)`
@@ -156,10 +156,10 @@ export default function Cat() {
         <CatContent>
           <CatHead>
             <div>
-              <CatFace src={catFace} />
+              <CatFace src={catFace} alt="Cat's face"/>
               <CatEyes>
-                <CatEye className="cat-leftEye" src={leftEye} />
-                <CatEye className="cat-rightEye" src={rightEye} />
+                <CatEye className="cat-leftEye" src={leftEye} alt="Cat's left eye"/>
+                <CatEye className="cat-rightEye" src={rightEye} alt="Cat's right eye"/>
               </CatEyes>
             </div>
           </CatHead>

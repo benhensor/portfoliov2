@@ -63,7 +63,8 @@ const HeroTitleContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	gap: 1em;
 	mix-blend-mode: screen;
-	opacity: ${({ $scrolled }) => $scrolled ? 0 : 1};
+	opacity: ${({ $scrolled }) => $scrolled ? 0 : 0.75};
 	transition: all 0.1s ease-in-out;
 `
