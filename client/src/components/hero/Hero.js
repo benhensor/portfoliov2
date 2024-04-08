@@ -58,7 +58,7 @@ const HeroContent = styled.div`
 
 const HeroTitleContainer = styled.div`
 	position: absolute;
-	top: 50%;
+	top: 30%;
 	transform: translateY(-50%);
 	display: flex;
 	flex-direction: column;

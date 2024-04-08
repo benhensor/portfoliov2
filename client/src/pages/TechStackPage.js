@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { motion , useInView, useAnimation } from 'framer-motion'
 import { Page } from '../styles/GlobalStyles'
 import TechCategory from '../components/tech/TechCategory'
+import AnimatedText from '../components/about/AnimatedText'
 import {
 	backend,
 	design,
@@ -15,7 +16,7 @@ import {
 
 const TechStack = forwardRef((props, ref) => {
 
-  const { scrolled, setActiveLink } = props
+  const { setActiveLink } = props
   const techRef = useRef(null)
   const isInView = useInView(techRef, { amount: 0.5 })
 	const controls = useAnimation()
@@ -24,13 +25,13 @@ const TechStack = forwardRef((props, ref) => {
 
   useEffect(() => {
     if (isInView) {
+      controls.start('visible')
       setActiveLink('tech')
+    } else {
+      controls.start('hidden')
+      setActiveLink('')
     }
-  }, [isInView, setActiveLink])
-  
-  useEffect(() => {
-		controls.start(isInView ? 'visible' : 'hidden')
-	}, [isInView, controls])
+  }, [isInView, setActiveLink, controls])
 
   const sections = [
     { title: 'Languages', skillSet: languages },
@@ -42,15 +43,27 @@ const TechStack = forwardRef((props, ref) => {
     { title: 'Tools', skillSet: tools },
   ]
 
-  const contentVariants = {
+  const pageVariants = {
 		hidden: { opacity: 0 },
 		visible: {
 			opacity: 1,
 			transition: {
-				staggerChildren: 3,
+        duration: 0.75,
 			},
 		},
 	}
+
+  const contentVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 0.5,
+        duration: 0.75,
+        staggerChildren: 3,
+      },
+    },
+  }
 
   const itemVariants = {
 		hidden: { opacity: 0, y: 50 },
@@ -58,6 +71,7 @@ const TechStack = forwardRef((props, ref) => {
 			opacity: 1,
 			y: 0,
 			transition: {
+        delay: 1,
 				duration: 0.5,
 			},
 		},
@@ -69,14 +83,14 @@ const TechStack = forwardRef((props, ref) => {
         ref={techRef}
         initial="hidden"
         animate={controls}
-        variants={contentVariants}
+        variants={pageVariants}
       >
         <BGWord
-          style={{ opacity: isInView ? 1 : 0, transition: 'all 0.5s ease-in-out' }}
+          style={{ top: '50%', left: '50%' }}
         >
           TECH STACK
         </BGWord>
-        <TechCategoriesContainer>
+        <TechCategoriesContainer variants={contentVariants}>
           {sections.map((section, index) => (
             <TechCategory
               key={index}
@@ -99,6 +113,8 @@ const TechStack = forwardRef((props, ref) => {
 export default TechStack
 
 const Content = styled(motion.div)`
+  width: 100%;
+  max-width: 1200px;
   display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -109,28 +125,27 @@ const Content = styled(motion.div)`
 	}
 `
 
-const BGWord = styled(motion.span)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  text-align: center;
-  font-size: clamp(4rem, 14vw, 15rem);
-  font-weight: 700;
-  color: var(--text-color-dk);
-  z-index: -1;
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    text-align: center;
-  }
-`
-
 const TechCategoriesContainer = styled(motion.div)`
-	position: absolute;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
+`
+
+const BGWord = styled.span`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+	font-size: clamp(4rem, 20vw, 15rem);
+	font-weight: 700;
+	color: var(--text-color-dk);
+	z-index: -1;
+	@media screen and (max-width: 768px) {
+		width: 100%;
+		text-align: center;
+	}
 `

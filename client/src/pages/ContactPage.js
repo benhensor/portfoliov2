@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { motion, useInView } from 'framer-motion'
+import { useInView } from 'framer-motion'
 import { Page } from '../styles/GlobalStyles'
 import MailIcon from '../assets/icons/mailPlane.svg'
 import { FcCheckmark } from "react-icons/fc";
@@ -24,6 +24,13 @@ const Contact = forwardRef((props, ref) => {
   useEffect(() => {
     if (isInView) {
       setActiveLink('contact')
+    } else {
+      setFormDetails({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+      })
     }
   }, [isInView, setActiveLink])
 
@@ -92,7 +99,6 @@ const Contact = forwardRef((props, ref) => {
 
     return errors;
   };
-
 
   return (
     <Page ref={ref} id="contact">
@@ -179,6 +185,7 @@ const ContactContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 `
 
 const ContactHeader = styled.h1`
