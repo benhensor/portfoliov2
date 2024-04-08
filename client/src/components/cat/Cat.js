@@ -19,7 +19,7 @@ const CatContent = styled.div`
 	height: 100%;
 	margin: 0 auto;
 	display: flex;
-  flex-direction: column;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 `
@@ -117,11 +117,11 @@ export default function Cat() {
 		const leftEyeCenterX =
 			leftEyeBoundingBox.left + leftEyeBoundingBox.width / 2
 		const leftEyeCenterY =
-			leftEyeBoundingBox.top + leftEyeBoundingBox.height * 1.5
+			leftEyeBoundingBox.top + leftEyeBoundingBox.height * 2
 		const rightEyeCenterX =
 			rightEyeBoundingBox.left + rightEyeBoundingBox.width / 2
 		const rightEyeCenterY =
-			rightEyeBoundingBox.top + rightEyeBoundingBox.height * 1.5
+			rightEyeBoundingBox.top + rightEyeBoundingBox.height * 2
 
 		// Calculate the distance between the mouse and the eye centers
 		const leftEyeDeltaX = mouseX - leftEyeCenterX - 1000
@@ -152,20 +152,28 @@ export default function Cat() {
 
 	return (
 		<Page>
-      <CatSection ref={catRef} style={{ bottom: catYPosition }}>
-        <CatContent>
-          <CatHead>
-            <div>
-              <CatFace src={catFace} alt="Cat's face"/>
-              <CatEyes>
-                <CatEye className="cat-leftEye" src={leftEye} alt="Cat's left eye"/>
-                <CatEye className="cat-rightEye" src={rightEye} alt="Cat's right eye"/>
-              </CatEyes>
-            </div>
-          </CatHead>
-        </CatContent>
-        <Footer />
-      </CatSection>
-    </Page>
+			<CatSection ref={catRef} style={{ bottom: catYPosition }}>
+				<CatContent>
+					<CatHead>
+						<div>
+							<CatFace src={catFace} alt="Cat's face" />
+							<CatEyes>
+								<CatEye
+									className="cat-leftEye"
+									src={leftEye}
+									alt="Cat's left eye"
+								/>
+								<CatEye
+									className="cat-rightEye"
+									src={rightEye}
+									alt="Cat's right eye"
+								/>
+							</CatEyes>
+						</div>
+					</CatHead>
+				</CatContent>
+				<Footer />
+			</CatSection>
+		</Page>
 	)
 }

@@ -4,21 +4,18 @@ import { Page } from '../styles/GlobalStyles'
 import { aboutInfo } from '../data'
 import profile from '../assets/img/profile.webp'
 import CV from '../assets/docs/BenHensor_CV_Mar_2024.pdf'
-import BackgroundWord from '../components/text/BackgroundWord'
 import { 
 	AboutContent,
-	BGWordStyles,
 	TextContainer,
 	ImageContainer,
 	Image,
-	ContactButton,
-	CVButton,
+	BGWord,
  } from '../styles/AboutStyles'
 
 const About = forwardRef((props, ref) => {
 	const { scrolled, setActiveLink } = props
 	const contentRef = useRef(null)
-	const isInView = useInView(contentRef, { amount: 0.5 })
+	const isInView = useInView(contentRef)
 	const controls = useAnimation()
 	const isVisible = isInView && scrolled
 
@@ -27,14 +24,12 @@ const About = forwardRef((props, ref) => {
 	useEffect(() => {
 		if (isVisible) {
 			setActiveLink('about')
+			controls.start('visible')
 		} else if (!isVisible) {
+			controls.start('hidden')
 			setActiveLink('')
 		}
-	}, [scrolled, isVisible, setActiveLink])
-
-	useEffect(() => {
-		controls.start(isVisible ? 'visible' : 'hidden')
-	}, [isVisible, controls ])
+	}, [scrolled, isVisible, setActiveLink, controls])
 
 	const scrollToContact = () => {
 		document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })
@@ -48,43 +43,53 @@ const About = forwardRef((props, ref) => {
 		link.click()
 	}
 
-	const contentVariants = {
+	const pageVariants = {
 		hidden: { opacity: 0 },
 		visible: {
 			opacity: 1,
 			transition: {
-				staggerChildren: 0.75,
+				duration: 0.75, ease: 'easeOut',
 			},
 		},
 	}
  
-	const primaryVariants = {
-		hidden: { opacity: 0 },
+	const contentVariants = {
+		hidden: { opacity: 0, y: 50 },
 		visible: {
 			opacity: 1,
+			y: 0,
 			transition: {
-				duration: 1,
-				delay: 0.5,
+				duration: 0.75,
+				delay: 0.75,
+				staggerChildren: 0.3,
+			},
+		},
+		exit: {
+			opacity: 0,
+			y: 50,
+			transition: {
+				duration: 0.75,
 			},
 		},
 	}
 
-	const secondaryVariants = {
+	const imageVariants = {
 		hidden: { opacity: 0, y: 50 },
 		visible: {
 			opacity: 1,
 			y: 0,
 			transition: {
 				duration: 1,
-				delay: 1,
+				delay: 0.75,
 			},
 		},
 	}
 
 	const sentenceVariants = {
-		hidden: { opacity: 0 },
+		hidden: { opacity: 0, y: 50 },
 		visible: {
 			opacity: 1,
+			y: 0,
 			transition: {
 				when: 'beforeChildren',
 				staggerChildren: 0.25,
@@ -103,45 +108,30 @@ const About = forwardRef((props, ref) => {
 		},
 	}
 
-	const text = {
-		heading: {
-			fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-			color: 'var(--orange)',
-		},
-		subHeading: {
-			fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
-			marginBottom: '1rem',
-			color: 'var(--ltOrange)',
-		},
-		sentences: {
-			fontSize: 'clamp(1rem, 3vw, 1.6rem)',
-			marginBottom: '1.6rem',
-			color: 'var(--text-color-md)',
-		},
-	}
-
 	return (
 		<Page ref={ref}>
 			<AboutContent
 				ref={contentRef}
 				initial="hidden"
 				animate={controls}
-				variants={contentVariants}
+				variants={pageVariants}
 			>
-			
-				<BackgroundWord
-					text="ABOUT"
-					el="span"
-					style={ BGWordStyles }
-				/>
 
-				<TextContainer>
+				<BGWord>
+					ABOUT
+				</BGWord>
 
-					<motion.h1 variants={primaryVariants} style={text.heading}>
+				<TextContainer
+					initial="hidden"
+					animate={controls}
+					variants={contentVariants}
+				>
+
+					<motion.h1 variants={itemVariants}>
 						{heading}
 					</motion.h1>
 
-					<motion.h2 variants={secondaryVariants} style={text.subHeading}>
+					<motion.h2 variants={itemVariants}>
 						{subHeading}
 					</motion.h2>
 
@@ -149,36 +139,34 @@ const About = forwardRef((props, ref) => {
 						{sentences.map((sentence) => (
 							<motion.p
 								key={sentence.key}
-								style={text.sentences}
-								variants={itemVariants}
 							>
 								{sentence.text}
 							</motion.p>
 						))}
 
-						<ContactButton
+						<motion.button
 							type="button"
 							aria-label='Contact me'
 							onClick={scrollToContact}
 							variants={itemVariants}
 						>
-							CONTACT ME
-						</ContactButton>
+							Contact me
+						</motion.button>
 
-						<CVButton
+						<motion.button
 							type="button"
 							aria-label='Download CV as PDF'
 							onClick={downloadPDF}
 							variants={itemVariants}
 						>
 							CV
-						</CVButton>
+						</motion.button>
 
 					</motion.div>
 					
 				</TextContainer>
 
-				<ImageContainer variants={primaryVariants}>
+				<ImageContainer variants={imageVariants}>
 					<Image src={profile} alt="" />
 				</ImageContainer>
 

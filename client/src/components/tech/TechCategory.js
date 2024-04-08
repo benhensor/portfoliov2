@@ -9,7 +9,6 @@ export default function TechCategory({
 	onHover,
 	onHoverLeave,
 }) {
-
 	const [showTechCards, setShowTechCards] = useState(false)
 
 	useEffect(() => {
@@ -25,16 +24,12 @@ export default function TechCategory({
 			onMouseLeave={onHoverLeave}
 			$ishovered={isHovered}
 		>
-			<motion.h2
-				layout="position"
-			>
-				{title}
-			</motion.h2>
+			<motion.h2 layout="position">{title}</motion.h2>
 			{isHovered && showTechCards && (
 				<motion.div>
 					{skillSet.map((skill, index) => {
 						const totalDelay = (skillSet.length - 1) * 0.05
-						const exitDelay = totalDelay - index * 0.05
+						const exitDelay = totalDelay - index * 3.05
 						return (
 							<TechCard
 								key={skill.name}

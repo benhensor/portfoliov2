@@ -1,47 +1,44 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import { motion } from 'framer-motion';
-
-const containerVariants = {
-	animate: {
-		transition: {
-			delayChildren: 0.4,
-			staggerChildren: 0.05,
-		},
-	},
-};
-  
-  const letterVariants = {
-	initial: { y: 200, opacity: 0 },
-	animate: {
-		y: 0,
-		opacity: 1,
-		transition: {
-			ease: "easeOut",
-			duration: 0.3,
-		},
-	},
-};
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
+import { motion } from 'framer-motion'
 
 export default function HeroTitleAnimation() {
-		const title = 'Ben Hensor';
-    return (
-        <HeroTitle
-            variants={containerVariants}
-            initial='initial'
-            animate='animate'
-        >
-            {title.split('').map((letter, index) => (
-                <motion.span
-                    key={index}
-                    variants={letterVariants}
-                >
-                    {letter === " " ? "\u00A0" : letter}
-                </motion.span>
-            ))}
-        </HeroTitle>
-    );
-};
+	const containerVariants = {
+		animate: {
+			transition: {
+				delayChildren: 0.4,
+				staggerChildren: 0.05,
+			},
+		},
+	}
+
+	const letterVariants = {
+		initial: { y: 200, opacity: 0 },
+		animate: {
+			y: 0,
+			opacity: 1,
+			transition: {
+				ease: 'easeOut',
+				duration: 0.3,
+			},
+		},
+	}
+
+	const title = 'Ben Hensor'
+	return (
+		<HeroTitle
+			variants={containerVariants}
+			initial="initial"
+			animate="animate"
+		>
+			{title.split('').map((letter, index) => (
+				<motion.span key={index} variants={letterVariants}>
+					{letter === ' ' ? '\u00A0' : letter}
+				</motion.span>
+			))}
+		</HeroTitle>
+	)
+}
 
 const gradientAnimation = keyframes`
   0% {
@@ -68,7 +65,7 @@ const HeroTitle = styled(motion.h1)`
 	background-clip: text;
 	color: #ffffff75;
 	mix-blend-mode: overlay;
-	
+
 	animation: ${gradientAnimation} 20s ease infinite;
 	-webkit-animation: ${gradientAnimation} 20s ease infinite;
 	white-space: nowrap;

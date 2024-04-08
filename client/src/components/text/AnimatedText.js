@@ -1,14 +1,13 @@
 import React, { useRef, useEffect } from 'react'
-import styled from 'styled-components'
 import { motion, useInView, useAnimation } from 'framer-motion'
 
 export default function BackgroundWord({
   text,
+  el: Wrapper = 'p',
   once,
   repeatDelay,
   animation,
-  top,
-  left
+  style,
 }) {
   const controls = useAnimation();
   const textArray = Array.isArray(text) ? text : [text];
@@ -37,52 +36,37 @@ export default function BackgroundWord({
   }, [isInView, controls, repeatDelay]);
 
   return (
-    <Wrapper $top={top} $left={left}>
+    <Wrapper style={style}>
       <span className="sr-only">{textArray.join(" ")}</span>
       <motion.span
         ref={ref}
         initial="hidden"
         animate={controls}
         variants={{
-          visible: { transition: { staggerChildren: 0.1 } },
+          visible: { transition: { staggerChildren: 1.5 } },
           hidden: {},
         }}
         aria-hidden
       >
         {textArray.map((line, lineIndex) => (
           <span className="block" key={`${line}-${lineIndex}`}>
-          <span className="inline-block">
-                
+            {line.split(" ").map((word, wordIndex) => (
+              <span className="inline-block" key={`${word}-${wordIndex}`}>
+                {word.split("").map((char, charIndex) => (
                   <motion.span
-   
+                    key={`${char}-${charIndex}`}
                     className="inline-block"
                     variants={animation}
                   >
-                    {text}
+                    {char}
                   </motion.span>
-  
+                ))}
                 <span className="inline-block">&nbsp;</span>
               </span>
+            ))}
           </span>
         ))}
       </motion.span>
     </Wrapper>
   )
 }
-
-export const Wrapper = styled(motion.span)`
-	position: absolute;
-	top: ${({ $top }) => $top};
-	left: ${({ $left }) => $left};
-  transform: translate(-50%, -50%);
-	font-size: clamp(4rem, 20vw, 15rem);
-	font-weight: 700;
-	color: var(--text-color-dk);
-	z-index: -1;
-	@media screen and (max-width: 768px) {
-		width: 100%;
-		top: 60%;
-		left: 0;
-		text-align: center;
-	}
-`
