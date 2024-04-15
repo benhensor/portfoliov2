@@ -32,7 +32,7 @@ export default function HeroGradientAnimation() {
     };
   }, []);
 
-
+ 
   return (
     <GradientBG className="gradient-bg">
     <svg xmlns="http://www.w3.org/2000/svg">
