@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
-import HeroAnimation from './HeroAnimation'
+// import HeroAnimation from './HeroAnimation'
+import HeroGradientAnimation from './HeroGradientAnimation'
 import HeroTitleAnimation from './HeroTitleAnimation'
 import HeroPhrases from './HeroPhrases'
 import HeroArrow from './HeroArrow'
@@ -15,7 +16,8 @@ export default function Hero({ scrolled }) {
 			$scrolled={scrolled}
 		>
 			<HeroContent>
-				<HeroAnimation />
+				{/* <HeroAnimation /> */}
+				<HeroGradientAnimation />
 				<HeroTitleContainer $scrolled={scrolled}>
 					<HeroTitleAnimation title='Ben Hensor'/>
 					<HeroPhrases />

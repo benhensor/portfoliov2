@@ -36,18 +36,33 @@ import vsCode from './assets/icons/tech/tools/vscode.svg';
 
 
 // Project Images
-import paperbackLogo from './assets/projects/paprback_logo_books.svg';
-import bookShelf from './assets/projects/bookshelfHero.png';
-import bhSoundLogo from './assets/projects/bhsoundLogo.svg';
-import mixingDesk from './assets/projects/mixingDesk.jpeg';
-import seasonItLogo from './assets/projects/seasonit-logo.svg';
-import seasonItBackground from './assets/projects/seasons-banner3.png';
-import sneakersLogo from './assets/projects/sneakersLogo.svg';
-import sneakersBackground from './assets/projects/sneakersBackground.jpg';
-import countriesBackground from './assets/projects/countriesBackground.png';
-import audiophileBackground from './assets/projects/image-header.jpg';
-import designoBackground from './assets/projects/designoBackground.jpg';
-import weatherAppBackground from './assets/projects/weather-app.png';
+import paprback1 from './assets/projects/paprback/bookshelf.webp'
+import paprback2 from './assets/projects/paprback/handOnBooks.webp'
+import paprback3 from './assets/projects/paprback/pileOfBooks.webp'
+import benhensorsound1 from './assets/projects/benhensorsound/mixingConsole.webp'
+import benhensorsound2 from './assets/projects/benhensorsound/mixingDesk.webp'
+import benhensorsound3 from './assets/projects/benhensorsound/outboardGear.webp'
+import seasonit1 from './assets/projects/seasonit/cauliflower.webp'
+import seasonit2 from './assets/projects/seasonit/corn.webp'
+import seasonit3 from './assets/projects/seasonit/vegetables.webp'
+import sneakers1 from './assets/projects/sneakers/sneakersBlueBG.webp'
+import sneakers2 from './assets/projects/sneakers/sneakersGreenBG.webp'
+import sneakers3 from './assets/projects/sneakers/sneakersVioletBG.webp'
+import countries1 from './assets/projects/countries/fingerGlobe.webp'
+import countries2 from './assets/projects/countries/flags.webp'
+import countries3 from './assets/projects/countries/multiFlags.webp'
+import audiophile1 from './assets/projects/audiophile/earbuds.webp'
+import audiophile2 from './assets/projects/audiophile/headphones.webp'
+import audiophile3 from './assets/projects/audiophile/speaker.webp'
+import designo1 from './assets/projects/designo/designDesktop.webp'
+import designo2 from './assets/projects/designo/desktop.webp'
+import designo3 from './assets/projects/designo/graphicDesign.webp'
+import weather1 from './assets/projects/weatherapp/raindrops.webp'
+import weather2 from './assets/projects/weatherapp/sunBehindClouds.webp'
+import weather3 from './assets/projects/weatherapp/tornado.webp'
+import kanban1 from './assets/projects/kanbantaskapp/calendars.webp'
+import kanban2 from './assets/projects/kanbantaskapp/postitOnFace.webp'
+import kanban3 from './assets/projects/kanbantaskapp/postits.webp'
 
 
 // Tech Icon Data
@@ -161,8 +176,8 @@ const projects = [
     {
         key: 1,
         title: 'Paprback',
-        logo: paperbackLogo,
-        image: bookShelf,
+        logo: null,
+        image: [paprback1, paprback2, paprback3],
         description: 'Connecting people in their local area for the purpose of exchanging and donating unwanted books.',
         live: 'https://bcpaprback.netlify.app/',
         code: 'https://github.com/benhensor/soc_byteclub_paprback'
@@ -170,8 +185,8 @@ const projects = [
     {
         key: 2,
         title: 'Ben Hensor Sound',
-        logo: bhSoundLogo,
-        image: mixingDesk,
+        logo: null,
+        image: [benhensorsound1, benhensorsound2, benhensorsound3],
         description: 'A recreation of my Sound Design website built in React with an Express mail server.',
         live: 'https://benhensorsound.netlify.app/',
         code: 'https://github.com/benhensor/benhensorsound'
@@ -179,8 +194,8 @@ const projects = [
     {
         key: 3,
         title: 'SeasonIt 2.0',
-        logo: seasonItLogo,
-        image: seasonItBackground,
+        logo: null,
+        image: [seasonit1, seasonit2, seasonit3],
         description: 'Discover seasonal produce throughout the year in the UK.',
         live: 'https://seasonit.netlify.app/',
         code: 'https://github.com/benhensor/season-it'
@@ -188,8 +203,8 @@ const projects = [
     {
         key: 4,
         title: 'Sneakers',
-        logo: sneakersLogo,
-        image: sneakersBackground,
+        logo: null,
+        image: [sneakers1, sneakers2, sneakers3],
         description: 'A Frontend Mentor e-commerce page built with React.',
         live: 'https://frontendmentor-sneakers.netlify.app/',
         code: 'https://github.com/benhensor/e-commerce_page'
@@ -198,7 +213,7 @@ const projects = [
         key: 5,
         title: 'RESTful Countries API',
         logo: null,
-        image: countriesBackground,
+        image: [countries1, countries2, countries3],
         description: 'A Frontend Mentor country finder page built with React.',
         live: 'https://fe-country-finder.netlify.app/',
         code: 'https://github.com/benhensor/countries_api.git'
@@ -207,7 +222,7 @@ const projects = [
         key: 6,
         title: 'Audiophile',
         logo: null,
-        image: audiophileBackground,
+        image: [audiophile1, audiophile2, audiophile3],
         description: 'A Frontend Mentor e-commerce site built with React.',
         live: 'https://fm-audiophile.netlify.app/',
         code: 'https://github.com/benhensor/audiophile.git'
@@ -216,7 +231,7 @@ const projects = [
         key: 7,
         title: 'Designo',
         logo: null,
-        image: designoBackground,
+        image: [designo1, designo2, designo3],
         description: 'A Frontend Mentor multi-page site built with React and Styled Components.',
         live: 'https://bhfm-designo.netlify.app/',
         code: 'https://github.com/benhensor/designo.git'
@@ -225,10 +240,19 @@ const projects = [
         key: 8,
         title: 'Weather App',
         logo: null,
-        image: weatherAppBackground,
+        image: [weather1, weather2, weather3],
         description: 'A simple React weather app.',
         live: 'https://weather-a0yriosp6-ben-s-projects-3a069c6e.vercel.app/',
         code: 'https://github.com/benhensor/weather-app.git'
+    },
+    {
+        key: 9,
+        title: 'Kanban Task Management App',
+        logo: null,
+        image: [kanban1, kanban2, kanban3],
+        description: 'A simple React weather app.',
+        live: 'https://kanban-pwa-indol.vercel.app/',
+        code: 'https://github.com/benhensor/kanban-pwa'
     }
 ]
 

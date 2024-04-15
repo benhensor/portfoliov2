@@ -20,6 +20,19 @@ const GlobalStyles = createGlobalStyle`
     --button-hover: #de9e36;
     --button-active: #00c5c5;
 
+    /* Animated Gradient Colors */
+    --color-bg1: rgb(108, 0, 162);
+    --color-bg2: rgb(0, 17, 82);
+    --color1: 18, 113, 255;
+    --color2: 221, 74, 255;
+    --color3: 100, 220, 255;
+    --color4: 200, 50, 50;
+    --color5: 180, 180, 50;
+    --color-interactive: 140, 100, 255;
+    --circle-size: 80%;
+    --blending: hard-light;
+
+
     /* Text Colors */
     --text-color-lt: #eeeeee;
     --text-color-md: #cccccc;

@@ -79,18 +79,22 @@ const TechStack = forwardRef((props, ref) => {
 
   return (
     <Page ref={ref}>
+
       <Content
         ref={techRef}
         initial="hidden"
         animate={controls}
         variants={pageVariants}
       >
-        <BGWord
-          style={{ top: '50%', left: '50%' }}
-        >
+        <BGWord>
           TECH STACK
         </BGWord>
-        <TechCategoriesContainer variants={contentVariants}>
+
+        <TechCategoriesContainer
+          initial="hidden"
+          animate={controls} 
+          variants={contentVariants}
+        >
           {sections.map((section, index) => (
             <TechCategory
               key={index}
@@ -100,12 +104,14 @@ const TechStack = forwardRef((props, ref) => {
               onHover={() => setHoveredCategory(section.title)}
               onHoverLeave={() => setHoveredCategory(null)}
               initial="hidden"
-              animate="visible"
+              animate={controls}
               variants={itemVariants}
             />
           ))}
         </TechCategoriesContainer>
+
       </Content>
+      
     </Page>
   )
 })

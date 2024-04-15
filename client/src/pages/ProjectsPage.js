@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { motion, useInView, useAnimation } from 'framer-motion'
 import { Page } from '../styles/GlobalStyles'
 
+import { projects } from '../data'
+
 const Projects = forwardRef((props, ref) => {
 
   const { setActiveLink } = props
@@ -31,6 +33,14 @@ const Projects = forwardRef((props, ref) => {
 		},
 	}
 
+  const cycleImages = (images) => {
+    let i = 0
+    setInterval(() => {
+      i = i === images.length - 1 ? 0 : i + 1
+    }, 3000)
+
+  }
+
   return (
     <Page ref={ref}>
       <Content 
@@ -44,6 +54,19 @@ const Projects = forwardRef((props, ref) => {
           PROJECTS
         </BGWord>
 
+        <ProjectsGrid>
+          {projects.map((project, index) => (
+            <motion.img
+              key={index}
+              src={cycleImages(project.image)}
+              alt={project.name}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            />
+          ))}
+        </ProjectsGrid>
+
       </Content>
     </Page>
   )
@@ -53,8 +76,8 @@ export default Projects
 
 const Content = styled(motion.div)`
   display: flex;
-	justify-content: space-between;
-	align-items: center;
+	justify-content: center;
+	align-items: flex-end;
 	position: relative;
   width: 100%;
 	@media screen and (max-width: 768px) {
@@ -75,4 +98,19 @@ const BGWord = styled.span`
 		width: 100%;
 		text-align: center;
 	}
+`
+
+const ProjectsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  width: 100%;
+  gap: 5rem;
+  z-index: 1;
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    outline: 1px solid var(--orange);
+  }
 `
