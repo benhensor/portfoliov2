@@ -1,9 +1,24 @@
 import React, { forwardRef, useRef, useState, useEffect } from 'react'
-import styled from 'styled-components'
 import { useInView } from 'framer-motion'
 import { Page } from '../styles/GlobalStyles'
 import MailIcon from '../assets/icons/mailPlane.svg'
-import { FcCheckmark } from "react-icons/fc";
+import { FcCheckmark, FcCancel } from "react-icons/fc";
+import {
+  ContactSection,
+  ContactContent,
+  ContactHeader,
+  ContactIcon,
+  ContactForm,
+  ContactLabel,
+  ContactInput,
+  ContactTextarea,
+  ContactButton,
+  ContactStatus,
+  InputWrapper,
+  ValidIcon,
+  InvalidIcon,
+  ErrorMessage
+} from '../styles/ContactStyles'
 
 const Contact = forwardRef((props, ref) => {
 
@@ -19,19 +34,12 @@ const Contact = forwardRef((props, ref) => {
   })
   const [buttonText, setButtonText] = useState('SEND')
   const [formErrors, setFormErrors] = useState({})
-  const [status, setStatus] = useState({})
+  const [status, setStatus] = useState({ success: null, message: '' })
 
   useEffect(() => {
     if (isInView) {
       setActiveLink('contact')
-    } else {
-      setFormDetails({
-        name: '',
-        email: '',
-        phone: '',
-        message: ''
-      })
-    }
+    } 
   }, [isInView, setActiveLink])
 
   const updateForm = (e) => {
@@ -50,15 +58,16 @@ const Contact = forwardRef((props, ref) => {
         setFormErrors(errors)
         return
       }
+      setFormErrors({})
       setButtonText('SENDING...')
-      const reponse = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch('http://localhost:5000/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
         },
         body: JSON.stringify(formDetails) 
       })
-      const result = await reponse.json()
+      const result = await response.json()
       setFormDetails({
         name: '',
         email: '',
@@ -100,6 +109,8 @@ const Contact = forwardRef((props, ref) => {
     return errors;
   };
 
+  const isValid = (field) => !formErrors[field] && formDetails[field]
+
   return (
     <Page ref={ref} id="contact">
       <ContactSection>
@@ -111,54 +122,69 @@ const Contact = forwardRef((props, ref) => {
             <InputWrapper>
               <ContactInput
                 type='text'
+                id='name'
                 name='name'
                 value={formDetails.name}
                 onChange={updateForm}
                 placeholder='Name'
+                aria-describedby='name-error'
                 required
                 style={{border: formErrors.name ? '1px solid var(--error)' : '1px solid var(--blue)'}}
               />
-              {formErrors.phone ? null : formDetails.phone.match(/^\d{9,16}$/g) && <ValidIcon><FcCheckmark /></ValidIcon>}
+              {formErrors.name ? <InvalidIcon aria-hidden='true'><FcCancel /></InvalidIcon> : isValid('name') && <ValidIcon aria-hidden='true'><FcCheckmark /></ValidIcon>}
             </InputWrapper>
+            {formErrors.name && <ErrorMessage id='name-error' role="alert" aria-live="assertive">{formErrors.name}</ErrorMessage>}
+
             <ContactLabel htmlFor='email'>Email</ContactLabel>
             <InputWrapper>
               <ContactInput
                 type='email'
+                id='email'
                 name='email'
                 value={formDetails.email}
                 onChange={updateForm}
                 placeholder='Email'
+                aria-describedby='email-error'
                 required
                 style={{border: formErrors.email ? '1px solid var(--error)' : '1px solid var(--blue)'}}
               />
-              {formErrors.phone ? null : formDetails.phone.match(/^\d{9,16}$/g) && <ValidIcon><FcCheckmark /></ValidIcon>}
+              {formErrors.email ? <InvalidIcon aria-hidden='true'><FcCancel /></InvalidIcon> : isValid('email') && <ValidIcon aria-hidden='true'><FcCheckmark /></ValidIcon>}
             </InputWrapper>
+            {formErrors.email && <ErrorMessage id='email-error' role='alert' aria-live="assertive">{formErrors.email}</ErrorMessage>}
+            
             <ContactLabel htmlFor='phone'>Phone</ContactLabel>
             <InputWrapper>
               <ContactInput
                 type='tel'
+                id='phone'
                 name='phone'
                 value={formDetails.phone}
                 onChange={updateForm}
                 placeholder='Phone'
+                aria-describedby='phone-error'
                 style={{border: formErrors.phone ? '1px solid var(--error)' : '1px solid var(--blue)'}}
               />
-              {formErrors.phone ? null : formDetails.phone.match(/^\d{9,16}$/g) && <ValidIcon><FcCheckmark /></ValidIcon>}
+              {formErrors.phone ? <InvalidIcon aria-hidden='true'><FcCancel /></InvalidIcon> : isValid('phone') && <ValidIcon aria-hidden='true'><FcCheckmark /></ValidIcon>}
             </InputWrapper>
+            {formErrors.phone && <ErrorMessage id='phone-error' role='alert' aria-live="assertive">{formErrors.phone}</ErrorMessage>}
+
             <ContactLabel htmlFor='message'>Message</ContactLabel>
             <InputWrapper>
               <ContactTextarea
+                id='message'
                 name='message'
                 value={formDetails.message}
                 onChange={updateForm}
                 placeholder='Message'
+                aria-describedby='message-error'
                 required
               />
-              {formErrors.phone ? null : formDetails.phone.match(/^\d{9,16}$/g) && <ValidIcon><FcCheckmark /></ValidIcon>}
             </InputWrapper>
-            <ContactButton type='submit' aria-label="Send">{buttonText}</ContactButton>
+            {formErrors.message && <ErrorMessage id='message-error' role='alert' aria-live="assertive">{formErrors.message}</ErrorMessage>}
+
+            <ContactButton type='submit' aria-label='Send'>{buttonText}</ContactButton>
           </ContactForm>
-          {status.message && <ContactStatus>{status.message}</ContactStatus>}
+          {status.message && <ContactStatus role='alert' aria-live='polite' $success={status.success}>{status.message}</ContactStatus>}
         </ContactContent>
       </ContactSection>
     </Page>
@@ -166,152 +192,3 @@ const Contact = forwardRef((props, ref) => {
 })
 
 export default Contact
-
-
-const ContactSection = styled.section`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const ContactContent = styled.div`
-  width: 100%;
-  max-width: 1000px;
-  height: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-`
-
-const ContactHeader = styled.h1`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--text-color-lt);
-  margin-bottom: 1em;
-  span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    margin-right: 0.5em;
-  }
-`
-
-const ContactIcon = styled.img`
-  width: 5em;
-  height: 5em;
-  margin-bottom: 1em;
-  rotate: 45deg;
-`
-
-const ContactForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 500px;
-  color: var(--text-color-lt);
-`
-
-const InputWrapper = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-`
-
-const ValidIcon = styled.div`
-  position: absolute;
-  top: 35%;
-  transform: translateY(-50%);
-  right: 10px;
-  font-size: 2rem;
-  display: none;
-`
-
-const ContactLabel = styled.label`
-  font-size: 1.2rem;
-  color: var(--text-color-soft);
-  margin-left: 1rem;
-  margin-bottom: 0.2em;
-`
-
-const ContactInput = styled.input`
-  width: 100%;
-  padding: 0.5em;
-  font-size: 1em;
-  color: var(--text-color-lt);
-  border-radius: 0.5rem;
-  border: 1px solid var(--blue);
-  margin-bottom: 1em;
-  background: var(--background-static);
-  &::placeholder {
-    color: var(--text-color-dk);
-  }
-  &:focus {
-    outline: none;
-  }
-  &:valid {
-    border: 2px solid green;
-
-    /* Show the tick icon when the input is valid */
-    ~ ${ValidIcon} {
-      display: block;
-    }
-  }
-`
-
-const ContactTextarea = styled.textarea`
-  width: 100%;
-  padding: 0.5em;
-  font-size: 1em;
-  color: var(--text-color-lt);
-  border-radius: 0.5rem;
-  resize: vertical;
-  min-height: 10em;
-  margin-bottom: 3em;
-  border: 1px solid var(--blue);
-  margin-bottom: 1em;
-  background: var(--background-static);
-  &::placeholder {
-    color: var(--text-color-dk);
-  }
-  &:focus {
-    outline: none;
-  }
-  &:valid {
-    border: 2px solid green;
-
-    /* Show the tick icon when the input is valid */
-    ~ ${ValidIcon} {
-      display: block;
-    }
-  }
-`
-
-const ContactButton = styled.button`
-  padding: 0.5em;
-  font-size: 1em;
-  border-radius: 0.5rem;
-  background: var(--orange);
-  color: var(--text-color-dk);
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s;
-  &:hover {
-    background: var(--ltOrange);
-    color: var(--text-color-dk);
-  }
-`
-
-const ContactStatus = styled.p`
-  font-size: 1.2em;
-  color: var(--text-color-lt);
-`
-

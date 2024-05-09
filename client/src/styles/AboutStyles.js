@@ -45,7 +45,7 @@ export const TextContainer = styled(motion.div)`
 		color: var(--ltOrange);
 	}
 	p {
-		font-size: clamp(1rem, 3vw, 1.6rem);
+		font-size: clamp(0.8rem, 3vw, 1.6rem);
 		margin-bottom: 1.6rem;
 		color: var(--text-color-md);
 	}
@@ -69,6 +69,19 @@ export const TextContainer = styled(motion.div)`
 	@media screen and (max-width: 768px) {
 		text-align: center;
 		padding: 0 5rem;
+	}
+	@media screen and (max-width: 546px) {
+		gap: 1rem;
+		padding: 0 2rem;
+		p {
+			margin-bottom: 1rem;
+			color: var(--text-color-md);
+		}
+		button {
+			margin: 1rem 1.5rem 0 0;
+			padding: 0.8rem 1.5rem;
+			font-size: 1.4rem;
+		}
 	}
 `
 

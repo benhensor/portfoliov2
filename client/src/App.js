@@ -27,11 +27,11 @@ export default function App() {
 	useEffect(() => {
 		const onScroll = () => {
 
-		if (window.scrollY > 50) {
-				setScrolled(true)
-		} else {
-				setScrolled(false)
-		}
+			if (window.scrollY > 50) {
+					setScrolled(true)
+			} else {
+					setScrolled(false)
+			}
 		}
 		window.addEventListener('scroll', onScroll)
 		return () => window.removeEventListener('scroll', onScroll)
