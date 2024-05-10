@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #0f222f;
+    }
+    
+    .container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15rem;
+    }
+    
+    .container .card {
+      position: relative;
+      width: 30rem;
+      height: 30rem;
+      background: var(--img);
+      background-size: 450px;
+      background-position: center;
+      cursor: pointer;
+      border-radius: 1rem;
+      transition: all 0.2s ease;
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <div class="card" style="--img:url(img1.jpg);"></div>
+    <div class="card" style="--img:url(img2.jpg);"></div>
+  </div>
+  <script>
+    const cards = document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        let x = e.offsetX
+        let y = e.offsetY
+        let cardWidth = card.clientWidth
+        let cardHeight = card.clientHeight
+        let transX = (x - cardWidth)
+        let transY = (y - cardHeight)
+        card.style.transform = `translateX(${transX}px) translateY(${transY}px)`
+        card.style.backgroundPositionX = x/2 + 'px'
+        card.style.backgroundPositionY = y/2 + 'px'
+      });
+      card.addEventListener('mouseout', (e) => {
+        card.style.transform = ``
+        card.style.backgroundPositionX = ``
+        card.style.backgroundPositionY = ``
+      });
+    });
+  </script>
+</body>
+</html>

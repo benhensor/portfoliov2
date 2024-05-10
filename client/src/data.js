@@ -20,7 +20,7 @@ import netlify from './assets/icons/tech/devops/netlify.svg';
 import node from './assets/icons/tech/backend/nodejs.svg';
 import npm from './assets/icons/tech/tools/npm.svg';
 import playwright from './assets/icons/tech/testing/playwright.svg';
-import postfresql from './assets/icons/tech/backend/postgresql.svg';
+import postgresql from './assets/icons/tech/backend/postgresql.svg';
 import postman from './assets/icons/tech/tools/postman.svg';
 import prettier from './assets/icons/tech/tools/prettier.svg';
 import ps from './assets/icons/tech/design/ps.svg';
@@ -32,6 +32,7 @@ import sass from './assets/icons/tech/frontend/sass.svg';
 import semanticUi from './assets/icons/tech/frontend/semanticui.svg';
 import tailwind from './assets/icons/tech/frontend/tailwindcss.svg';
 import typescript from './assets/icons/tech/languages/typescript.svg';
+import vercel from './assets/icons/tech/devops/vercel.svg';
 import vsCode from './assets/icons/tech/tools/vscode.svg';
 
 
@@ -71,7 +72,7 @@ const backend = [
     { name: 'Flask', icon: flask },
     { name: 'MongoDB', icon: mongodb },
     { name: 'Node.js', icon: node },
-    { name: 'PostgreSQL', icon: postfresql }
+    { name: 'PostgreSQL', icon: postgresql }
 ]
 
 const design = [
@@ -84,6 +85,7 @@ const devops = [
     { name: 'GitHub', icon: github },
     { name: 'Heroku', icon: heroku },
     { name: 'Netlify', icon: netlify },
+    { name: 'Vercel', icon: vercel }
 ]
 
 const frontend = [
@@ -139,7 +141,7 @@ const tech = [
     { name: 'NPM', icon: npm },
     { name: 'Photoshop', icon: ps },
     { name: 'Playwright', icon: playwright },
-    { name: 'PostgreSQL', icon: postfresql },
+    { name: 'PostgreSQL', icon: postgresql },
     { name: 'Postman', icon: postman },
     { name: 'Prettier', icon: prettier },
     { name: 'Python', icon: python },
@@ -164,7 +166,7 @@ const aboutInfo = {
         { key: 2,
             text: "Following a successful career as a Sound Designer, I decided to pursue a fresh challenge and get into Web Development!" },
         { key: 3,
-            text: "I am passionate about technology and design, always looking to create immersive user experiences..." },
+            text: "I am passionate about technology and design, always striving to create engaging user experiences..." },
         { key: 4,
             text: "I am actively seeking new opportunities so please get in touch!" }
     ]
@@ -177,8 +179,9 @@ const projects = [
         key: 1,
         title: 'Paprback',
         logo: null,
-        image: [paprback1, paprback2, paprback3],
+        images: [paprback1, paprback2, paprback3],
         description: 'Connecting people in their local area for the purpose of exchanging and donating unwanted books.',
+        techStack: [react, node, postgresql, netlify],
         live: 'https://bcpaprback.netlify.app/',
         code: 'https://github.com/benhensor/soc_byteclub_paprback'
     },
@@ -186,8 +189,9 @@ const projects = [
         key: 2,
         title: 'Ben Hensor Sound',
         logo: null,
-        image: [benhensorsound1, benhensorsound2, benhensorsound3],
+        images: [benhensorsound1, benhensorsound2, benhensorsound3],
         description: 'A recreation of my Sound Design website built in React with an Express mail server.',
+        techStack: [react, node, netlify],
         live: 'https://benhensorsound.netlify.app/',
         code: 'https://github.com/benhensor/benhensorsound'
     },
@@ -195,8 +199,9 @@ const projects = [
         key: 3,
         title: 'SeasonIt 2.0',
         logo: null,
-        image: [seasonit1, seasonit2, seasonit3],
+        images: [seasonit1, seasonit2, seasonit3],
         description: 'Discover seasonal produce throughout the year in the UK.',
+        techStack: [react, node, mongodb, netlify],
         live: 'https://seasonit.netlify.app/',
         code: 'https://github.com/benhensor/season-it'
     },
@@ -204,8 +209,9 @@ const projects = [
         key: 4,
         title: 'Sneakers',
         logo: null,
-        image: [sneakers1, sneakers2, sneakers3],
+        images: [sneakers1, sneakers2, sneakers3],
         description: 'A Frontend Mentor e-commerce page built with React.',
+        techStack: [react, netlify],
         live: 'https://frontendmentor-sneakers.netlify.app/',
         code: 'https://github.com/benhensor/e-commerce_page'
     },
@@ -213,8 +219,9 @@ const projects = [
         key: 5,
         title: 'RESTful Countries API',
         logo: null,
-        image: [countries1, countries2, countries3],
+        images: [countries1, countries2, countries3],
         description: 'A Frontend Mentor country finder page built with React.',
+        techStack: [react, netlify],
         live: 'https://fe-country-finder.netlify.app/',
         code: 'https://github.com/benhensor/countries_api.git'
     },
@@ -222,8 +229,9 @@ const projects = [
         key: 6,
         title: 'Audiophile',
         logo: null,
-        image: [audiophile1, audiophile2, audiophile3],
+        images: [audiophile1, audiophile2, audiophile3],
         description: 'A Frontend Mentor e-commerce site built with React.',
+        techStack: [react, netlify],
         live: 'https://fm-audiophile.netlify.app/',
         code: 'https://github.com/benhensor/audiophile.git'
     },
@@ -231,8 +239,9 @@ const projects = [
         key: 7,
         title: 'Designo',
         logo: null,
-        image: [designo1, designo2, designo3],
+        images: [designo1, designo2, designo3],
         description: 'A Frontend Mentor multi-page site built with React and Styled Components.',
+        techStack: [react, netlify],
         live: 'https://bhfm-designo.netlify.app/',
         code: 'https://github.com/benhensor/designo.git'
     },
@@ -240,8 +249,9 @@ const projects = [
         key: 8,
         title: 'Weather App',
         logo: null,
-        image: [weather1, weather2, weather3],
+        images: [weather1, weather2, weather3],
         description: 'A simple React weather app.',
+        techStack: [react, vercel],
         live: 'https://weather-a0yriosp6-ben-s-projects-3a069c6e.vercel.app/',
         code: 'https://github.com/benhensor/weather-app.git'
     },
@@ -249,8 +259,9 @@ const projects = [
         key: 9,
         title: 'Kanban Task Management App',
         logo: null,
-        image: [kanban1, kanban2, kanban3],
+        images: [kanban1, kanban2, kanban3],
         description: 'A simple React weather app.',
+        techStack: [react, typescript, tailwind, vercel],
         live: 'https://kanban-pwa-indol.vercel.app/',
         code: 'https://github.com/benhensor/kanban-pwa'
     }

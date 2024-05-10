@@ -3,13 +3,13 @@ import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 const phraseVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.8 } },
-    exit: { opacity: 0, transition: { duration: 0.5 } },
-  };
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.8 } },
+  exit: { opacity: 0, transition: { duration: 0.5 } },
+};
 
 export default function HeroPhrases() {
-    const [currentPhrase, setCurrentPhrase] = useState(0)
+  const [currentPhrase, setCurrentPhrase] = useState(0)
 
 	const textRotate = [
 		'Frontend Developer',
@@ -28,23 +28,23 @@ export default function HeroPhrases() {
 		return () => clearInterval(interval)
 	}, [textRotate.length])
 
-    const renderPhrases = () => {
-        return textRotate.map((phrase, index) => (
-          <Phrase
-            key={index}
-            variants={phraseVariants}
-            initial="hidden"
-            animate={index === currentPhrase ? "visible" : "exit"}
-            exit="exit"
-          >
-            {phrase}
-          </Phrase>
-        ));
-    };
+	const renderPhrases = () => {
+		return textRotate.map((phrase, index) => (
+			<Phrase
+				key={index}
+				variants={phraseVariants}
+				initial="hidden"
+				animate={index === currentPhrase ? "visible" : "exit"}
+				exit="exit"
+			>
+				{phrase}
+			</Phrase>
+		));
+	};
 
-    return (
-        <Phrases>{renderPhrases()}</Phrases>
-    )
+	return (
+		<Phrases>{renderPhrases()}</Phrases>
+	)
 }
 
 const Phrases = styled.div`
