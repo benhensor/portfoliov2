@@ -15,6 +15,7 @@ import heroku from './assets/icons/tech/devops/heroku.svg';
 import html from './assets/icons/tech/frontend/html5.svg';
 import jest from './assets/icons/tech/testing/jest.svg';
 import javascript from './assets/icons/tech/languages/js.svg';
+import mocha from './assets/icons/tech/testing/mochajs.svg';
 import mongodb from './assets/icons/tech/backend/mongodb.svg';
 import netlify from './assets/icons/tech/devops/netlify.svg';
 import node from './assets/icons/tech/backend/nodejs.svg';
@@ -108,6 +109,7 @@ const languages = [
 const testing = [
     { name: 'Cypress', icon: cypress },
     { name: 'Jest', icon: jest },
+    { name: 'Mocha', icon: mocha },
     { name: 'Playwright', icon: playwright }
 ]
 
@@ -264,6 +266,16 @@ const projects = [
         techStack: [react, typescript, tailwind, vercel],
         live: 'https://kanban-pwa-indol.vercel.app/',
         code: 'https://github.com/benhensor/kanban-pwa'
+    },
+    {
+        key: 10,
+        title: 'Jam',
+        logo: null,
+        images: [kanban1, kanban2, kanban3],
+        description: 'A playlist generator powered by the Spotify API.',
+        techStack: [react, vercel],
+        live: 'https://jam-client.vercel.app/',
+        code: 'https://github.com/benhensor/codecademy-react/tree/main/spotify-playlist-app'
     }
 ]
 

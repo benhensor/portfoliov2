@@ -34,23 +34,37 @@ const ProjectsPage = forwardRef((props, ref) => {
   
   return (
     <Page ref={ref}>
-      <Content 
-        ref={projectsRef}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-        variants={contentVariants}
-      >
-
-        <BGWord>PROJECTS</BGWord>
-
-        <ProjectsGallery />
-
-      </Content>
+      <Projects>
+        <Content
+          ref={projectsRef}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={contentVariants}
+        >
+          <BGWord>PROJECTS</BGWord>
+          <ProjectsGallery />
+        </Content>
+      </Projects>
     </Page>
   )
 })
 
 export default ProjectsPage
+
+const Projects = styled.section`
+	height: 200vh;
+  overflow-y: scroll;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@media screen and (max-width: 999px) {
+		padding: var(--m-desktop);
+	}
+	@media screen and (max-width: 768px) {
+		padding: var(--m-mobile);
+	}
+`
 
 const Content = styled(motion.div)`
   display: flex;

@@ -53,7 +53,7 @@ export default function App() {
 						<About ref={aboutRef} scrolled={scrolled} setActiveLink={setActiveLink}/>
 					</Page>
 					<Page>
-						<TechStack ref={techStackRef} setActiveLink={setActiveLink} />
+						<TechStack ref={techStackRef} activeLink={activeLink} setActiveLink={setActiveLink} />
 					</Page>
 					<Page>
 						<Projects ref={projectsRef} setActiveLink={setActiveLink} />
