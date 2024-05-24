@@ -52,7 +52,7 @@ const ProjectsPage = forwardRef((props, ref) => {
 export default ProjectsPage
 
 const Projects = styled.section`
-	height: 200vh;
+	height: 100vh;
   overflow-y: scroll;
 	margin: 0 auto;
 	display: flex;

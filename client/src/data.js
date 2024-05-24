@@ -275,7 +275,7 @@ const projects = [
         description: 'A playlist generator powered by the Spotify API.',
         techStack: [react, vercel],
         live: 'https://jam-client.vercel.app/',
-        code: 'https://github.com/benhensor/codecademy-react/tree/main/spotify-playlist-app'
+        code: 'https://github.com/benhensor/jam'
     }
 ]
 

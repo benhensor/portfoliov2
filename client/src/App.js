@@ -49,21 +49,11 @@ export default function App() {
 					/>
 				<Hero scrolled={scrolled} />
 				<AppContent>
-					<Page>
 						<About ref={aboutRef} scrolled={scrolled} setActiveLink={setActiveLink}/>
-					</Page>
-					<Page>
 						<TechStack ref={techStackRef} activeLink={activeLink} setActiveLink={setActiveLink} />
-					</Page>
-					<Page>
 						<Projects ref={projectsRef} setActiveLink={setActiveLink} />
-					</Page>
-					<Page>
 						<Contact ref={contactRef} setActiveLink={setActiveLink} />
-					</Page>
-					<Page>
 						<Cat />
-					</Page>
 				</AppContent>
 			</AppContainer>
 		</AnimatePresence>

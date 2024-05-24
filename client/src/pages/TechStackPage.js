@@ -109,8 +109,8 @@ const TechStack = forwardRef((props, ref) => {
 export default TechStack
 
 const Content = styled(motion.div)`
+	height: 100vh;
 	width: 100%;
-	max-width: 1200px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

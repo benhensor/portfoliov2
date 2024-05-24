@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 export const AboutContent = styled(motion.div)`
+	height: 100vh;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -13,8 +14,8 @@ export const AboutContent = styled(motion.div)`
 
 export const BGWord = styled.span`
 	position: absolute;
-	top: 20rem;
-	left: 30rem;
+	top: 50%;
+	left: 35%;
 	transform: translate(-50%, -50%);
 	font-size: clamp(4rem, 20vw, 15rem);
 	font-weight: 700;
