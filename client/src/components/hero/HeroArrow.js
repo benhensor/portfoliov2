@@ -29,26 +29,26 @@ const Arrows = styled.div`
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: 2rem;
 	color: var(--text-color);
-	transition: all 0.3s ease;
+	transition: all .12s;
 	&:hover {
-		gap: 4rem;
+		gap: 3rem;
 	}
 `
 
 const Arrow = styled(FaChevronDown)`
 	position: relative;
-	font-size: 5rem;
+	font-size: 3rem;
 	animation: arrow 2s infinite ease-in-out;
 	&:nth-child(1) {
-		top: 40px;
+		top: 35px;
 	}
 	&:nth-child(2) {
 		animation-delay: -0.2s;
 	}
 	&:nth-child(3) {
-		bottom: 40px;
+		bottom: 35px;
 		animation-delay: -0.4s;
 	}
 	@keyframes arrow {

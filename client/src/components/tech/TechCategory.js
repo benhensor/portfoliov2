@@ -1,31 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 export default function TechCategory({
 	title,
-	skillSet,
-	isHovered,
-	onHover,
-	onHoverLeave,
+	skillSet
 }) {
 	const [showTechCards, setShowTechCards] = useState(false)
-
-	useEffect(() => {
-		if (isHovered) {
-			setShowTechCards(true)
-		}
-	}, [isHovered])
 
 	return (
 		<TechSection
 			layout
-			onMouseEnter={onHover}
-			onMouseLeave={onHoverLeave}
-			$ishovered={isHovered}
+			onMouseEnter={() => setShowTechCards(true)}
+			onMouseLeave={() => setShowTechCards(false)}
 		>
 			<motion.h2 layout="position">{title}</motion.h2>
-			{isHovered && showTechCards && (
+			{showTechCards && (
 				<motion.div>
 					{skillSet.map((skill, index) => {
 						const totalDelay = (skillSet.length - 1) * 0.05

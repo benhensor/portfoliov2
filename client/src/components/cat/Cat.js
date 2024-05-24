@@ -126,7 +126,7 @@ export default function Cat() {
 		// Calculate the distance between the mouse and the eye centers
 		const leftEyeDeltaX = mouseX - leftEyeCenterX - 1000
 		const leftEyeDeltaY = mouseY - leftEyeCenterY * 2
-		const rightEyeDeltaX = mouseX - rightEyeCenterX - 200
+		const rightEyeDeltaX = mouseX - rightEyeCenterX - 50
 		const rightEyeDeltaY = mouseY - rightEyeCenterY * 2
 
 		const maxEyeMove = 35 // Adjust this value to control the eye movement range
