@@ -288,7 +288,7 @@ const projects = [
         images: [flashcards1],
         description: 'A quiz app making use of the Redux Toolkit in React.',
         techStack: [react, redux, vercel],
-        live: 'https://codecademy-react.vercel.app/',
+        live: 'https://bh-flashcards-app.vercel.app/',
         code: 'https://github.com/benhensor/codecademy-react/tree/main/flashcards'
     }
 ]
