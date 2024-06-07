@@ -69,6 +69,7 @@ import jam1 from './assets/projects/jam/jam1.webp'
 import jam2 from './assets/projects/jam/jam2.webp'
 import jam3 from './assets/projects/jam/jam3.webp'
 import flashcards1 from './assets/projects/flashcards/flashcards1.webp'
+import reddit1 from './assets/projects/reddit/reddit-logo.svg'
 
 
 // Tech Icon Data
@@ -290,6 +291,16 @@ const projects = [
         techStack: [react, redux, vercel],
         live: 'https://bh-flashcards-app.vercel.app/',
         code: 'https://github.com/benhensor/codecademy-react/tree/main/flashcards'
+    },
+    {
+        key: 12,
+        title: 'Reddit Clone',
+        logo: null,
+        images: [reddit1],
+        description: 'A Reddit clone built in React with Redux using the Reddit API.',
+        techStack: [react, redux, vercel],
+        live: 'https://reddit-api-bh.vercel.app/',
+        code: 'https://github.com/benhensor/reddit-api'
     }
 ]
 
