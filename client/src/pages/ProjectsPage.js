@@ -20,50 +20,35 @@ const ProjectsPage = forwardRef((props, ref) => {
       setActiveLink('')
     }
   }, [isInView, setActiveLink, controls])
-
-  const contentVariants = {
-		hidden: { opacity: 0 },
-		visible: {
-			opacity: 1,
-			transition: {
-        duration: 0.75,
-				staggerChildren: 3,
-			},
-		},
-	}
   
   return (
-    <Page ref={ref}>
-      <Projects>
-        <Content
-          ref={projectsRef}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={contentVariants}
-        >
+    <ProjectsContainer ref={ref}>
+      <ProjectsSection ref={projectsRef}>
+        <Content >
           <BGWord>PROJECTS</BGWord>
           <ProjectsGallery />
         </Content>
-      </Projects>
-    </Page>
+      </ProjectsSection>
+    </ProjectsContainer>
   )
 })
 
 export default ProjectsPage
 
-const Projects = styled.section`
-	height: 200vh;
-  overflow-y: scroll;
+const ProjectsContainer = styled.div`
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`
+
+const ProjectsSection = styled.div`
+	width: 100%;
 	margin: 0 auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	@media screen and (max-width: 999px) {
-		padding: var(--m-desktop);
-	}
-	@media screen and (max-width: 768px) {
-		padding: var(--m-mobile);
-	}
 `
 
 const Content = styled(motion.div)`
@@ -87,7 +72,6 @@ const BGWord = styled.span`
 	color: var(--text-color-dk);
 	z-index: -1;
 	@media screen and (max-width: 768px) {
-		width: 100%;
 		text-align: center;
 	}
 `

@@ -65,6 +65,11 @@ import weather3 from './assets/projects/weatherapp/tornado.webp'
 import kanban1 from './assets/projects/kanbantaskapp/calendars.webp'
 import kanban2 from './assets/projects/kanbantaskapp/postitOnFace.webp'
 import kanban3 from './assets/projects/kanbantaskapp/postits.webp'
+import jam1 from './assets/projects/jam/jam1.webp'
+import jam2 from './assets/projects/jam/jam2.webp'
+import jam3 from './assets/projects/jam/jam3.webp'
+import flashcards1 from './assets/projects/flashcards/flashcards1.webp'
+import reddit1 from './assets/projects/reddit/reddit-logo.svg'
 
 
 // Tech Icon Data
@@ -271,11 +276,31 @@ const projects = [
         key: 10,
         title: 'Jam',
         logo: null,
-        images: [kanban1, kanban2, kanban3],
+        images: [jam1, jam2, jam3],
         description: 'A playlist generator powered by the Spotify API.',
         techStack: [react, vercel],
         live: 'https://jam-client.vercel.app/',
-        code: 'https://github.com/benhensor/codecademy-react/tree/main/spotify-playlist-app'
+        code: 'https://github.com/benhensor/jam'
+    },
+    {
+        key: 11,
+        title: 'Flashcard Quiz App',
+        logo: null,
+        images: [flashcards1],
+        description: 'A quiz app making use of the Redux Toolkit in React.',
+        techStack: [react, redux, vercel],
+        live: 'https://bh-flashcards-app.vercel.app/',
+        code: 'https://github.com/benhensor/codecademy-react/tree/main/flashcards'
+    },
+    {
+        key: 12,
+        title: 'Reddit Clone',
+        logo: null,
+        images: [reddit1],
+        description: 'A Reddit clone built in React with Redux using the Reddit API.',
+        techStack: [react, redux, vercel],
+        live: 'https://reddit-api-bh.vercel.app/',
+        code: 'https://github.com/benhensor/reddit-api'
     }
 ]
 

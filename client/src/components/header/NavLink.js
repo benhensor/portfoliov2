@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 export default function NavLink({ name, activeLink, onClick }) {
+
     return (
         <Li>
             <Button 

@@ -15,7 +15,7 @@ import {
 const About = forwardRef((props, ref) => {
 	const { scrolled, setActiveLink } = props
 	const contentRef = useRef(null)
-	const isInView = useInView(contentRef)
+	const isInView = useInView(contentRef, { amount: 0.5 })
 	const controls = useAnimation()
 	const isVisible = isInView && scrolled
 
@@ -23,13 +23,15 @@ const About = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		if (isVisible) {
-			setActiveLink('about')
 			controls.start('visible')
+			if (isInView) {
+				setActiveLink('about')
+			}
 		} else if (!isVisible) {
 			controls.start('hidden')
 			setActiveLink('')
 		}
-	}, [scrolled, isVisible, setActiveLink, controls])
+	}, [scrolled, isInView, isVisible, setActiveLink, controls])
 
 	const scrollToContact = () => {
 		document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })

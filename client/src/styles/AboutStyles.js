@@ -13,15 +13,15 @@ export const AboutContent = styled(motion.div)`
 
 export const BGWord = styled.span`
 	position: absolute;
-	top: 20rem;
-	left: 30rem;
+	top: 50%;
+	left: 35%;
 	transform: translate(-50%, -50%);
 	font-size: clamp(4rem, 20vw, 15rem);
 	font-weight: 700;
 	color: var(--text-color-dk);
 	z-index: -1;
 	@media screen and (max-width: 768px) {
-		top: 50%;
+		top: 65%;
 		left: 50%;
 	}
 `
@@ -67,7 +67,6 @@ export const TextContainer = styled(motion.div)`
 		}
 	}
 	@media screen and (max-width: 768px) {
-		text-align: center;
 		padding: 0 5rem;
 	}
 	@media screen and (max-width: 546px) {
@@ -103,15 +102,17 @@ export const ImageContainer = styled(motion.div)`
 		}
 	}
 	@media screen and (max-width: 768px) {
-		margin-bottom: 4rem;
 		min-width: 23rem;
 		height: 23rem;
+		position: relative;
+		top: 20rem;
+		left: 14rem;
 	}
 	@media screen and (max-width: 546px) {
 		min-width: 15rem;
 		height: 15rem;
-		margin-top: 5rem;
-		margin-bottom: 2rem;
+		top: 15rem;
+		left: 8rem;
 	}
 `
 
