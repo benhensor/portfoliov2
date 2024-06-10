@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import { Page } from './styles/GlobalStyles'
 import Header from './components/header/Header'
 import Hero from './components/hero/Hero'
+import Dummy from './pages/DummyPage'
 import About from './pages/AboutPage'
 import TechStack from './pages/TechStackPage'
 import Projects from './pages/ProjectsPage'
@@ -49,11 +50,21 @@ export default function App() {
 					/>
 				<Hero scrolled={scrolled} />
 				<AppContent>
-						<About ref={aboutRef} scrolled={scrolled} setActiveLink={setActiveLink}/>
-						<TechStack ref={techStackRef} activeLink={activeLink} setActiveLink={setActiveLink} />
-						<Projects ref={projectsRef} setActiveLink={setActiveLink} />
-						<Contact ref={contactRef} setActiveLink={setActiveLink} />
-						<Cat />
+						<Page>
+							<About ref={aboutRef} scrolled={scrolled} setActiveLink={setActiveLink}/>
+						</Page>
+						<Page>
+							<TechStack ref={techStackRef} activeLink={activeLink} setActiveLink={setActiveLink} />
+						</Page>
+						<Page>
+							<Projects ref={projectsRef} setActiveLink={setActiveLink} />
+						</Page>
+						<Page>
+							<Contact ref={contactRef} setActiveLink={setActiveLink} />
+						</Page>
+						<Page>
+							<Cat />
+						</Page>
 				</AppContent>
 			</AppContainer>
 		</AnimatePresence>

@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 export const AboutContent = styled(motion.div)`
-	height: 100vh;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -22,7 +21,7 @@ export const BGWord = styled.span`
 	color: var(--text-color-dk);
 	z-index: -1;
 	@media screen and (max-width: 768px) {
-		top: 50%;
+		top: 65%;
 		left: 50%;
 	}
 `
@@ -68,7 +67,6 @@ export const TextContainer = styled(motion.div)`
 		}
 	}
 	@media screen and (max-width: 768px) {
-		text-align: center;
 		padding: 0 5rem;
 	}
 	@media screen and (max-width: 546px) {
@@ -104,15 +102,17 @@ export const ImageContainer = styled(motion.div)`
 		}
 	}
 	@media screen and (max-width: 768px) {
-		margin-bottom: 4rem;
 		min-width: 23rem;
 		height: 23rem;
+		position: relative;
+		top: 20rem;
+		left: 14rem;
 	}
 	@media screen and (max-width: 546px) {
 		min-width: 15rem;
 		height: 15rem;
-		margin-top: 5rem;
-		margin-bottom: 2rem;
+		top: 15rem;
+		left: 8rem;
 	}
 `
 
