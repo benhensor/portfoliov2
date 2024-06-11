@@ -188,7 +188,7 @@ const projects = [
         logo: null,
         images: [paprback1, paprback2, paprback3],
         description: 'Connecting people in their local area for the purpose of exchanging and donating unwanted books.',
-        techStack: [react, node, postgresql, netlify],
+        techStack: [{name: 'React', icon: react}, {name: 'Node', icon: node}, {name: 'PostgreSQL', icon: postgresql}, {name: 'Netlify', icon: netlify}],
         live: 'https://bcpaprback.netlify.app/',
         code: 'https://github.com/benhensor/soc_byteclub_paprback'
     },
@@ -198,7 +198,7 @@ const projects = [
         logo: null,
         images: [benhensorsound1, benhensorsound2, benhensorsound3],
         description: 'A recreation of my Sound Design website built in React with an Express mail server.',
-        techStack: [react, node, netlify],
+        techStack: [{name: 'React', icon: react}, {name: 'Node', icon: node}, {name: 'Netlify', icon: netlify}],
         live: 'https://benhensorsound.netlify.app/',
         code: 'https://github.com/benhensor/benhensorsound'
     },
@@ -208,7 +208,7 @@ const projects = [
         logo: null,
         images: [seasonit1, seasonit2, seasonit3],
         description: 'Discover seasonal produce throughout the year in the UK.',
-        techStack: [react, node, mongodb, netlify],
+        techStack: [{name: 'React', icon: react}, {name: 'Node', icon: node}, {name: 'MongoDB', icon: mongodb}, {name: 'Netlify', icon: netlify}],
         live: 'https://seasonit.netlify.app/',
         code: 'https://github.com/benhensor/season-it'
     },
@@ -218,7 +218,7 @@ const projects = [
         logo: null,
         images: [sneakers1, sneakers2, sneakers3],
         description: 'A Frontend Mentor e-commerce page built with React.',
-        techStack: [react, netlify],
+        techStack: [{name: 'React', icon: react}, {name: 'Netlify', icon: netlify}],
         live: 'https://frontendmentor-sneakers.netlify.app/',
         code: 'https://github.com/benhensor/e-commerce_page'
     },
@@ -228,7 +228,7 @@ const projects = [
         logo: null,
         images: [countries1, countries2, countries3],
         description: 'A Frontend Mentor country finder page built with React.',
-        techStack: [react, netlify],
+        techStack: [{name: 'React', icon: react}, {name: 'Netlify', icon: netlify}],
         live: 'https://fe-country-finder.netlify.app/',
         code: 'https://github.com/benhensor/countries_api.git'
     },
@@ -238,7 +238,7 @@ const projects = [
         logo: null,
         images: [audiophile1, audiophile2, audiophile3],
         description: 'A Frontend Mentor e-commerce site built with React.',
-        techStack: [react, netlify],
+        techStack: [{name: 'React', icon: react}, {name: 'Netlify', icon: netlify}],
         live: 'https://fm-audiophile.netlify.app/',
         code: 'https://github.com/benhensor/audiophile.git'
     },
@@ -248,7 +248,7 @@ const projects = [
         logo: null,
         images: [designo1, designo2, designo3],
         description: 'A Frontend Mentor multi-page site built with React and Styled Components.',
-        techStack: [react, netlify],
+        techStack: [{name: 'React', icon: react}, {name: 'Netlify', icon: netlify}],
         live: 'https://bhfm-designo.netlify.app/',
         code: 'https://github.com/benhensor/designo.git'
     },
@@ -258,7 +258,7 @@ const projects = [
         logo: null,
         images: [weather1, weather2, weather3],
         description: 'A simple React weather app.',
-        techStack: [react, vercel],
+        techStack: [{name: 'React', icon: react}, {name: 'Vercel', icon: vercel}],
         live: 'https://weather-a0yriosp6-ben-s-projects-3a069c6e.vercel.app/',
         code: 'https://github.com/benhensor/weather-app.git'
     },
@@ -267,8 +267,8 @@ const projects = [
         title: 'Kanban Task Management App',
         logo: null,
         images: [kanban1, kanban2, kanban3],
-        description: 'A simple React weather app.',
-        techStack: [react, typescript, tailwind, vercel],
+        description: 'A Frontend Mentor PWA challenge built with React and Styled Components.',
+        techStack: [{name: 'React', icon: react}, {name: 'TypeScript', icon: typescript}, {name: 'Taliwind CSS', icon: tailwind}, {name: 'Vercel', icon: vercel}],
         live: 'https://kanban-pwa-indol.vercel.app/',
         code: 'https://github.com/benhensor/kanban-pwa'
     },
@@ -278,7 +278,7 @@ const projects = [
         logo: null,
         images: [jam1, jam2, jam3],
         description: 'A playlist generator powered by the Spotify API.',
-        techStack: [react, vercel],
+        techStack: [{name: 'React', icon: react}, {name: 'Vercel', icon: vercel}],
         live: 'https://jam-client.vercel.app/',
         code: 'https://github.com/benhensor/jam'
     },
@@ -288,7 +288,7 @@ const projects = [
         logo: null,
         images: [flashcards1],
         description: 'A quiz app making use of the Redux Toolkit in React.',
-        techStack: [react, redux, vercel],
+        techStack: [{name: 'React', icon: react}, {name: 'Redux', icon: redux}, {name: 'Vercel', icon: vercel}],
         live: 'https://bh-flashcards-app.vercel.app/',
         code: 'https://github.com/benhensor/codecademy-react/tree/main/flashcards'
     },
@@ -298,7 +298,7 @@ const projects = [
         logo: null,
         images: [reddit1],
         description: 'A Reddit clone built in React with Redux using the Reddit API.',
-        techStack: [react, redux, vercel],
+        techStack: [{name: 'React', icon: react}, {name: 'Redux', icon: redux}, {name: 'Vercel', icon: vercel}],
         live: 'https://reddit-api-bh.vercel.app/',
         code: 'https://github.com/benhensor/reddit-api'
     }

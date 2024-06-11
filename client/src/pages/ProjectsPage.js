@@ -1,7 +1,6 @@
 import React, { forwardRef, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { motion, useInView, useAnimation } from 'framer-motion'
-import { Page } from '../styles/GlobalStyles'
 import ProjectsGallery from '../components/projects/ProjectsGallery'
 
 const ProjectsPage = forwardRef((props, ref) => {
@@ -54,7 +53,6 @@ const ProjectsSection = styled.div`
 const Content = styled(motion.div)`
   display: flex;
 	justify-content: center;
-	align-items: flex-end;
 	position: relative;
   width: 100%;
 	@media screen and (max-width: 768px) {
