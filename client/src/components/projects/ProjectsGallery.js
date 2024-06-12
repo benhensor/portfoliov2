@@ -1,168 +1,129 @@
-import React, { useRef, useState, useEffect } from 'react'
-import styled from 'styled-components'
-import { motion, useMotionValue } from 'framer-motion'
-import { projects } from '../../data'
-import Project from './Project'
-
-const ONE_SECOND = 1000
-const AUTO_DELAY = ONE_SECOND * 10
-const DRAG_BUFFER = 50
-
-const SPRING_OPTIONS = {
-	type: 'spring',
-	mass: 3,
-	stiffness: 400,
-	damping: 50,
-}
+import React, { useRef, useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { projects } from '../../data';
+import Project from './Project';
 
 export default function ProjectsGallery() {
-	const galleryRef = useRef(null)
-	const [projectIndex, setProjectIndex] = useState(0)
+  const galleryRef = useRef(null);
+  const [projectIndex, setProjectIndex] = useState(0);
+  const projectRefs = useRef([]);
 
-	const dragX = useMotionValue(0)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = Number(entry.target.getAttribute('data-index'));
+          if (entry.isIntersecting) {
+            setProjectIndex(index);
+            entry.target.classList.add('visible');
+          } else {
+            entry.target.classList.remove('visible');
+          }
+        });
+      },
+      {
+        root: galleryRef.current,
+        threshold: 0.8,
+      }
+    );
+  
+    const currentRefs = projectRefs.current; 
+    currentRefs.forEach((project) => {
+      if (project) observer.observe(project);
+    });
+  
+    return () => {
+      currentRefs.forEach((project) => {
+        if (project) observer.unobserve(project);
+      });
+    };
+  }, []);
 
-	useEffect(() => {
-		const intervalRef = setInterval(() => {
-			const x = dragX.get()
+  const scrollToProject = (index) => {
+    if (projectRefs.current[index]) {
+      projectRefs.current[index].scrollIntoView({ behavior: 'smooth', inline: 'start' });
+      setProjectIndex(index);
+    }
+  };
 
-			if (x === 0) {
-				setProjectIndex((prev) => {
-					if (prev === projects.length - 1) {
-						return 0
-					}
-					return prev + 1
-				})
-			}
-		}, AUTO_DELAY)
+  const Dots = () => {
+    return (
+      <DotsContainer>
+        {projects.map((_, index) => (
+          <Dot
+            key={index}
+            onClick={() => scrollToProject(index)}
+            $isActive={projectIndex === index}
+          />
+        ))}
+      </DotsContainer>
+    );
+  };
 
-		return () => clearInterval(intervalRef)
-	}, [dragX])
-
-	const onDragEnd = () => {
-		const x = dragX.get()
-
-		if (x <= -DRAG_BUFFER && projectIndex < projects.length - 1) {
-			setProjectIndex((prev) => prev + 1)
-		} else if (x >= DRAG_BUFFER && projectIndex > 0) {
-			setProjectIndex((prev) => prev - 1)
-		}
-	}
-
-	const MappedProjects = ({ projectIndex }) => {
-		return (
-			<>
-				{projects.map((project, idx) => {
-					return (
-						<Project
-							key={idx}
-							project={project}
-							springOptions={SPRING_OPTIONS}
-							projectIndex={projectIndex}
-						/>
-					)
-				})}
-			</>
-		)
-	}
-
-	const Dots = ({ projectIndex, setProjectIndex }) => {
-		return (
-			<DotsContainer>
-				{projects.map((_, index) => {
-					return (
-						<Dot
-							key={index}
-							onClick={() => setProjectIndex(index)}
-							$isActive={projectIndex === index}
-						></Dot>
-					)
-				})}
-			</DotsContainer>
-		)
-	}
-
-	return (
-		<ProjectGallery ref={galleryRef}>
-			<InnerContainer
-				drag="x"
-				dragConstraints={{
-					left: 0,
-					right: 0,
-				}}
-				style={{
-					x: dragX,
-				}}
-				animate={{
-					translateX: `-${projectIndex * 100}%`,
-				}}
-				transition={SPRING_OPTIONS}
-				onDragEnd={onDragEnd}
-			>
-				<MappedProjects projectIndex={projectIndex} />
-			</InnerContainer>
-			<Dots
-				projectIndex={projectIndex}
-				setProjectIndex={setProjectIndex}
-			/>
-		</ProjectGallery>
-	)
+  return (
+    <ProjectGallery ref={galleryRef}>
+      <InnerContainer>
+        {projects.map((project, index) => (
+          <ProjectWrapper
+            key={index}
+            ref={(el) => (projectRefs.current[index] = el)}
+            data-index={index}
+          >
+            <Project project={project} />
+          </ProjectWrapper>
+        ))}
+      </InnerContainer>
+      <Dots />
+    </ProjectGallery>
+  );
 }
 
 const ProjectGallery = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 	width: 100%;
-	overflow: hidden;
-	/* @media screen and (max-width: 999px) {
- 
+`;
+
+const InnerContainer = styled.div`
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  width: 100%;
+`;
+
+const ProjectWrapper = styled.ul`
+  flex: 0 0 100%;
+	height: 100%;
+  margin: 0 10rem;
+  scroll-snap-align: start;
+  transition: all .5s ease-in-out;
+  opacity: 0;
+  &.visible {
+    opacity: 1;
   }
-
-  @media screen and (max-width: 768px) {
-  
-  }
-
-  @media screen and (max-width: 480px) {
-    
-  } */
-`
-
-const InnerContainer = styled(motion.div)`
-  width: 118%;
-	display: flex;
-	align-items: center;
-	cursor: grab;
-	&:active {
-		cursor: grabbing;
-	}
-`
+`;
 
 const DotsContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 1rem;
-	gap: 1rem;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  gap: 1.6rem;
+`;
 
 const Dot = styled.button`
-	width: 2rem;
-	height: 2rem;
-	border: none;
-	border-radius: 50%;
-	background: ${({ $isActive }) =>
-		$isActive ? 'var(--blue)' : 'var(--ltBlue)'};
-	cursor: pointer;
-	&:hover {
-		background: var(--blue);
-	}
-	@media only screen and (max-width: 768px) {
-		width: 1.5rem;
-		height: 1.5rem;
-	}
-	@media only screen and (max-width: 480px) {
-		width: 1rem;
-		height: 1rem;
-	}
-`
+  width: clamp(1rem, 2vw, 2rem);
+  height: clamp(1rem, 2vw, 2rem);
+  border: none;
+  border-radius: 50%;
+  background: ${({ $isActive }) => ($isActive ? 'var(--blue)' : 'var(--ltBlue)')};
+  cursor: pointer;
+  transition: all 0.12s ease;
+  &:hover {
+    background: var(--blue);
+    scale: 1.5;
+  }
+`;

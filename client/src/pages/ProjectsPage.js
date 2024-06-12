@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import { motion, useInView, useAnimation } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import ProjectsGallery from '../components/projects/ProjectsGallery'
 
 const ProjectsPage = forwardRef((props, ref) => {
@@ -8,38 +8,44 @@ const ProjectsPage = forwardRef((props, ref) => {
   const { setActiveLink } = props
   const projectsRef = useRef(null)
   const isInView = useInView(projectsRef, { amount: 0.5 })
-  const controls = useAnimation()
 
   useEffect(() => {
     if (isInView) {
-      controls.start('visible')
       setActiveLink('projects')
     } else {
-      controls.start('hidden')
       setActiveLink('')
     }
-  }, [isInView, setActiveLink, controls])
+  }, [isInView, setActiveLink])
   
   return (
-    <ProjectsContainer ref={ref}>
-      <ProjectsSection ref={projectsRef}>
-        <Content >
-          <BGWord>PROJECTS</BGWord>
-          <ProjectsGallery />
-        </Content>
-      </ProjectsSection>
-    </ProjectsContainer>
+    <Projects ref={ref}>
+      <Content ref={ref}>
+        <ProjectsSection ref={projectsRef}>
+
+            <BGWord>PROJECTS</BGWord>
+            <ProjectsGallery />
+
+        </ProjectsSection>
+      </Content>
+    </Projects>
   )
 })
 
 export default ProjectsPage
 
-const ProjectsContainer = styled.div`
-	width: 100%;
-	height: 100vh;
+const Projects = styled.section`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+`
+
+const Content = styled(motion.div)`
+  width: 100%;
+  overflow: hidden;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: relative;
 `
 
 const ProjectsSection = styled.div`
@@ -48,16 +54,6 @@ const ProjectsSection = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-`
-
-const Content = styled(motion.div)`
-  display: flex;
-	justify-content: center;
-	position: relative;
-  width: 100%;
-	@media screen and (max-width: 768px) {
-		flex-direction: column;
-	}
 `
 
 const BGWord = styled.span`

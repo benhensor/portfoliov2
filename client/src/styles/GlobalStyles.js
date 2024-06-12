@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
     --blue: #00c5c5;
     --ltBlue: #d8fdfe;
     --error: #ff0000;
-    --background-card: linear-gradient(to top left, #2f3636, #171e1e);
+    --background-card: linear-gradient(180deg, #2f3636, #171e1e);
     --background-gradient: linear-gradient(180deg, #141717 0%, #1d1f20 100%);
     --background-static: #141717;
 
