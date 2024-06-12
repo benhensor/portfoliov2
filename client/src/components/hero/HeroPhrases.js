@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
+import { heroPhrases } from '../../data'
 
 const phraseVariants = {
   hidden: { opacity: 0 },
@@ -11,12 +12,7 @@ const phraseVariants = {
 export default function HeroPhrases() {
   const [currentPhrase, setCurrentPhrase] = useState(0)
 
-	const textRotate = [
-		'Frontend Developer',
-		'Web Designer',
-		'Sound Editor',
-		'Cat Fanatic!'
-	]
+	const textRotate = heroPhrases.map((phrase) => phrase.phrase)
 
 	useEffect(() => {
 		const interval = setInterval(() => {

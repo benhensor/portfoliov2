@@ -1,10 +1,10 @@
 import React, { forwardRef, useRef, useEffect } from 'react'
 import { motion, useInView, useAnimation } from 'framer-motion'
-import { Page } from '../styles/GlobalStyles'
 import { aboutInfo } from '../data'
 import profile from '../assets/img/profile.webp'
 import CV from '../assets/docs/BenHensor_CV_Mar_2024.pdf'
 import { 
+	About,
 	AboutContent,
 	TextContainer,
 	ImageContainer,
@@ -12,7 +12,7 @@ import {
 	BGWord,
  } from '../styles/AboutStyles'
 
-const About = forwardRef((props, ref) => {
+const AboutPage = forwardRef((props, ref) => {
 	const { scrolled, setActiveLink } = props
 	const contentRef = useRef(null)
 	const isInView = useInView(contentRef, { amount: 0.5 })
@@ -23,15 +23,19 @@ const About = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		if (isVisible) {
-			controls.start('visible')
-			if (isInView) {
-				setActiveLink('about')
-			}
-		} else if (!isVisible) {
-			controls.start('hidden')
+			setActiveLink('about')
+		}	else {
 			setActiveLink('')
 		}
-	}, [scrolled, isInView, isVisible, setActiveLink, controls])
+	}, [isVisible, setActiveLink])
+
+	useEffect(() => {
+		if (isInView) {
+			controls.start('visible')
+		} else {
+			controls.start('hidden')
+		}
+	}, [isInView, controls])
 
 	const scrollToContact = () => {
 		document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })
@@ -111,7 +115,7 @@ const About = forwardRef((props, ref) => {
 	}
 
 	return (
-		<Page ref={ref}>
+		<About ref={ref}>
 			<AboutContent
 				ref={contentRef}
 				initial="hidden"
@@ -173,8 +177,8 @@ const About = forwardRef((props, ref) => {
 				</ImageContainer>
 
 			</AboutContent>
-		</Page>
+		</About>
 	)
 })
 
-export default About
+export default AboutPage

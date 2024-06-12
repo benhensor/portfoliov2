@@ -1,7 +1,6 @@
 import React, { forwardRef, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { motion, useInView, useAnimation } from 'framer-motion'
-import { Page } from '../styles/GlobalStyles'
 import TechCategory from '../components/tech/TechCategory'
 import {
 	backend,
@@ -13,7 +12,7 @@ import {
 	tools,
 } from '../data'
 
-const TechStack = forwardRef((props, ref) => {
+const TechStackPage = forwardRef((props, ref) => {
 	const { setActiveLink } = props
 	const techRef = useRef(null)
 	const isInView = useInView(techRef, { amount: 0.5 })
@@ -77,7 +76,7 @@ const TechStack = forwardRef((props, ref) => {
 	};
 
 	return (
-		<Page ref={ref}>
+		<TechStack ref={ref}>
 			<Content
 				ref={techRef}
 				initial="hidden"
@@ -102,16 +101,22 @@ const TechStack = forwardRef((props, ref) => {
 					))}
 				</TechCategoriesContainer>
 			</Content>
-		</Page>
+		</TechStack>
 	)
 })
 
-export default TechStack
+export default TechStackPage
+
+const TechStack = styled.section`
+	display: flex;
+	width: 100%;
+	height: 100vh;
+`
 
 const Content = styled(motion.div)`
 	width: 100%;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 	position: relative;
 	width: 100%;
@@ -135,7 +140,7 @@ const BGWord = styled.span`
 	transform: translate(-50%, -50%);
 	width: 100%;
 	text-align: center;
-	font-size: clamp(4rem, 20vw, 15rem);
+	font-size: clamp(3rem, 15vw, 15rem);
 	font-weight: 700;
 	color: var(--text-color-dk);
 	z-index: -1;
