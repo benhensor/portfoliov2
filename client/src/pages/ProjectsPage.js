@@ -1,11 +1,12 @@
 import React, { forwardRef, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { motion, useInView } from 'framer-motion'
+import { useActiveLink } from '../context/useActiveNavLink'
 import ProjectsGallery from '../components/projects/ProjectsGallery'
 
 const ProjectsPage = forwardRef((props, ref) => {
 
-  const { setActiveLink } = props
+  const { setActiveLink } = useActiveLink()
   const projectsRef = useRef(null)
   const isInView = useInView(projectsRef, { amount: 0.5 })
 
@@ -18,13 +19,11 @@ const ProjectsPage = forwardRef((props, ref) => {
   }, [isInView, setActiveLink])
   
   return (
-    <Projects ref={ref}>
-      <Content ref={ref}>
+    <Projects ref={ref} id='projects'>
+      <Content>
+        <BGWord>PROJECTS</BGWord>
         <ProjectsSection ref={projectsRef}>
-
-            <BGWord>PROJECTS</BGWord>
-            <ProjectsGallery />
-
+          <ProjectsGallery />
         </ProjectsSection>
       </Content>
     </Projects>
@@ -48,14 +47,6 @@ const Content = styled(motion.div)`
 	position: relative;
 `
 
-const ProjectsSection = styled.div`
-	width: 100%;
-	margin: 0 auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`
-
 const BGWord = styled.span`
 	position: absolute;
 	top: 50%;
@@ -68,4 +59,12 @@ const BGWord = styled.span`
 	@media screen and (max-width: 768px) {
 		text-align: center;
 	}
+`
+
+const ProjectsSection = styled.div`
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `

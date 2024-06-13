@@ -9,20 +9,21 @@ import {
 	LogoContainer,
 	HeaderName,
 	HeaderMenu,
-	StyledSend,
 	MenuControls,
 	StyledFaBars,
 	StyledFaTimes,
 	MobileMenu,
 	Icons,
 } from '../../styles/HeaderStyles'
+import { useActiveLink } from '../../context/useActiveNavLink'
 import NavIcon1 from '../../icons/NavIcon1'
 import NavIcon2 from '../../icons/NavIcon2'
 import NavIcon3 from '../../icons/NavIcon3'
 import Logo from '../../assets/img/logo2023.webp'
 
-export default function Header({ scrolled, scrollToRef, activeLink, setActiveLink }) {
+export default function Header({ scrolled, scrollToRef }) {
 	
+	const { setActiveLink } = useActiveLink()
 	const headerRef = useRef(null)
 	const [isOpen, setIsOpen] = useState(false)
 
@@ -63,28 +64,19 @@ export default function Header({ scrolled, scrollToRef, activeLink, setActiveLin
 						</LogoContainer>
 						<HeaderMenu>
 							<NavLink
-								name="About"
-								activeLink={activeLink === 'about'}
+								name="about"
 								onClick={() => navigateToSection('about')}
 							/>
 							<NavLink
-								name="Tech Stack"
-								activeLink={activeLink === 'tech'}
+								name="tech"
 								onClick={() => navigateToSection('tech')}
 							/>
 							<NavLink
-								name="Projects"
-								activeLink={activeLink === 'projects'}
+								name="projects"
 								onClick={() => navigateToSection('projects')}
 							/>
 							<NavLink
-								name={
-									<StyledSend
-										$activeLink={activeLink === 'contact'}
-										style={{ rotate: '-45deg' }}
-									/>
-								}
-								activeLink={activeLink === 'contact'}
+								name='contact'
 								onClick={() => navigateToSection('contact')}
 							/>
 						</HeaderMenu>
@@ -101,23 +93,19 @@ export default function Header({ scrolled, scrollToRef, activeLink, setActiveLin
 			</StyledHeader>
 			<MobileMenu $isOpen={isOpen}>
 				<NavLink
-					name="About"
-					activeLink={activeLink === 'about'}
+					name="about"
 					onClick={() => navigateToSection('about')}
 				/>
 				<NavLink
-					name="Tech Stack"
-					activeLink={activeLink === 'tech'}
+					name="tech"
 					onClick={() => navigateToSection('tech')}
 				/>
 				<NavLink
-					name="Projects"
-					activeLink={activeLink === 'projects'}
+					name="projects"
 					onClick={() => navigateToSection('projects')}
 				/>
 				<NavLink
-					name={<StyledSend $activeLink={activeLink === 'contact'} />}
-					activeLink={activeLink === 'contact'}
+					name='contactMobile'
 					onClick={() => navigateToSection('contact')}
 				/>
 				<Icons>

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { projects } from '../../data';
 import Project from './Project';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 export default function ProjectsGallery() {
+  const galleryRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const gapWidth = 500; // Gap width in pixels
 
   const handlePrevClick = () => {
     setActiveIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : projects.length - 1));
@@ -16,39 +16,35 @@ export default function ProjectsGallery() {
     setActiveIndex((prevIndex) => (prevIndex < projects.length - 1 ? prevIndex + 1 : 0));
   };
 
+  const calculateOpacity = (index) => {
+    const offset = Math.abs(index - activeIndex);
+    const maxOffset = Math.floor(projects.length / 2);
+    return Math.max(0, 1 - offset / maxOffset);
+  };
+
   return (
-    <ProjectGallery>
+    <ProjectGallery ref={galleryRef}>
       <InnerContainer>
-        <Chevron
-          direction='left' 
-          onClick={handlePrevClick}
-        >
-          <FaChevronLeft />
-        </Chevron>
         <GalleryTrackContainer>
-            <GalleryTrack style={{ transform: `translateX(calc(-${activeIndex} * (100% + ${gapWidth}px)))` }}>
-              {projects.map((project, index) => (
-                <ProjectWrapper
-                  key={project.key}
-                  $isActive={activeIndex === index}
-                  style={{
-                    marginRight: `${gapWidth}px`,
-                  }}
-                >
-                  <Project project={project} />
-                </ProjectWrapper>
-              ))}
+          <GalleryTrack>
+            {projects.map((project, index) => (
+              <ProjectWrapper
+                key={project.key}
+                style={{
+                  opacity: calculateOpacity(index),
+                  transform: `translateX(-${activeIndex * 100}%)`
+                }}
+              >
+                <Project project={project} />
+              </ProjectWrapper>
+            ))}
           </GalleryTrack>
         </GalleryTrackContainer>
-        <Chevron
-          direction='right'
-          onClick={handleNextClick}
-        >
-          <FaChevronRight />
-        </Chevron>
       </InnerContainer>
       <Dots>
-        
+        <Chevron onClick={handlePrevClick}>
+          <FaChevronLeft />
+        </Chevron>
         {projects.map((project, index) => (
           <Dot
             key={project.key}
@@ -56,7 +52,9 @@ export default function ProjectsGallery() {
             onClick={() => setActiveIndex(index)}
           />
         ))}
-        
+        <Chevron onClick={handleNextClick}>
+          <FaChevronRight />
+        </Chevron>
       </Dots>
     </ProjectGallery>
   );
@@ -72,6 +70,7 @@ const ProjectGallery = styled.div`
 
 const InnerContainer = styled.div`
   width: 100%;
+  max-width: 1000px;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -79,45 +78,18 @@ const InnerContainer = styled.div`
 `;
 
 const Chevron = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  ${({ direction }) => (direction === 'left' ? 'left: 1rem;' : 'right: 1rem;')}
-  width: clamp(3rem, 5vw, 4rem);
-  height: clamp(3rem, 5vw, 4rem);
+  width: clamp(2rem, 5vw, 4rem);
+  height: clamp(2rem, 5vw, 4rem);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: clamp(1rem, 2vw, 2rem);
   border: none;
   border-radius: 50%;
-  background: #fff;
-  color: var(--orange);
+  background: var(--ltBlue);
   padding: 1rem;
   cursor: pointer;
   transition: all 0.12s ease;
-  z-index: 10;
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 130%;
-    height: 130%;
-    border: 3px solid var(--orange);
-    padding: 1rem;
-    border-radius: 50%;
-    transition: all 0.12s ease;
-  
-  }
-  &:hover {
-    color: #fff;
-    background-color: var(--orange);
-    &::before {
-      border-color: #fff;
-    }
-  }
 `;
 
 const GalleryTrackContainer = styled.div`
@@ -131,14 +103,15 @@ const GalleryTrack = styled.ul`
   display: flex;
   align-items: center;
   width: 100%;
+  padding: 0;
+  margin: 0;
   list-style: none;
   transition: transform 0.5s ease;
 `;
 
 const ProjectWrapper = styled.div`
   min-width: 100%;
-  transition: opacity .75s ease;
-  opacity: ${({ $isActive }) => ($isActive ? 1 : 0)};
+  transition: opacity 0.5s ease;
 `;
 
 const Dots = styled.div`
@@ -152,13 +125,13 @@ const Dots = styled.div`
 const Dot = styled.button`
   width: clamp(1rem, 2vw, 2rem);
   height: clamp(1rem, 2vw, 2rem);
-  border: 1px solid var(--blue);
+  border: none;
   border-radius: 50%;
-  background: ${({ $isActive }) => ($isActive ? 'var(--blue)' : 'transparent')};
+  background: ${({ $isActive }) => ($isActive ? 'var(--blue)' : 'var(--ltBlue)')};
   cursor: pointer;
   transition: all 0.12s ease;
   &:hover {
-    background: var(--ltBlue);
+    background: var(--blue);
     transform: scale(1.2);
   }
 `;

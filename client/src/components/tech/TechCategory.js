@@ -4,7 +4,8 @@ import { motion } from 'framer-motion'
 
 export default function TechCategory({
 	title,
-	skillSet
+	skillSet,
+	variants
 }) {
 	const [showTechCards, setShowTechCards] = useState(false)
 
@@ -13,6 +14,7 @@ export default function TechCategory({
 			layout
 			onMouseEnter={() => setShowTechCards(true)}
 			onMouseLeave={() => setShowTechCards(false)}
+			variants={variants}
 		>
 			<motion.h2 layout="position">{title}</motion.h2>
 			{showTechCards && (
@@ -109,7 +111,8 @@ const TechCard = styled(motion.div)`
 	}
 	@media screen and (max-width: 768px) {
 		width: 7rem;
-		gap: 0.5rem;
+		height: 7rem;
+		padding: 0.5rem;
 		img {
 			width: 2em;
 			height: 2em;

@@ -202,14 +202,15 @@ export const Icons = styled.li`
 			width: 2.5em;
 			height: 2.5em;
 			position: absolute;
-			background-color: var(--button-hover);
+			background-color: var(--orange);
 			border-radius: 25%;
 			transform: scale(0);
-			border: 1px solid var(--button-hover);
+			border: 1px solid rgba(255, 255, 255, 0.5);
 			transition: 0.1s ease-in-out;
 		}
 		&:hover::before {
 			transform: scale(1);
+			color: #333;
 		}
 		img {
 			width: 1.5em;
@@ -217,7 +218,7 @@ export const Icons = styled.li`
 			transition: 0.1s ease-in-out;
 		}
 		&:hover {
-			img {
+			svg {
 				filter: brightness(0) saturate(100%) invert(0%) sepia(7%)
 					saturate(98%) hue-rotate(346deg) brightness(95%)
 					contrast(86%);

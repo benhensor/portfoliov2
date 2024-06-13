@@ -1,7 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, useInView } from 'framer-motion'
 import { Page } from './styles/GlobalStyles'
+import { useActiveLink } from './context/useActiveNavLink'
+import { useWindowSize } from './hooks/useWindowSize'
 import Header from './components/header/Header'
 import Hero from './components/hero/Hero'
 import About from './pages/AboutPage'
@@ -10,15 +12,20 @@ import Projects from './pages/ProjectsPage'
 import Contact from './pages/ContactPage'
 import Cat from './components/cat/Cat'
 
-
 export default function App() {
+	const { activeLink, setActiveLink } = useActiveLink()
+	const size = useWindowSize()
 	const aboutRef = useRef(null)
 	const techStackRef = useRef(null)
 	const projectsRef = useRef(null)
 	const contactRef = useRef(null)
 
 	const [scrolled, setScrolled] = useState(false)
-	const [activeLink, setActiveLink] = useState('home')
+
+	const isAboutInView = useInView(aboutRef, { amount: 0.5 })
+	const isTechInView = useInView(techStackRef, { amount: 0.5 })
+	const isProjectsInView = useInView(projectsRef, { amount: 0.5 })
+	const isContactInView = useInView(contactRef, { amount: 0.5 })
 
 	useEffect(() => {
 		window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -26,49 +33,75 @@ export default function App() {
 
 	useEffect(() => {
 		const onScroll = () => {
-
 			if (window.scrollY > 50) {
-					setScrolled(true)
+				setScrolled(true)
 			} else {
-					setScrolled(false)
+				setScrolled(false)
 			}
 		}
 		window.addEventListener('scroll', onScroll)
 		return () => window.removeEventListener('scroll', onScroll)
 	}, [scrolled])
 
+	useEffect(() => {
+		if (isAboutInView && scrolled) {
+			setActiveLink('about')
+		} else if (isTechInView) {
+			setActiveLink('tech')
+		} else if (isProjectsInView) {
+			setActiveLink('projects')
+		} else if (isContactInView) {
+			console.log(size)
+			setActiveLink('contact')
+			console.log(activeLink)
+		} else {
+			setActiveLink('')
+		}
+	}, [ 
+		isAboutInView,
+		isTechInView,
+		isProjectsInView,
+		isContactInView,
+		activeLink,
+		setActiveLink,
+		size,
+		scrolled,
+	])
+
 	return (
 		<AnimatePresence>
 			<AppContainer>
-
-				<Header 
+				<Header
 					scrolled={scrolled}
-					scrollToRef={{ about: aboutRef, tech: techStackRef, projects: projectsRef, contact: contactRef }}
-					activeLink={activeLink}
-					setActiveLink={setActiveLink}
-					/>
+					scrollToRef={{
+						about: aboutRef,
+						tech: techStackRef,
+						projects: projectsRef,
+						contact: contactRef,
+					}}
+				/>
 				<Hero scrolled={scrolled} />
 				<AppContent>
-						<Page>
-							<About ref={aboutRef} scrolled={scrolled}  activeLink={activeLink} setActiveLink={setActiveLink}/>
-						</Page>
-						<Page>
-							<TechStack ref={techStackRef} activeLink={activeLink} setActiveLink={setActiveLink} />
-						</Page>
-						<Page>
-							<Projects ref={projectsRef}  activeLink={activeLink} setActiveLink={setActiveLink} />
-						</Page>
-						<Page>
-							<Contact ref={contactRef}  activeLink={activeLink} setActiveLink={setActiveLink} />
-						</Page>
-						<Page>
-							<Cat />
-						</Page>
+					<Page>
+						<About ref={aboutRef} scrolled={scrolled} />
+					</Page>
+					<Page>
+						<TechStack ref={techStackRef} />
+					</Page>
+					<Page>
+						<Projects ref={projectsRef} />
+					</Page>
+					<Page>
+						<Contact ref={contactRef} />
+					</Page>
+					<Page>
+						<Cat />
+					</Page>
 				</AppContent>
 			</AppContainer>
 		</AnimatePresence>
 	)
-} 
+}
 
 const AppContainer = styled.main`
 	display: flex;
