@@ -58,7 +58,7 @@ import audiophile3 from './assets/projects/audiophile/speaker.webp'
 import designo1 from './assets/projects/designo/designDesktop.webp'
 import designo2 from './assets/projects/designo/desktop.webp'
 import designo3 from './assets/projects/designo/graphicDesign.webp'
-import weather1 from './assets/projects/weatherapp/raindrops.webp'
+import weather1 from './assets/projects/weatherapp/weather-app-card2.webp'
 import weather2 from './assets/projects/weatherapp/sunBehindClouds.webp'
 import weather3 from './assets/projects/weatherapp/tornado.webp'
 import kanban1 from './assets/projects/kanbantaskapp/calendars.webp'
@@ -194,10 +194,10 @@ const aboutInfo = {
 // Projects data
 const projects = [
 	{
-		key: 1,
+		key: 0,
 		title: 'Paprback',
 		logo: null,
-		images: [paprback1, paprback2, paprback3],
+		image: paprback1,
 		description:
 			'Connecting people in their local area for the purpose of exchanging and donating unwanted books.',
 		techStack: [
@@ -210,10 +210,10 @@ const projects = [
 		code: 'https://github.com/benhensor/soc_byteclub_paprback',
 	},
 	{
-		key: 2,
+		key: 1,
 		title: 'Ben Hensor Sound',
 		logo: null,
-		images: [benhensorsound1, benhensorsound2, benhensorsound3],
+		image: benhensorsound1,
 		description:
 			'A recreation of my Sound Design website built in React with an Express mail server.',
 		techStack: [
@@ -225,10 +225,10 @@ const projects = [
 		code: 'https://github.com/benhensor/benhensorsound',
 	},
 	{
-		key: 3,
+		key: 2,
 		title: 'SeasonIt 2.0',
 		logo: null,
-		images: [seasonit1, seasonit2, seasonit3],
+		image: seasonit1,
 		description: 'Discover seasonal produce throughout the year in the UK.',
 		techStack: [
 			{ name: 'React', icon: react },
@@ -240,10 +240,10 @@ const projects = [
 		code: 'https://github.com/benhensor/season-it',
 	},
 	{
-		key: 4,
+		key: 3,
 		title: 'Sneakers',
 		logo: null,
-		images: [sneakers1, sneakers2, sneakers3],
+		image: sneakers1,
 		description: 'A Frontend Mentor e-commerce page built with React.',
 		techStack: [
 			{ name: 'React', icon: react },
@@ -253,10 +253,10 @@ const projects = [
 		code: 'https://github.com/benhensor/e-commerce_page',
 	},
 	{
-		key: 5,
+		key: 4,
 		title: 'RESTful Countries API',
 		logo: null,
-		images: [countries1, countries2, countries3],
+		image: countries1,
 		description: 'A Frontend Mentor country finder page built with React.',
 		techStack: [
 			{ name: 'React', icon: react },
@@ -266,10 +266,10 @@ const projects = [
 		code: 'https://github.com/benhensor/countries_api.git',
 	},
 	{
-		key: 6,
+		key: 5,
 		title: 'Audiophile',
 		logo: null,
-		images: [audiophile1, audiophile2, audiophile3],
+		image: audiophile1,
 		description: 'A Frontend Mentor e-commerce site built with React.',
 		techStack: [
 			{ name: 'React', icon: react },
@@ -279,10 +279,10 @@ const projects = [
 		code: 'https://github.com/benhensor/audiophile.git',
 	},
 	{
-		key: 7,
+		key: 6,
 		title: 'Designo',
 		logo: null,
-		images: [designo1, designo2, designo3],
+		image: designo1,
 		description:
 			'A Frontend Mentor multi-page site built with React and Styled Components.',
 		techStack: [
@@ -293,10 +293,10 @@ const projects = [
 		code: 'https://github.com/benhensor/designo.git',
 	},
 	{
-		key: 8,
+		key: 7,
 		title: 'Weather App',
 		logo: null,
-		images: [weather1, weather2, weather3],
+		image: weather1,
 		description: 'A simple React weather app.',
 		techStack: [
 			{ name: 'React', icon: react },
@@ -306,10 +306,10 @@ const projects = [
 		code: 'https://github.com/benhensor/weather-app.git',
 	},
 	{
-		key: 9,
+		key: 8,
 		title: 'Kanban Task Management App',
 		logo: null,
-		images: [kanban1, kanban2, kanban3],
+		image: kanban1,
 		description:
 			'A Frontend Mentor PWA challenge built with React and Styled Components.',
 		techStack: [
@@ -322,10 +322,10 @@ const projects = [
 		code: 'https://github.com/benhensor/kanban-pwa',
 	},
 	{
-		key: 10,
+		key: 9,
 		title: 'Jam',
 		logo: null,
-		images: [jam1, jam2, jam3],
+		image: jam1,
 		description: 'A playlist generator powered by the Spotify API.',
 		techStack: [
 			{ name: 'React', icon: react },
@@ -335,10 +335,10 @@ const projects = [
 		code: 'https://github.com/benhensor/jam',
 	},
 	{
-		key: 11,
+		key: 10,
 		title: 'Flashcard Quiz App',
 		logo: null,
-		images: [flashcards1],
+		image: flashcards1,
 		description: 'A quiz app making use of the Redux Toolkit in React.',
 		techStack: [
 			{ name: 'React', icon: react },
@@ -349,10 +349,10 @@ const projects = [
 		code: 'https://github.com/benhensor/codecademy-react/tree/main/flashcards',
 	},
 	{
-		key: 12,
+		key: 11,
 		title: 'Reddit Clone',
 		logo: null,
-		images: [reddit1],
+		image: reddit1,
 		description:
 			'A Reddit clone built in React with Redux using the Reddit API.',
 		techStack: [

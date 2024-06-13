@@ -1,6 +1,7 @@
 import React, { forwardRef, useRef, useEffect } from 'react'
 import { motion, useInView, useAnimation } from 'framer-motion'
 import { aboutInfo } from '../data'
+import { useActiveLink } from '../context/useActiveNavLink'
 import profile from '../assets/img/profile.webp'
 import CV from '../assets/docs/BenHensor_CV_Mar_2024.pdf'
 import { 
@@ -13,7 +14,8 @@ import {
  } from '../styles/AboutStyles'
 
 const AboutPage = forwardRef((props, ref) => {
-	const { scrolled, setActiveLink } = props
+	const { setActiveLink } = useActiveLink()
+	const { scrolled } = props
 	const contentRef = useRef(null)
 	const isInView = useInView(contentRef, { amount: 0.5 })
 	const controls = useAnimation()
@@ -97,8 +99,8 @@ const AboutPage = forwardRef((props, ref) => {
 			opacity: 1,
 			y: 0,
 			transition: {
-				when: 'beforeChildren',
-				staggerChildren: 0.25,
+				ease: "easeOut",
+				duration: 0.5,
 			},
 		},
 	}
@@ -109,13 +111,14 @@ const AboutPage = forwardRef((props, ref) => {
 			opacity: 1,
 			y: 0,
 			transition: {
+				ease: "easeOut",
 				duration: 0.5,
 			},
 		},
 	}
 
 	return (
-		<About ref={ref}>
+		<About ref={ref} id='about'>
 			<AboutContent
 				ref={contentRef}
 				initial="hidden"
@@ -141,10 +144,11 @@ const AboutPage = forwardRef((props, ref) => {
 						{subHeading}
 					</motion.h2>
 
-					<motion.div variants={sentenceVariants}>
+					<motion.div >
 						{sentences.map((sentence) => (
 							<motion.p
 								key={sentence.key}
+								variants={sentenceVariants}
 							>
 								{sentence.text}
 							</motion.p>

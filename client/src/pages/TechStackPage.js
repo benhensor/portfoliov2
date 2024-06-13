@@ -2,6 +2,7 @@ import React, { forwardRef, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { motion, useInView, useAnimation } from 'framer-motion'
 import TechCategory from '../components/tech/TechCategory'
+import { useActiveLink } from '../context/useActiveNavLink'
 import {
 	backend,
 	design,
@@ -13,7 +14,7 @@ import {
 } from '../data'
 
 const TechStackPage = forwardRef((props, ref) => {
-	const { setActiveLink } = props
+	const { setActiveLink } = useActiveLink()
 	const techRef = useRef(null)
 	const isInView = useInView(techRef, { amount: 0.5 })
 	const controls = useAnimation()
@@ -54,11 +55,10 @@ const TechStackPage = forwardRef((props, ref) => {
 			opacity: 1,
 			y: 0,
 			transition: {
-				delay: 0.5,
 				when: "beforeChildren",
 				staggerChildren: 0.1,
 				ease: "easeOut",
-				duration: 0.75,
+				duration: 0.5,
 			},
 		},
 	};
@@ -76,7 +76,7 @@ const TechStackPage = forwardRef((props, ref) => {
 	};
 
 	return (
-		<TechStack ref={ref}>
+		<TechStack ref={ref} id='tech'>
 			<Content
 				ref={techRef}
 				initial="hidden"

@@ -3,6 +3,7 @@ import { useInView } from 'framer-motion'
 import { Page } from '../styles/GlobalStyles'
 import MailIcon from '../assets/icons/mailPlane.svg'
 import { FcCheckmark, FcCancel } from "react-icons/fc";
+import { useActiveLink } from '../context/useActiveNavLink';
 import {
   ContactSection,
   ContactContent,
@@ -22,7 +23,7 @@ import {
 
 const Contact = forwardRef((props, ref) => {
 
-  const { setActiveLink } = props
+  const { setActiveLink } = useActiveLink()
   const contactRef = useRef(null)
   const isInView = useInView(contactRef, { amount: 0.5 })
 
@@ -39,7 +40,9 @@ const Contact = forwardRef((props, ref) => {
   useEffect(() => {
     if (isInView) {
       setActiveLink('contact')
-    } 
+    } else {
+      setActiveLink('')
+    }
   }, [isInView, setActiveLink])
 
   const updateForm = (e) => {

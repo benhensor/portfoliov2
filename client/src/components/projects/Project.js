@@ -1,18 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProjectTechIcon from './ProjectTechIcon';
+import TechCard from './TechCard';
 
 export default function Project({ project }) {
-  const { title, description, techStack, live, code } = project;
+
+  const { title, image, description, techStack, live, code } = project;
 
   return (
     <ProjectContainer $images={project.images}>
+      <BackgroundImage src={image} alt={title} />
       <ProjectContent>
-        <h3>{title}</h3>
-        <p>{description}</p>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
         <TechWrapper>
           {techStack.map((tech, idx) => (
-            <ProjectTechIcon key={idx} icon={tech} />
+            <TechCard key={idx} tech={tech} />
           ))}
         </TechWrapper>
         <Links>
@@ -24,8 +26,8 @@ export default function Project({ project }) {
   );
 }
 
-const ProjectContainer = styled.div`
-  background: var(--background-card);
+const ProjectContainer = styled.li`
+  position: relative;
   width: 100%;
   height: 50rem;
   border-radius: 1em;
@@ -34,16 +36,34 @@ const ProjectContainer = styled.div`
   align-items: center;
   flex-direction: column;
   text-align: center;
-  h3 {
-    font-size: 2.5rem;
-    color: var(--ltOrange);
-  }
-  p {
-    font-size: clamp(1.2rem, 5vw, 2rem);
-  }
 `;
 
+const BackgroundImage = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1em;
+  z-index: -1;
+`
+
+const Title = styled.h3`
+  font-size: 2.5rem;
+  color: var(--ltOrange);
+`
+
+const Description = styled.p`
+  font-size: clamp(1.2rem, 5vw, 2rem);
+`
+
 const ProjectContent = styled.div`
+  background-color: rgba(0, 0, 0, 0.4);
+  width: calc(100% - 6rem);
+  height: calc(100% - 6rem);
+  backdrop-filter: blur(5px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,7 +71,11 @@ const ProjectContent = styled.div`
   border-radius: 1em;
   overflow: hidden;
   gap: 2rem;
-  z-index: 1;
+  z-index: 2;
+  @media only screen and (max-width: 768px) {
+    width: calc(100% - 5rem);
+    height: calc(100% - 5rem);
+  }
 `;
 
 const TechWrapper = styled.ul`

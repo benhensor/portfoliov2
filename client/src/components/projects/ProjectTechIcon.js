@@ -13,8 +13,11 @@ export default function ProjectTechIcon({ icon }) {
 
 const StyledIcon = styled.li`
   display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 10rem;
+	height: 10rem;
   padding: 0.5rem 2rem;
 	border-radius: 5px;
 	background-color: #0c0f1199;
@@ -22,21 +25,15 @@ const StyledIcon = styled.li`
 	border-top: 2px solid #2d363c;
 	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
 	img {
-		width: 1.5em;
-		height: 1.5em;
-    margin-right: 0.875rem;
+		width: 3em;
+		height: 3em;
 	}
 	p {
 		color: var(--text-color);
 		font-size: 1.2rem;
-		white-space: nowrap;
 	}
 	@media screen and (max-width: 768px) {
 		gap: 0.5rem;
-		img {
-			width: 2em;
-			height: 2em;
-		}
 		h3 {
 			color: var(--text-color);
 			font-size: 0.7rem;

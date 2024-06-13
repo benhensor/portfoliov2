@@ -1,7 +1,38 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useActiveLink } from '../../context/useActiveNavLink';
+import { StyledSend } from '../../styles/HeaderStyles';
 
-export default function NavLink({ name, activeLink, onClick }) {
+export default function NavLink({ name, onClick }) {
+
+    const { activeLink } = useActiveLink();
+    const isActive = activeLink === name.toLowerCase();
+
+    let displayName =''
+    switch (name) {
+        case 'home':
+            displayName = 'Home';
+            break;
+        case 'about':
+            displayName = 'About';
+            break;
+        case 'tech':
+            displayName = 'Tech Stack';
+            break;
+        case 'projects':
+            displayName = 'Projects';
+            break;
+        case 'contact':
+            displayName = <StyledSend $activeLink={activeLink === 'contact'} style={{ rotate: '-45deg' }}/>;
+            break;
+        case 'contactMobile': // For mobile menu only
+            displayName = 'Contact';
+            console.log(activeLink)
+            break;
+        default:
+            displayName = '';
+    }
+
 
     return (
         <Li>
@@ -9,9 +40,9 @@ export default function NavLink({ name, activeLink, onClick }) {
                 type="button"
                 aria-label={`Scroll to ${name} section`}
                 onClick={onClick}
-                $activeLink={activeLink}
+                $isActive={isActive}
             >
-                {name}
+                {displayName}
             </Button>
         </Li>
     );
@@ -24,7 +55,7 @@ const Li = styled.li`
 const Button = styled.button`
     background: none;
     border: none;
-    color: ${({ $activeLink }) => $activeLink ? 'var(--orange)' : 'var(--white)'};
+    color: ${({ $isActive }) => $isActive ? 'var(--orange)' : 'var(--white)'};
     font-size: var(--text-l);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
