@@ -26,9 +26,7 @@ const AboutPage = forwardRef((props, ref) => {
 	useEffect(() => {
 		if (isVisible) {
 			setActiveLink('about')
-		}	else {
-			setActiveLink('')
-		}
+		}	
 	}, [isVisible, setActiveLink])
 
 	useEffect(() => {

@@ -13,9 +13,7 @@ const ProjectsPage = forwardRef((props, ref) => {
   useEffect(() => {
     if (isInView) {
       setActiveLink('projects')
-    } else {
-      setActiveLink('')
-    }
+    } 
   }, [isInView, setActiveLink])
   
   return (

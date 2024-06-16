@@ -22,10 +22,10 @@ export default function App() {
 
 	const [scrolled, setScrolled] = useState(false)
 
-	const isAboutInView = useInView(aboutRef, { amount: 0.5 })
-	const isTechInView = useInView(techStackRef, { amount: 0.5 })
-	const isProjectsInView = useInView(projectsRef, { amount: 0.5 })
-	const isContactInView = useInView(contactRef, { amount: 0.5 })
+	// const isAboutInView = useInView(aboutRef, { amount: 0.5 })
+	// const isTechInView = useInView(techStackRef, { amount: 0.5 })
+	// const isProjectsInView = useInView(projectsRef, { amount: 0.5 })
+	// const isContactInView = useInView(contactRef, { amount: 0.5 })
 
 	useEffect(() => {
 		window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -37,36 +37,35 @@ export default function App() {
 				setScrolled(true)
 			} else {
 				setScrolled(false)
+				setActiveLink('home')
 			}
 		}
 		window.addEventListener('scroll', onScroll)
 		return () => window.removeEventListener('scroll', onScroll)
-	}, [scrolled])
+	}, [scrolled, setActiveLink])
 
-	useEffect(() => {
-		if (isAboutInView && scrolled) {
-			setActiveLink('about')
-		} else if (isTechInView) {
-			setActiveLink('tech')
-		} else if (isProjectsInView) {
-			setActiveLink('projects')
-		} else if (isContactInView) {
-			console.log(size)
-			setActiveLink('contact')
-			console.log(activeLink)
-		} else {
-			setActiveLink('')
-		}
-	}, [ 
-		isAboutInView,
-		isTechInView,
-		isProjectsInView,
-		isContactInView,
-		activeLink,
-		setActiveLink,
-		size,
-		scrolled,
-	])
+	// useEffect(() => {
+	// 	if (isAboutInView && scrolled) {
+	// 		setActiveLink('about')
+	// 	} else if (isTechInView) {
+	// 		setActiveLink('tech')
+	// 	} else if (isProjectsInView) {
+	// 		setActiveLink('projects')
+	// 	} else if (isContactInView) {
+	// 		setActiveLink('contact')
+	// 	} else {
+	// 		setActiveLink('')
+	// 	}
+	// }, [ 
+	// 	isAboutInView,
+	// 	isTechInView,
+	// 	isProjectsInView,
+	// 	isContactInView,
+	// 	activeLink,
+	// 	setActiveLink,
+	// 	size,
+	// 	scrolled,
+	// ])
 
 	return (
 		<AnimatePresence>

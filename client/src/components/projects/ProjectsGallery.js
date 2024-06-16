@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { projects } from '../../data';
 import Project from './Project';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import BackgroundWord from '../text/BackgroundWord';
 
 export default function ProjectsGallery() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -82,7 +83,7 @@ const Chevron = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  ${({ direction }) => (direction === 'left' ? 'left: 1rem;' : 'right: 1rem;')}
+  ${({ direction }) => (direction === 'left' ? 'left: 1.6rem;' : 'right: 1.6rem;')}
   width: clamp(3rem, 5vw, 4rem);
   height: clamp(3rem, 5vw, 4rem);
   display: flex;
@@ -109,7 +110,6 @@ const Chevron = styled.button`
     padding: 1rem;
     border-radius: 50%;
     transition: all 0.12s ease;
-  
   }
   &:hover {
     color: #fff;

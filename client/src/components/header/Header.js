@@ -105,8 +105,9 @@ export default function Header({ scrolled, scrollToRef }) {
 					onClick={() => navigateToSection('projects')}
 				/>
 				<NavLink
-					name='contactMobile'
+					name='contact'
 					onClick={() => navigateToSection('contact')}
+					isMobile={true}
 				/>
 				<Icons>
 					<a

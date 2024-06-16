@@ -25,7 +25,6 @@ const TechStackPage = forwardRef((props, ref) => {
 			setActiveLink('tech')
 		} else {
 			controls.start('hidden')
-			setActiveLink('')
 		}
 	}, [isInView, setActiveLink, controls])
 
