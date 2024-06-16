@@ -40,9 +40,7 @@ const Contact = forwardRef((props, ref) => {
   useEffect(() => {
     if (isInView) {
       setActiveLink('contact')
-    } else {
-      setActiveLink('')
-    }
+    } 
   }, [isInView, setActiveLink])
 
   const updateForm = (e) => {

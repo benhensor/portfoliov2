@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useActiveLink } from '../../context/useActiveNavLink';
 import { StyledSend } from '../../styles/HeaderStyles';
 
-export default function NavLink({ name, onClick }) {
+export default function NavLink({ name, onClick, isMobile }) {
 
     const { activeLink } = useActiveLink();
     const isActive = activeLink === name.toLowerCase();
@@ -23,11 +23,7 @@ export default function NavLink({ name, onClick }) {
             displayName = 'Projects';
             break;
         case 'contact':
-            displayName = <StyledSend $activeLink={activeLink === 'contact'} style={{ rotate: '-45deg' }}/>;
-            break;
-        case 'contactMobile': // For mobile menu only
-            displayName = 'Contact';
-            console.log(activeLink)
+            displayName = isMobile ? 'Contact' : <StyledSend $activeLink={activeLink === 'contact'} style={{ rotate: '-45deg' }}/>;
             break;
         default:
             displayName = '';
